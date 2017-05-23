@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block head_title %}All Interviews | {{ block.super }}{% endblock %}
+
+{% block content %}
+    <div class="row">
+        {% if interviews %}
+            {% for interview in interviews %}
+                <div class="ts-interview col-md-4">
+                    {% if interview.image %}
+                        <div class="ts-interview-image mb-2">
+                            <a href="{{ interview.get_absolute_url }}">
+                                <div class="card ts-card">
+                                    <div class="card-img-overlay overlay"></div>
+                                    <img class="img-fluid" src="{{ interview.image.url }}"
+                                         alt="{{ interview.slug }}">
+                                </div>
+                            </a>
+                        </div>
+                    {% endif %}
+                    <h6 class="ts-interview-title"><strong>{{ interview.interviewee }}</strong></h6>
+                    <p class="ts-interview-subtitle"><em>&ldquo;{{ interview.title|truncatechars:120 }}&rdquo;</em></p>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>There are no interviews available.</p>
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% block pagination %}
+    {% if interviews %}
+        <div class="row">
+            <div class="col-md-4">
+                <div class="pagination">
+                <span class="step-links">
+                    {% if page_obj.has_previous %}
+                        <a href="?{{ page_request_var }}={{ page_obj.previous_page_number }}
+                        {% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">previous</a>
+                    {% endif %}
+
+                    <span class="current">
+                        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                    </span>
+
+                    {% if page_obj.has_next %}
+                        <a href="?{{ page_request_var }}={{ page_obj.next_page_number }}
+                        {% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">next</a>
+                    {% endif %}
+                </span>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

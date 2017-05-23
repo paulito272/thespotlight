@@ -1,0 +1,50 @@
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+/*.jumbotron {*/
+/*background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("./img/cover.jpg") no-repeat center center fixed;*/
+/*-webkit-background-size: cover;*/
+/*-moz-background-size: cover;*/
+/*-ms-background-size: cover;*/
+/*-o-background-size: cover;*/
+/*background-size: cover;*/
+/*color: #ffffff;*/
+/*}*/
+
+.overlay {
+    background: rgba(0, 0, 0, 0.0);
+    -webkit-transition: background .25s ease-out;
+    -moz-transition: background .25s ease-out;
+    -o-transition: background .25s ease-out;
+    transition: background .25s ease-out;
+}
+
+.overlay:hover {
+    background: rgba(0, 0, 0, 0.5);;
+}
+
+.ts-interview {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.ts-interview-title {
+    margin-bottom: 0.05rem;
+}
+
+.ts-card {
+    border: none;
+}
+
+.adds {
+    background-color: #3c3f41;
+    color: #ffffff;
+    padding: 20px;
+}
+
+@media (min-width: 1200px) {
+    .container {
+        width: 1600px;
+    }
+}

@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block head_title %}{{ title }} | {{ block.super }}{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-8">
+            {% if interview.image %}
+                <img src="{{ interview.image.url }}" alt="{{ interview.image }}" class="img-fluid">
+            {% endif %}
+
+            <div class="mt-3">
+                {% if interview.draft %}
+                    <div class="alert alert-warning alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <strong>[Staff only]</strong> Draft
+                    </div>
+                {% endif %}
+
+                {% if interview.publish > today %}
+                    <div class="alert alert-warning alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <strong>[Staff only]</strong> Future Interview
+                    </div>
+                {% endif %}
+
+                <div class="blockquote">
+                    <small class="text-muted">{{ interview.publish }}</small>
+                    <br>
+                    <small class="text-muted">Author:
+                        {% if interview.author.get_full_name %}
+                            {{ interview.author.get_full_name }}
+                        {% else %}
+                            {{ interview.author }}
+                        {% endif %}
+                    </small>
+                    <br>
+                    <small class="text-muted">Estimated read time: {{ interview.read_time }} minutes</small>
+                </div>
+
+                <h4>{{ interview.title }}</h4>
+
+                <p>{{ interview.get_markdown }}</p>
+            </div>
+        </div>
+
+        <div class="col-4">
+            <div class="adds">
+                <p>Adds will be placed here...</p>
+                <p>Adds will be placed here...</p>
+                <p>Adds will be placed here...</p>
+                <p>Adds will be placed here...</p>
+                <p>Adds will be placed here...</p>
+                <p>Adds will be placed here...</p>
+                <p>Adds will be placed here...</p>
+                <p>Adds will be placed here...</p>
+                <p>Adds will be placed here...</p>
+                <p>Adds will be placed here...</p>
+                <p>Adds will be placed here...</p>
+                <p>Adds will be placed here...</p>
+                <p>Adds will be placed here...</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}
