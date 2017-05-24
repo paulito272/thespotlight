@@ -1,5 +1,7 @@
 from django import forms
+from django.contrib.auth.models import User
 from django.forms import widgets
+from django.utils.encoding import smart_text
 
 from .models import Interview
 
@@ -8,7 +10,13 @@ class CustomDateInput(widgets.DateInput):
     input_type = 'date'
 
 
-class InterviewForm(forms.ModelForm):
+class UserFullnameChoiceField(forms.ModelChoiceField):
+    def label_from_instance(self, obj):
+        return smart_text(obj.get_full_name())
+
+
+class InterviewModelForm(forms.ModelForm):
+    author = UserFullnameChoiceField(queryset=User.objects.all())
     publish = forms.DateField(widget=CustomDateInput)
 
     class Meta:
@@ -18,6 +26,7 @@ class InterviewForm(forms.ModelForm):
             'interviewee',
             'title',
             'content',
-            'draft',
             'publish',
+            'draft',
+            'slug'
         ]

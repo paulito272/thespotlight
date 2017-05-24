@@ -5,12 +5,12 @@ from django.views.generic import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import UpdateView, CreateView
 
-from .forms import InterviewForm
+from .forms import InterviewModelForm
 from .models import Interview
 
 
 class InterviewCreateView(CreateView):
-    form_class = InterviewForm
+    form_class = InterviewModelForm
     template_name = 'interview_form.html'
     success_url = reverse_lazy('interviews:list')
 
@@ -18,7 +18,7 @@ class InterviewCreateView(CreateView):
 class InterviewListView(ListView):
     model = Interview
     context_object_name = 'interviews'
-    queryset = Interview.objects.active().order_by('-publish') # Latest to oldest
+    queryset = Interview.objects.active().order_by('-publish')  # Latest to oldest
     template_name = 'interview_list.html'
     paginate_by = 10
 
@@ -52,7 +52,7 @@ class InterviewDetailView(DetailView):
 
 
 class InterviewUpdateView(UpdateView):
-    form_class = InterviewForm
+    form_class = InterviewModelForm
     model = Interview
     template_name = 'interview_form.html'
 
