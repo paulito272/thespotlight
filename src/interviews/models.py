@@ -21,8 +21,6 @@ class Interview(models.Model):
     interviewee = models.ForeignKey(Interviewee)
     title = models.CharField(max_length=120)
     image = models.ImageField(upload_to=upload_location,
-                              null=True,
-                              blank=True,
                               width_field='width_field',
                               height_field='height_field')
     width_field = models.IntegerField(default=0)
