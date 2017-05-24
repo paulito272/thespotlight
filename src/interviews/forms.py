@@ -1,13 +1,8 @@
 from django import forms
 from django.contrib.auth.models import User
-from django.forms import widgets
 from django.utils.encoding import smart_text
 
 from .models import Interview
-
-
-class CustomDateInput(widgets.DateInput):
-    input_type = 'date'
 
 
 class UserFullnameChoiceField(forms.ModelChoiceField):
@@ -17,7 +12,6 @@ class UserFullnameChoiceField(forms.ModelChoiceField):
 
 class InterviewModelForm(forms.ModelForm):
     author = UserFullnameChoiceField(queryset=User.objects.all())
-    publish = forms.DateField(widget=CustomDateInput)
 
     class Meta:
         model = Interview
