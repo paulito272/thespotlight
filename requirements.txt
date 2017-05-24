@@ -1,8 +1,15 @@
+appdirs==1.4.3
 Django==1.11
 django-ckeditor==5.2.2
 django-crispy-forms==1.6.1
 django-wysiwyg==0.8.0
+html5lib==1.0b8
 olefile==0.44
+packaging==16.8
 Pillow==4.1.1
+pyparsing==2.2.0
+pytidylib==0.3.2
 pytz==2017.2
+six==1.10.0
 Unidecode==0.4.20
+webencodings==0.5.1
