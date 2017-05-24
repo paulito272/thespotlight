@@ -29,7 +29,6 @@
                 {% endif %}
 
                 <div class="blockquote">
-
                     <small class="text-muted">
                         <span class="fa fa-calendar-o"></span>
                         {{ interview.publish }}
@@ -52,8 +51,7 @@
                 </div>
 
                 <h4>{{ interview.title }}</h4>
-
-                <p>{{ interview.get_markdown }}</p>
+                <p>{{ interview.content|safe }}</p>
             </div>
         </div>
 

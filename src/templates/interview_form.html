@@ -9,6 +9,11 @@
     <form method="POST" action="">
         {% csrf_token %}
         {{ form|crispy }}
+
+        {% load wysiwyg %}
+        {% wysiwyg_setup %}
+        {% wysiwyg_editor 'id_content' %}
+
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 {% endblock %}

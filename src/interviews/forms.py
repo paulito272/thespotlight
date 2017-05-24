@@ -1,6 +1,5 @@
 from django import forms
 from django.forms import widgets
-from pagedown.widgets import PagedownWidget
 
 from .models import Interview
 
@@ -10,14 +9,14 @@ class CustomDateInput(widgets.DateInput):
 
 
 class InterviewForm(forms.ModelForm):
-    content = forms.CharField(widget=PagedownWidget())
     publish = forms.DateField(widget=CustomDateInput)
 
     class Meta:
         model = Interview
         fields = [
-            'title',
+            'author',
             'interviewee',
+            'title',
             'content',
             'draft',
             'publish',

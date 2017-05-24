@@ -1,0 +1,18 @@
+{% extends 'admin/change_form.html' %}
+
+{% load wysiwyg %}
+
+{% block extrahead %}
+    {{ block.super }}
+    {% wysiwyg_setup %}
+{% endblock %}
+
+{% block content %}
+    <style>
+        label[for=id_content] {
+            display: none;
+        }
+    </style>
+    {{ block.super }}
+    {% wysiwyg_editor 'id_content' %}
+{% endblock %}

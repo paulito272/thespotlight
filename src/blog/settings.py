@@ -27,8 +27,8 @@ INSTALLED_APPS = [
 
     # Third-party apps
     'crispy_forms',
-    'markdown_deux',
-    'pagedown',
+    'ckeditor',
+    'django_wysiwyg',
 
     # Custom apps
     'interviews',
@@ -36,6 +36,7 @@ INSTALLED_APPS = [
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+DJANGO_WYSIWYG_FLAVOR = 'ckeditor'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

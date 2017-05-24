@@ -3,8 +3,7 @@ from django.core.urlresolvers import reverse
 from django.db import models
 from django.db.models.signals import pre_save
 from django.template import defaultfilters
-from django.utils.safestring import mark_safe
-from markdown_deux import markdown
+from django_wysiwyg import clean_html
 from unidecode import unidecode
 
 from interviewees.models import Interviewee
@@ -35,10 +34,6 @@ class Interview(models.Model):
     def get_absolute_url(self):
         return reverse('interviews:detail', kwargs={'slug': self.slug})
 
-    def get_markdown(self):
-        markdown_text = markdown(self.content)
-        return mark_safe(markdown_text)
-
 
 def create_slug(instance, new_slug=None):
     slug = defaultfilters.slugify(unidecode(instance.title))
@@ -57,8 +52,7 @@ def pre_save_interview_receiver(sender, instance, *args, **kwargs):
         instance.slug = create_slug(instance)
 
     if instance.content:
-        html_string = instance.get_markdown()
-        instance.read_time = get_read_time(html_string)
+        instance.read_time = get_read_time(clean_html(instance.content))
 
 
 pre_save.connect(pre_save_interview_receiver, sender=Interview)

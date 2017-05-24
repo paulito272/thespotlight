@@ -1,14 +1,10 @@
 from django.contrib import admin
-from django.db import models
-from pagedown.widgets import AdminPagedownWidget
 
 from .models import Interview
 
 
 class InterviewModelAdmin(admin.ModelAdmin):
-    formfield_overrides = {
-        models.TextField: {'widget': AdminPagedownWidget},
-    }
+    change_form_template = 'interviews/admin/change_form.html'
     list_display = ['title', 'publish', 'updated']
     list_filter = ['publish', 'updated', 'timestamp']
     search_fields = ['title', 'content', 'interviewee']
