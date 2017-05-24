@@ -26,7 +26,7 @@ class InterviewModelForm(forms.ModelForm):
             'interviewee',
             'title',
             'content',
-            'publish',
             'draft',
+            'publish',
             'slug'
         ]
