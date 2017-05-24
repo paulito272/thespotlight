@@ -31,7 +31,7 @@
                 <div class="blockquote">
                     <small class="text-muted">{{ interview.publish }}</small>
                     <br>
-                    <small class="text-muted">Author:
+                    <small class="text-muted">Συγγραφέας:
                         {% if interview.author.get_full_name %}
                             {{ interview.author.get_full_name }}
                         {% else %}
@@ -39,7 +39,9 @@
                         {% endif %}
                     </small>
                     <br>
-                    <small class="text-muted">Estimated read time: {{ interview.read_time }} minutes</small>
+                    <small class="text-muted">Εκτιμώμενος χρόνος ανάγνωσης: {{ interview.read_time }}
+                        {% if  interview.read_time > 1 %} λεπτά{% else %} λεπτό {% endif %}
+                    </small>
                 </div>
 
                 <h4>{{ interview.title }}</h4>

@@ -2,15 +2,11 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 
-/*.jumbotron {*/
-/*background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("./img/cover.jpg") no-repeat center center fixed;*/
-/*-webkit-background-size: cover;*/
-/*-moz-background-size: cover;*/
-/*-ms-background-size: cover;*/
-/*-o-background-size: cover;*/
-/*background-size: cover;*/
-/*color: #ffffff;*/
-/*}*/
+.container-fluid {
+    margin-top: 30px;
+    padding-left: 70px;
+    padding-right: 70px;
+}
 
 .overlay {
     background: rgba(0, 0, 0, 0.0);
@@ -29,22 +25,24 @@ body {
     padding-right: 10px;
 }
 
-.ts-interview-title {
-    margin-bottom: 0.05rem;
-}
-
 .ts-card {
     border: none;
+}
+
+.ts-interview-image {
+    height: 210px;
+
+    /* Remove below line to fill the entire box */
+    /* Remainder: It will stretch the image */
+    object-fit: cover;
+}
+
+.ts-interview-title {
+    margin-bottom: 0.05rem;
 }
 
 .adds {
     background-color: #3c3f41;
     color: #ffffff;
     padding: 20px;
-}
-
-.container-fluid {
-    margin-top: 30px;
-    padding-left: 70px;
-    padding-right: 70px;
 }

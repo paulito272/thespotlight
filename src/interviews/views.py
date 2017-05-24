@@ -18,7 +18,7 @@ class InterviewCreateView(CreateView):
 class InterviewListView(ListView):
     model = Interview
     context_object_name = 'interviews'
-    queryset = Interview.objects.active()
+    queryset = Interview.objects.active().order_by('-publish') # Latest to oldest
     template_name = 'interview_list.html'
     paginate_by = 10
 

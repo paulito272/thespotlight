@@ -6,13 +6,13 @@
     <div class="row">
         {% if interviews %}
             {% for interview in interviews %}
-                <div class="ts-interview col-md-4">
+                <div class="col-md-4 ts-interview">
                     {% if interview.image %}
-                        <div class="ts-interview-image mb-2">
+                        <div class="mb-2">
                             <a href="{{ interview.get_absolute_url }}">
                                 <div class="card ts-card">
                                     <div class="card-img-overlay overlay"></div>
-                                    <img class="img-fluid" src="{{ interview.image.url }}"
+                                    <img class="img-fluid ts-interview-image" src="{{ interview.image.url }}"
                                          alt="{{ interview.slug }}">
                                 </div>
                             </a>
