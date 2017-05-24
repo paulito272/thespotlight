@@ -29,9 +29,14 @@
                 {% endif %}
 
                 <div class="blockquote">
-                    <small class="text-muted">{{ interview.publish }}</small>
+
+                    <small class="text-muted">
+                        <span class="fa fa-calendar-o"></span>
+                        {{ interview.publish }}
+                    </small>
                     <br>
-                    <small class="text-muted">Συγγραφέας:
+                    <small class="text-muted">
+                        <span class="fa fa-user-circle"></span>
                         {% if interview.author.get_full_name %}
                             {{ interview.author.get_full_name }}
                         {% else %}
@@ -39,7 +44,9 @@
                         {% endif %}
                     </small>
                     <br>
-                    <small class="text-muted">Εκτιμώμενος χρόνος ανάγνωσης: {{ interview.read_time }}
+                    <small class="text-muted">
+                        <span class="fa fa-clock-o"></span>
+                        {{ interview.read_time }}
                         {% if  interview.read_time > 1 %} λεπτά{% else %} λεπτό {% endif %}
                     </small>
                 </div>

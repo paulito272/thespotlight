@@ -7,13 +7,14 @@
         {% if interviews %}
             {% for interview in interviews %}
                 <div class="col-md-4 ts-interview">
-                    {% if interview.image %}
+                    {% if interview.interviewee.profile_image %}
                         <div class="mb-2">
                             <a href="{{ interview.get_absolute_url }}">
                                 <div class="card ts-card">
                                     <div class="card-img-overlay overlay"></div>
-                                    <img class="img-fluid ts-interview-image" src="{{ interview.image.url }}"
-                                         alt="{{ interview.slug }}">
+                                    <img class="img-fluid ts-interview-image"
+                                         src="{{ interview.interviewee.profile_image.url }}"
+                                         alt="{{ interview.interviewee.slug }}">
                                 </div>
                             </a>
                         </div>

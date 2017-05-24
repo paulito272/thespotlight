@@ -14,9 +14,9 @@ class InterviewForm(forms.ModelForm):
     class Meta:
         model = Interview
         fields = [
-            "title",
-            "content",
-            "image",
-            "draft",
-            "publish",
+            'title',
+            'interviewee',
+            'content',
+            'draft',
+            'publish',
         ]
