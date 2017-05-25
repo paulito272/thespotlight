@@ -5,6 +5,7 @@ from django.views.generic import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import UpdateView, CreateView
 
+from categories.models import Category
 from .forms import InterviewModelForm
 from .models import Interview
 
@@ -18,7 +19,6 @@ class InterviewCreateView(CreateView):
 class InterviewListView(ListView):
     model = Interview
     context_object_name = 'interviews'
-    queryset = Interview.objects.active().order_by('-publish')  # Latest to oldest
     template_name = 'interview_list.html'
     paginate_by = 10
 
@@ -28,6 +28,16 @@ class InterviewListView(ListView):
         'today': today,
         'page_request_var': page_request_var,
     }
+
+    def get_queryset(self):
+        queryset = self.model.objects.active().order_by('-publish')  # Latest to oldest
+
+        if self.request.GET.get('category'):
+            category_slug = self.request.GET.get('category')
+            category = Category.objects.filter(slug=category_slug)
+            queryset = self.model.objects.filter(category=category)
+
+        return queryset
 
     def get_context_data(self, **kwargs):
         context = super(InterviewListView, self).get_context_data(**kwargs)

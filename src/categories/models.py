@@ -5,8 +5,8 @@ from unidecode import unidecode
 
 
 class Category(models.Model):
-    parent = models.ForeignKey('self', blank=True, null=True)
     name = models.CharField(max_length=120, unique=True)
+    sub_categories = models.ManyToManyField('self', blank=True, null=True)
     slug = models.SlugField(max_length=255, editable=True, blank=True, null=False, unique=True)
 
     class Meta:

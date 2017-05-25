@@ -18,6 +18,7 @@ class InterviewModelForm(forms.ModelForm):
         fields = [
             'author',
             'interviewee',
+            'category',
             'title',
             'content',
             'draft',

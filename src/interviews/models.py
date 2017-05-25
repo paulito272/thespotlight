@@ -6,6 +6,7 @@ from django.template import defaultfilters
 from django_wysiwyg import clean_html
 from unidecode import unidecode
 
+from categories.models import Category
 from interviewees.models import Interviewee
 from .managers import InterviewManager
 from .utils import get_read_time
@@ -14,6 +15,7 @@ from .utils import get_read_time
 class Interview(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL, default=1)
     interviewee = models.ForeignKey(Interviewee)
+    category = models.ForeignKey(Category)
     title = models.CharField(max_length=120)
     content = models.TextField()
     publish = models.DateField(auto_now=False, auto_now_add=False, verbose_name='Publication Date')
