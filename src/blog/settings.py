@@ -32,7 +32,8 @@ INSTALLED_APPS = [
 
     # Custom apps
     'interviews',
-    'interviewees'
+    'interviewees',
+    'categories'
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
