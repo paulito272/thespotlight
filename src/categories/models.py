@@ -5,14 +5,28 @@ from unidecode import unidecode
 
 
 class Category(models.Model):
+    position = models.PositiveSmallIntegerField(default=1, blank=False, unique=True)
     name = models.CharField(max_length=120, unique=True)
-    sub_categories = models.ManyToManyField('self', blank=True, null=True)
+    sub_categories = models.ManyToManyField('Subcategory', blank=True)
+    slug = models.SlugField(max_length=255, editable=True, blank=True, null=False, unique=True)
+
+    class Meta:
+        ordering = ['position']
+        verbose_name = 'Category'
+        verbose_name_plural = 'Categories'
+
+    def __str__(self):
+        return self.name
+
+
+class Subcategory(models.Model):
+    name = models.CharField(max_length=120, unique=True)
     slug = models.SlugField(max_length=255, editable=True, blank=True, null=False, unique=True)
 
     class Meta:
         ordering = ['name']
-        verbose_name = 'Category'
-        verbose_name_plural = 'Categories'
+        verbose_name = 'Subcategory'
+        verbose_name_plural = 'Subcategories'
 
     def __str__(self):
         return self.name
@@ -30,9 +44,10 @@ def create_slug(instance, new_slug=None):
     return slug
 
 
-def pre_save_interview_receiver(sender, instance, *args, **kwargs):
+def pre_save_receiver(sender, instance, *args, **kwargs):
     if not instance.slug:
         instance.slug = create_slug(instance)
 
 
-pre_save.connect(pre_save_interview_receiver, sender=Category)
+pre_save.connect(pre_save_receiver, sender=Category)
+pre_save.connect(pre_save_receiver, sender=Subcategory)

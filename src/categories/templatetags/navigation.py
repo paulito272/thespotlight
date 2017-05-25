@@ -8,6 +8,6 @@ register = template.Library()
 @register.inclusion_tag('navigation.html')
 def navigation(selected_id=None):
     return {
-        'categories': Category.objects.all().order_by('-id'),
+        'categories': Category.objects.all(),
         'selected': selected_id,
     }

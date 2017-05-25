@@ -1,4 +1,6 @@
 body {
+    min-height: 75rem;
+    padding-top: 4.5rem;
     font-family: 'Roboto', sans-serif;
 }
 
@@ -45,6 +47,10 @@ body {
     background-color: #3c3f41;
     color: #ffffff;
     padding: 20px;
+}
+
+.footer {
+    background-color: #f7f7f7;
 }
 
 footer a {

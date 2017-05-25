@@ -1,11 +1,12 @@
 {% load staticfiles %}
 
-<nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+<nav class="navbar navbar-toggleable-md navbar-light bg-faded fixed-top">
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
             data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false"
             aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
+
     <a class="navbar-brand" href="{% url 'interviews:list' %}">
         <img src="{% static 'img/logo.png' %}" width="30" height="30" class="d-inline-block align-top" alt="logo"/>
         The Spotlight
@@ -14,7 +15,7 @@
     <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
             {% for category in categories %}
-                {% if category.sub_categories.all.count > 1 %}
+                {% if category.sub_categories.all.count >= 1 %}
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="{{ category.slug }}"
                            id="dropdown01" data-toggle="dropdown" aria-haspopup="true"
@@ -22,13 +23,13 @@
                         <div class="dropdown-menu" aria-labelledby="dropdown01">
                             {% for sub_category in category.sub_categories.all %}
                                 <a class="dropdown-item"
-                                   href="?category={{ sub_category.slug }}">{{ sub_category.name }}</a>
+                                   href="/?category={{ sub_category.slug }}">{{ sub_category.name }}</a>
                             {% endfor %}
                         </div>
                     </li>
                 {% elif not category.sub_categories.all %}
                     <li class="nav-item {% if category.id == selected %}active{% endif %}">
-                        <a class="nav-link" href="?category={{ category.slug }}">{{ category.name }}</a>
+                        <a class="nav-link" href="/?category={{ category.slug }}">{{ category.name }}</a>
                     </li>
                 {% endif %}
             {% endfor %}

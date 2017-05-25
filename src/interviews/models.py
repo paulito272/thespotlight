@@ -6,7 +6,7 @@ from django.template import defaultfilters
 from django_wysiwyg import clean_html
 from unidecode import unidecode
 
-from categories.models import Category
+from categories.models import Subcategory
 from interviewees.models import Interviewee
 from .managers import InterviewManager
 from .utils import get_read_time
@@ -15,7 +15,7 @@ from .utils import get_read_time
 class Interview(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL, default=1)
     interviewee = models.ForeignKey(Interviewee)
-    category = models.ForeignKey(Category)
+    category = models.ForeignKey(Subcategory)
     title = models.CharField(max_length=120)
     content = models.TextField()
     publish = models.DateField(auto_now=False, auto_now_add=False, verbose_name='Publication Date')
@@ -38,7 +38,7 @@ class Interview(models.Model):
 
 
 def create_slug(instance, new_slug=None):
-    slug = defaultfilters.slugify(unidecode(instance.title))
+    slug = defaultfilters.slugify(unidecode(instance.interviewee.slug))
     if new_slug is not None:
         slug = new_slug
     qs = Interview.objects.filter(slug=slug).order_by('-id')

@@ -5,7 +5,7 @@ from django.views.generic import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import UpdateView, CreateView
 
-from categories.models import Category
+from categories.models import Subcategory
 from .forms import InterviewModelForm
 from .models import Interview
 
@@ -34,7 +34,7 @@ class InterviewListView(ListView):
 
         if self.request.GET.get('category'):
             category_slug = self.request.GET.get('category')
-            category = Category.objects.filter(slug=category_slug)
+            category = Subcategory.objects.filter(slug=category_slug)
             queryset = self.model.objects.filter(category=category)
 
         return queryset

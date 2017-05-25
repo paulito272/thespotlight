@@ -7,7 +7,10 @@ from .models import Interview
 
 class UserFullnameChoiceField(forms.ModelChoiceField):
     def label_from_instance(self, obj):
-        return smart_text(obj.get_full_name())
+        label = obj.username
+        if (obj.get_full_name()):
+            label = obj.get_full_name()
+        return smart_text(label)
 
 
 class InterviewModelForm(forms.ModelForm):
