@@ -51,25 +51,37 @@
                     <div class="col-6">
                         <div class="blockquote">
                             <h5>Σύντομο Προφίλ</h5>
-                            <small class="text-muted">
-                                <strong>Όνομα:</strong>
-                                {{ interview.interviewee.get_full_name }}
-                            </small>
-                            <br>
-                            <small class="text-muted">
-                                <strong>Ημερομηνία γέννησης:</strong>
-                                {{ interview.interviewee.date_of_birth }}
-                            </small>
-                            <br>
-                            <small class="text-muted">
-                                <strong>Τόπος γέννησης:</strong>
-                                {{ interview.interviewee.place_of_birth }}
-                            </small>
-                            <br>
-                            <small class="text-muted">
-                                <strong>Ενασχόληση:</strong>
-                                {{ interview.interviewee.occupation }}
-                            </small>
+
+                            {% if interview.interviewee.get_full_name %}
+                                <small class="text-muted">
+                                    <strong>Όνομα:</strong>
+                                    {{ interview.interviewee.get_full_name }}
+                                </small>
+                                <br>
+                            {% endif %}
+
+                            {% if interview.interviewee.date_of_birth %}
+                                <small class="text-muted">
+                                    <strong>Ημερομηνία γέννησης:</strong>
+                                    {{ interview.interviewee.date_of_birth }}
+                                </small>
+                                <br>
+                            {% endif %}
+
+                            {% if interview.interviewee.place_of_birth %}
+                                <small class="text-muted">
+                                    <strong>Τόπος γέννησης:</strong>
+                                    {{ interview.interviewee.place_of_birth }}
+                                </small>
+                                <br>
+                            {% endif %}
+
+                            {% if interview.interviewee.occupation %}
+                                <small class="text-muted">
+                                    <strong>Ενασχόληση:</strong>
+                                    {{ interview.interviewee.occupation }}
+                                </small>
+                            {% endif %}
                         </div>
                     </div>
 
