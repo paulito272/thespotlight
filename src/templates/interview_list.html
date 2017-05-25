@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load accentify %}
 
 {% block head_title %}All Interviews | {{ block.super }}{% endblock %}
 
@@ -19,8 +20,12 @@
                             </a>
                         </div>
                     {% endif %}
-                    <h6 class="ts-interview-title"><strong>{{ interview.interviewee }}</strong></h6>
-                    <p class="ts-interview-subtitle"><em>&ldquo;{{ interview.title|truncatechars:120 }}&rdquo;</em></p>
+                    <h6 class="ts-interview-title">
+                        <strong>{{ interview.interviewee.get_full_name }}</strong>
+                    </h6>
+                    <p class="ts-interview-subtitle">
+                        <em>&ldquo;{{ interview.title|accentify|upper|truncatechars:120 }}&rdquo;</em>
+                    </p>
                 </div>
             {% endfor %}
         {% else %}
