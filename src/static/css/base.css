@@ -4,14 +4,24 @@ html {
 }
 
 body {
-    padding-top: 4.5rem;
+    padding-top: 3.5rem;
     font-family: 'Roboto', sans-serif;
 }
 
-.container-fluid {
-    margin-top: 30px;
-    padding-left: 70px;
-    padding-right: 70px;
+.jumbotron {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../img/cover.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -ms-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    color: #ffffff;
+    padding-top: 233px;
+    padding-bottom: 233px;
+}
+
+#ts-container {
+    padding-top: 40px;
 }
 
 .overlay {
@@ -37,10 +47,12 @@ body {
 
 .ts-interview-image {
     height: 210px;
-
     /* Remove below line to fill the entire box */
     /* Remainder: It will stretch the image */
     object-fit: cover;
+    -o-object-fit: cover;
+    object-position: top;
+    -o-object-position: top;
 }
 
 .ts-interview-title {

@@ -35,7 +35,10 @@
 
     {% navigation %}
 
-    <div class="container-fluid">
+    {% block jumbotron %}
+    {% endblock %}
+
+    <div id="ts-container" class="container">
         {% block content %}
         {% endblock %}
 

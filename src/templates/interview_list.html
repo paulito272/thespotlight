@@ -3,8 +3,36 @@
 
 {% block head_title %}All Interviews | {{ block.super }}{% endblock %}
 
+{% block jumbotron %}
+    <div class="jumbotron jumbotron-fluid mb-0">
+        <div class="container">
+            <h1 class="display-3 animated bounceInLeft">
+                {% if request.user.first_name or request.user.last_name %}
+                    Καλωσόρισες,
+                    {% if request.user.first_name %}
+                        {{ request.user.first_name }}!
+                    {% else %}
+                        {{ request.user.username }}!
+                    {% endif %}
+                {% else %}
+                    Καλωσόρισες!
+                {% endif %}
+            </h1>
+            <p class="lead animated bounceInRight">Μόνο συνεντεύξεις!</p>
+        </div>
+    </div>
+{% endblock %}
+
 {% block content %}
-    <div class="row">
+    {% if interviews %}
+        <div class="row">
+            <div class="col">
+                <h4>Νέες συνεντεύξεις</h4>
+            </div>
+        </div>
+    {% endif %}
+
+    <div class="row mt-3">
         {% if interviews %}
             {% for interview in interviews %}
                 <div class="col-md-4 ts-interview">
