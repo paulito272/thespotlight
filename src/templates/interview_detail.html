@@ -24,9 +24,12 @@
                     {% if  interview.read_time > 1 %} λεπτά{% else %} λεπτό {% endif %}
                 </div>
             </div>
-
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-8">
             <img src="{{ interview.interviewee.profile_image.url }}" alt="{{ interview.interviewee.profile_image }}"
-                 class="img-fluid">
+                 id="ts-interview-cover-image" class="img-fluid">
 
             <div class="mt-3">
                 {% if interview.draft %}
