@@ -8,18 +8,6 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 
-.jumbotron {
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../img/cover.jpg") no-repeat center center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -ms-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    color: #ffffff;
-    padding-top: 233px;
-    padding-bottom: 233px;
-}
-
 #ts-container {
     padding-top: 40px;
 }
@@ -43,16 +31,6 @@ body {
 
 .ts-card {
     border: none;
-}
-
-.ts-interview-image {
-    height: 210px;
-    /* Remove below line to fill the entire box */
-    /* Remainder: It will stretch the image */
-    object-fit: cover;
-    -o-object-fit: cover;
-    object-position: top;
-    -o-object-position: top;
 }
 
 .ts-interview-title {
@@ -82,4 +60,58 @@ footer a {
 
 footer a:hover {
     text-decoration: none;
+}
+
+/* CUSTOMIZE THE CAROUSEL
+-------------------------------------------------- */
+
+/* Carousel base class */
+.carousel {
+    margin-bottom: 4rem;
+}
+
+/* Since positioning the image, we need to help out the caption */
+.carousel-caption {
+    z-index: 10;
+    bottom: 3rem;
+}
+
+/* Declare heights because of positioning of img element */
+.carousel-item {
+    height: 32rem;
+    background-color: #777;
+}
+
+.carousel-item > img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    height: 32rem;
+}
+
+.ts-carousel-indicators li {
+    text-indent: 0;
+    margin: 0 2px;
+    width: 15px;
+    height: 15px;
+    max-width: 15px;
+    line-height: 15px;
+    border: none;
+    border-radius: 100%;
+    transition: all 0.25s ease;
+}
+
+@media (min-width: 40em) {
+    .carousel-caption p {
+        margin-bottom: 1.25rem;
+        font-size: 1.25rem;
+        line-height: 1.4;
+    }
+}
+
+/* -------------------------------------------------- */
+
+#ts-carousel-cover-image {
+    object-fit: cover;
 }

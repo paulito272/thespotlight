@@ -4,23 +4,45 @@
 {% block head_title %}All Interviews | {{ block.super }}{% endblock %}
 
 {% block jumbotron %}
-    <div class="jumbotron jumbotron-fluid mb-0">
-        <div class="container">
-            <h1 class="display-3 animated bounceInLeft">
-                {% if request.user.first_name or request.user.last_name %}
-                    Καλωσόρισες,
-                    {% if request.user.first_name %}
-                        {{ request.user.first_name }}!
-                    {% else %}
-                        {{ request.user.username }}!
-                    {% endif %}
-                {% else %}
-                    Καλωσόρισες!
-                {% endif %}
-            </h1>
-            <p class="lead animated bounceInRight">Μόνο συνεντεύξεις!</p>
+    {% if interviews %}
+        <div id="ts-jumbotron">
+            <div id="ts-carousel" class="carousel slide mb-0" data-ride="carousel">
+                <ol class="carousel-indicators ts-carousel-indicators">
+                    {% for interview in interviews %}
+                        <li data-target="#ts-carousel" data-slide-to="{{ forloop.counter0 }}"
+                            class="{% cycle 'active' '' %}"></li>
+                    {% endfor %}
+                </ol>
+                <div class="carousel-inner" role="listbox">
+                    {% for interview in interviews %}
+                        <div class="carousel-item {% cycle 'active' '' %}">
+                            <img id="ts-carousel-cover-image" class="img-fluid" src="{{ interview.interviewee.profile_image.url }}"
+                                 alt="{{ interview.interviewee.slug }}">
+                            <div id="ts-carousel-overlay"></div>
+                            <div class="container">
+                                <a href="{{ interview.get_absolute_url }}">
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <h1><strong>{{ interview.interviewee.get_full_name }}</strong></h1>
+                                        <p>
+                                            <em>&ldquo;{{ interview.title|accentify|upper|truncatechars:120 }}&rdquo;</em>
+                                        </p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <a class="carousel-control-prev" href="#ts-carousel" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#ts-carousel" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
         </div>
-    </div>
+    {% endif %}
 {% endblock %}
 
 {% block content %}
