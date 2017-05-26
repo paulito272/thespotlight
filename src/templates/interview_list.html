@@ -83,6 +83,57 @@
             <p>There are no interviews available.</p>
         {% endif %}
     </div>
+
+    <div class="row mb-2">
+        <div class="col-8">
+            <hr class="mb-2">
+            <h6><strong>Συνεντεύξεις περασμένης εβδομάδας</strong></h6>
+        </div>
+        <div class="col-4">
+            <hr class="mb-2">
+            <h6><strong>A-Z Κατάλογος Συνεντεύξεων</strong></h6>
+            <div id="ts-interview-directory" class="pre-scrollable mt-3" style="overflow-x: hidden;">
+                {% for interview in interviews %}
+                    <a href="{{ interview.get_absolute_url }}">
+                        <div class="row mb-2">
+                            <div class="col-md-6 pl-0">
+                                <div class="card ts-card">
+                                    <div class="card-img-overlay overlay p-0"></div>
+                                    <img class="img-fluid"
+                                         src="{{ interview.interviewee.profile_image.url }}"
+                                         alt="{{ interview.interviewee.slug }}">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <h6 class="ts-interview-title ts-interview-directory-title">
+                                    <strong>{{ interview.interviewee.get_full_name }}</strong>
+                                </h6>
+                            </div>
+                        </div>
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    {#    {% if interviews %}#}
+    {#        <hr class="mb-2">#}
+    {#        <div class="row mb-2">#}
+    {#            <div class="col">#}
+    {#                <h6><strong>Α-Ζ Κατάλογος συνεντεύξεων</strong></h6>#}
+    {#            </div>#}
+    {#        </div>#}
+    {#    {% endif %}#}
+    {##}
+    {#    <div class="row">#}
+    {#        {% if interviews %}#}
+    {#            {% for interview in interviews %}#}
+    {#                <div class="col-3">#}
+    {##}
+    {#                </div>#}
+    {#            {% endfor %}#}
+    {#        {% endif %}#}
+    {#    </div>#}
 {% endblock %}
 
 {% block pagination %}
