@@ -30,7 +30,7 @@ class InterviewListView(ListView):
     }
 
     def get_queryset(self):
-        queryset = self.model.objects.active().order_by('-publish')  # Latest to oldest
+        queryset = self.model.objects.latest()
 
         if self.request.GET.get('category'):
             category_slug = self.request.GET.get('category')
