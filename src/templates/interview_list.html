@@ -22,8 +22,9 @@
                         <div class="container">
                             <a href="{{ interview.get_absolute_url }}">
                                 <div class="carousel-caption d-none d-md-block">
-                                    <h1><strong>{{ interview.interviewee.get_full_name }}</strong></h1>
-                                    <p>
+                                    <h1 class="animated bounceInLeft">
+                                        <strong>{{ interview.interviewee.get_full_name }}</strong></h1>
+                                    <p class="animated bounceInRight">
                                         <em>&ldquo;{{ interview.title|accentify|upper|truncatechars:120 }}&rdquo;</em>
                                     </p>
                                 </div>
@@ -41,7 +42,6 @@
                 <span class="sr-only">Next</span>
             </a>
         </div>
-
     {% endif %}
 {% endblock %}
 
