@@ -115,36 +115,18 @@
             </div>
         </div>
     </div>
-
-    {#    {% if interviews %}#}
-    {#        <hr class="mb-2">#}
-    {#        <div class="row mb-2">#}
-    {#            <div class="col">#}
-    {#                <h6><strong>Α-Ζ Κατάλογος συνεντεύξεων</strong></h6>#}
-    {#            </div>#}
-    {#        </div>#}
-    {#    {% endif %}#}
-    {##}
-    {#    <div class="row">#}
-    {#        {% if interviews %}#}
-    {#            {% for interview in interviews %}#}
-    {#                <div class="col-3">#}
-    {##}
-    {#                </div>#}
-    {#            {% endfor %}#}
-    {#        {% endif %}#}
-    {#    </div>#}
 {% endblock %}
 
 {% block pagination %}
     {% if interviews %}
-        <div class="row">
-            <div class="col-md-4">
-                <div class="pagination">
+        <div class="row mt-5">
+            <div class="col-md-12 text-center">
                 <span class="step-links">
                     {% if page_obj.has_previous %}
-                        <a href="?{{ page_request_var }}={{ page_obj.previous_page_number }}
-                        {% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">previous</a>
+                        <a class="float-left" href="?{{ page_request_var }}={{ page_obj.previous_page_number }}
+                        {% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">
+                            <i class="fa fa-angle-double-left" aria-hidden="true"></i>
+                        </a>
                     {% endif %}
 
                     <span class="current">
@@ -152,11 +134,12 @@
                     </span>
 
                     {% if page_obj.has_next %}
-                        <a href="?{{ page_request_var }}={{ page_obj.next_page_number }}
-                        {% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">next</a>
+                        <a class="float-right" href="?{{ page_request_var }}={{ page_obj.next_page_number }}
+                        {% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">
+                            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                        </a>
                     {% endif %}
                 </span>
-                </div>
             </div>
         </div>
     {% endif %}
