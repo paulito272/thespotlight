@@ -1,7 +1,6 @@
 from django.views.generic import ListView, DetailView
 
 from .models import Interviewee
-from interviews.models import Interview
 
 
 class IntervieweeListView(ListView):

@@ -5,31 +5,79 @@
 
 {% block content %}
     <div class="row">
-        <div class="col-8">
-            <h4>
-                {{ interview.interviewee.get_full_name|accentify|upper }}:&nbsp;
-                &ldquo;{{ interview.title|accentify|upper }}&rdquo;
-            </h4>
+        <div class="col-md-8 col-sm-12">
+            <h5 id="ts-interview-main-title">
+                <em>
+                    {{ interview.interviewee.get_full_name|accentify|upper }}:&nbsp;
+                    &ldquo;{{ interview.title|accentify|upper }}&rdquo;
+                </em>
+            </h5>
             <hr>
 
-            <div class="row mb-3">
-                <div class="col-6">
+            <div id="ts-interview-header-container" class="row mb-2">
+                <div id="ts-interview-header" class="col-6">
                     <span class="fa fa-calendar-o"></span>
-                    {{ interview.publish }}
+                    <time>{{ interview.publish|date:"F d, Y" }}</time>
+                    <span class="text-muted">
+                        | By
+                        {% if interview.author.get_full_name %}
+                            {{ interview.author.get_full_name }}
+                        {% else %}
+                            {{ interview.author.username }}
+                        {% endif %}
+                    </span>
                 </div>
 
-                <div class="col-6 text-right">
+                <div id="ts-m-interview-header" class="col-6">
+                    <div class="row">
+                        <div class="col pl-sm-0">
+                            <span class="fa fa-calendar-o"></span>
+                            <time>{{ interview.publish|date:"F d, Y" }}</time>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col pl-sm-0">
+                            <span class="text-muted">
+                                By
+                                {% if interview.author.get_full_name %}
+                                    {{ interview.author.get_full_name }}
+                                {% else %}
+                                    {{ interview.author.username }}
+                                {% endif %}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-6 text-right align-self-center">
                     <span class="fa fa-clock-o"></span>
-                    {{ interview.read_time }}
-                    {% if  interview.read_time > 1 %} λεπτά{% else %} λεπτό {% endif %}
+                    <span>
+                        {{ interview.read_time }}
+                        {% if  interview.read_time > 1 %} λεπτά{% else %} λεπτό {% endif %}
+                    </span>
                 </div>
             </div>
         </div>
     </div>
     <div class="row">
-        <div class="col-8">
+        <div class="col-md-8 col-sm-12">
             <img src="{{ interview.interviewee.profile_image.url }}" alt="{{ interview.interviewee.profile_image }}"
                  id="ts-interview-cover-image" class="img-fluid">
+
+            <div id="ts-m-interview-cover-image-container" class="row">
+                <img src="{{ interview.interviewee.profile_image.url }}"
+                     alt="{{ interview.interviewee.profile_image }}"
+                     id="ts-m-interview-cover-image" class="img-fluid">
+            </div>
+
+            {% if interview.interviewee.photographer %}
+                <div class="row">
+                    <div id="ts-interview-photographer" class="col-12 mt-1 text-right">
+                        <small>Photo by {{ interview.interviewee.photographer }}</small>
+                    </div>
+                </div>
+            {% endif %}
 
             <div class="mt-3">
                 {% if interview.draft %}
@@ -37,7 +85,7 @@
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
-                        <strong>[Staff only]</strong> Draft
+                        <strong>[Staff only]</strong>&nbsp;<span>Draft</span>
                     </div>
                 {% endif %}
 
@@ -46,69 +94,49 @@
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
-                        <strong>[Staff only]</strong> Future Interview
+                        <strong>[Staff only]</strong>&nbsp;<span>Future Interview</span>
                     </div>
                 {% endif %}
 
+                <hr>
                 <div class="row">
-                    <div class="col-6">
-                        <div class="blockquote">
-                            <h5>Σύντομο Προφίλ</h5>
-
+                    <div class="col-12" style="line-height: 1.125em;">
+                        <h6 class="mb-3"><strong>Σύντομο Προφίλ</strong></h6>
+                        <div id="ts-interviewee-short-description">
                             {% if interview.interviewee.get_full_name %}
-                                <small class="text-muted">
-                                    <strong>Όνομα:</strong>
-                                    {{ interview.interviewee.get_full_name }}
-                                </small>
-                                <br>
-                            {% endif %}
-
-                            {% if interview.interviewee.date_of_birth %}
-                                <small class="text-muted">
-                                    <strong>Ημερομηνία γέννησης:</strong>
-                                    {{ interview.interviewee.date_of_birth }}
-                                </small>
+                                <strong>Όνομα: </strong>
+                                <span>{{ interview.interviewee.get_full_name }}</span>
                                 <br>
                             {% endif %}
 
                             {% if interview.interviewee.place_of_birth %}
-                                <small class="text-muted">
-                                    <strong>Τόπος γέννησης:</strong>
-                                    {{ interview.interviewee.place_of_birth }}
-                                </small>
+                                <strong>Τόπος γέννησης:</strong>
+                                <span>{{ interview.interviewee.place_of_birth }}</span>
+                                <br>
+                            {% endif %}
+
+                            {% if interview.interviewee.date_of_birth %}
+                                <strong>Ημερομηνία γέννησης: </strong>
+                                <span>{{ interview.interviewee.date_of_birth }}</span>
                                 <br>
                             {% endif %}
 
                             {% if interview.interviewee.occupation %}
-                                <small class="text-muted">
-                                    <strong>Ενασχόληση:</strong>
-                                    {{ interview.interviewee.occupation }}
-                                </small>
+                                <strong>Ενασχόληση:</strong>
+                                <span>{{ interview.interviewee.occupation }}</span>
                             {% endif %}
                         </div>
                     </div>
-
-                    <div class="col-6">
-                        <div class="blockquote blockquote-reverse" style="border: none;">
-                            <small class="text-muted">
-                                <span class="fa fa-user-circle"></span>
-                                {% if interview.author.get_full_name %}
-                                    {{ interview.author.get_full_name }}
-                                {% else %}
-                                    {{ interview.author.username }}
-                                {% endif %}
-                            </small>
-                        </div>
-                    </div>
                 </div>
+                <hr>
 
-                <div id="ts-interview-content" class="mt-5">
+                <div id="ts-interview-content">
                     {{ interview.content|safe }}
                 </div>
             </div>
         </div>
 
-        <div class="col-4">
+        <div id="ts-interview-adds" class="col-md-4 hidden-sm-down">
             <div class="adds text-center">
                 <p>Adds will be placed here</p>
                 <p>Adds will be placed here</p>

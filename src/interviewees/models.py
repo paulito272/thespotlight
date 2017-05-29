@@ -18,8 +18,9 @@ class Interviewee(models.Model):
                                       height_field='height_field')
     width_field = models.IntegerField(default=0)
     height_field = models.IntegerField(default=0)
-    date_of_birth = models.DateField(_('date of birth'), blank=True, null=True)
+    photographer = models.CharField(_('photographer name'), max_length=90, blank=True, null=True)
     place_of_birth = models.CharField(_('place of birth'), max_length=90, blank=True, null=True)
+    date_of_birth = models.DateField(_('date of birth'), blank=True, null=True)
     occupation = models.CharField(_('occupation'), max_length=30, blank=True, null=True)
     slug = models.SlugField(max_length=255, editable=True, blank=True, null=False, unique=True)
 

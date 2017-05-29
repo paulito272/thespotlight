@@ -2,7 +2,7 @@
 
 <nav class="navbar navbar-toggleable-md navbar-light bg-faded fixed-top">
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
-            data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false"
+            data-target="#ts-navbar" aria-controls="ts-navbar" aria-expanded="false"
             aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -12,7 +12,7 @@
         The Spotlight
     </a>
 
-    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+    <div class="collapse navbar-collapse" id="ts-navbar">
         <ul class="navbar-nav mr-auto">
             {% for category in categories %}
                 {% if category.sub_categories.all.count >= 1 %}

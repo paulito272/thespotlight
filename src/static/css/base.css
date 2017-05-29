@@ -31,7 +31,7 @@ body {
 
 .ts-interview-title,
 .ts-interview-subtitle {
-    font-size: 14px;
+    font-size: 0.875em;
 }
 
 .ts-interview-title {
@@ -56,8 +56,37 @@ body {
     border: none;
 }
 
-#ts-interview-cover-image {
+#ts-interview-main-title {
+    font-size: 1.375em;
+}
+
+#ts-interview-header-container span,
+#ts-interview-header-container time {
+    font-size: 0.813em;
+}
+
+#ts-interviewee-short-description strong,
+#ts-interviewee-short-description span {
+    font-size: 0.813em;
+}
+
+#ts-interviewee-short-description span {
+    color: #636c72;
+}
+
+#ts-interview-cover-image,
+#ts-m-interview-cover-image {
     width: 100%;
+}
+
+#ts-interview-photographer {
+    font-size: 0.813em;
+    color: #636c72;
+}
+
+#ts-interview-content {
+    margin-top: 35px;
+    word-wrap: break-word;
 }
 
 #ts-carousel-overlay:before {
@@ -152,4 +181,41 @@ footer a:hover {
     -webkit-animation-delay: 0.5s;
     -moz-animation-delay: 0.5s;
     -o-animation-delay: 0.5s;
+}
+
+#ts-m-interview-header {
+    display: none;
+}
+
+#ts-m-interview-cover-image-container {
+    display: none;
+}
+
+/*Medium devices (tablets, less than 992px)*/
+@media (max-width: 991px) {
+    #ts-interview-main-title {
+        font-size: 1.125em;
+        padding-bottom: 1.063em;
+    }
+
+    #ts-interview-header {
+        display: none;
+    }
+
+    #ts-m-interview-header {
+        display: block;
+    }
+
+    #ts-interview-cover-image {
+        display: none;
+    }
+
+    #ts-m-interview-cover-image-container {
+        display: block;
+    }
+
+    #ts-interview-header-container span,
+    #ts-interview-header-container time {
+        font-size: 0.625em;
+    }
 }
