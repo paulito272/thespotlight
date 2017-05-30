@@ -116,6 +116,7 @@ body {
 }
 
 #ts-interview-content {
+    margin-top: 3em;
     word-wrap: break-word;
 }
 
@@ -242,6 +243,10 @@ footer a:hover {
 
 /*Medium devices (tablets, less than 992px)*/
 @media (max-width: 991px) {
+    #ts-interview-content {
+        margin-top: 1em;
+    }
+
     #ts-interview-main-title {
         font-size: 1.125em;
         padding-bottom: 1.063em;

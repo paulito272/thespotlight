@@ -74,9 +74,9 @@
                                 &ldquo;{{ interview.title|accentify|upper|truncatechars:120 }}&rdquo;
                             </em>
                         </h5>
-                        <hr>
+                        <hr class="mb-2">
                         <strong class="ts-small-text">{{ interview.publish|date:"F d, Y"|accentify|upper }}</strong>
-                        <div id="ts-interview-content" class="mt-4">
+                        <div id="ts-interview-content"">
                             {{ interview.content|safe|truncatewords:200 }}
                         </div>
                         <a href="{{ interview.get_absolute_url }}">
