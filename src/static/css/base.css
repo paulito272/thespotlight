@@ -29,13 +29,26 @@ body {
     padding-right: 10px;
 }
 
+.ts-new-interview-title {
+    font-family: 'Roboto Slab', serif;
+}
+
+#ts-interview-main-title {
+    font-family: 'Roboto Slab', serif;
+}
+
 .ts-interview-title,
 .ts-interview-subtitle {
+    font-family: 'Roboto Slab', serif;
     font-size: 0.875em;
 }
 
 .ts-interview-title {
     margin-bottom: 0.05rem;
+}
+
+.ts-interview-image {
+    object-fit: cover;
 }
 
 #ts-interview-directory a {
@@ -56,6 +69,10 @@ body {
     border: none;
 }
 
+.ts-small-text {
+    font-size: 0.813em;
+}
+
 #ts-interview-main-title {
     font-size: 1.375em;
 }
@@ -65,9 +82,17 @@ body {
     font-size: 0.813em;
 }
 
+#ts-interviewee-short-description {
+    font-family: 'Roboto Slab', serif;
+}
+
 #ts-interviewee-short-description strong,
 #ts-interviewee-short-description span {
     font-size: 0.813em;
+}
+
+#ts-interviewee-short-description>h6>strong {
+    font-size: 1em;
 }
 
 #ts-interviewee-short-description span {
@@ -80,7 +105,7 @@ body {
 }
 
 #ts-interview-photographer {
-    font-size: 0.813em;
+    font-family: 'Roboto Slab', serif;
     color: #636c72;
 }
 
@@ -189,6 +214,25 @@ footer a:hover {
 
 #ts-m-interview-cover-image-container {
     display: none;
+}
+
+.ts-btn-general {
+    background-color: #f7f7f7;
+    color: #000000;
+    border: none;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    cursor: pointer;
+    -webkit-transition: background-color .25s ease-out;
+    -moz-transition: background-color .25s ease-out;
+    -o-transition: background-color .25s ease-out;
+    transition: background-color .25s ease-out;
+}
+
+.ts-btn-general:hover {
+    background-color: #000000;
+    color: #ffffff;
 }
 
 /*Medium devices (tablets, less than 992px)*/

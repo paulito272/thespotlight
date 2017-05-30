@@ -75,13 +75,21 @@
                             </a>
                         </div>
                     {% endif %}
-                    <h5>
+                    <h5 class="ts-new-interview-title mt-3">
                         <em>{{ interview.interviewee.get_full_name|accentify|upper }}:
                             &ldquo;{{ interview.title|accentify|upper|truncatechars:120 }}&rdquo;
                         </em>
                     </h5>
                     <hr>
-                    {{ interview.publish|date:"F d, Y" }}
+                    <strong class="ts-small-text">{{ interview.publish|date:"F d, Y" }}</strong>
+                    <div id="ts-interview-content">
+                        {{ interview.content|safe|truncatewords:200 }}
+                    </div>
+                    <a href="{{ interview.get_absolute_url }}">
+                        <button type="button" class="btn btn-secondary ts-btn-general">
+                            <strong class="ts-small-text">Διάβασε περισσότερα...</strong>
+                        </button>
+                    </a>
                 </div>
             {% endwith %}
 

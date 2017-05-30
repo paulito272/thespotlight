@@ -73,7 +73,7 @@
 
             {% if interview.interviewee.photographer %}
                 <div class="row">
-                    <div id="ts-interview-photographer" class="col-12 mt-1 text-right">
+                    <div id="ts-interview-photographer" class="col-12 mt-1 text-right ts-small-text">
                         <small>Photo by {{ interview.interviewee.photographer }}</small>
                     </div>
                 </div>
@@ -100,32 +100,30 @@
 
                 <hr>
                 <div class="row">
-                    <div class="col-12" style="line-height: 1.125em;">
+                    <div id="ts-interviewee-short-description" class="col-12">
                         <h6 class="mb-3"><strong>Σύντομο Προφίλ</strong></h6>
-                        <div id="ts-interviewee-short-description">
-                            {% if interview.interviewee.get_full_name %}
-                                <strong>Όνομα: </strong>
-                                <span>{{ interview.interviewee.get_full_name }}</span>
-                                <br>
-                            {% endif %}
+                        {% if interview.interviewee.get_full_name %}
+                            <strong>Όνομα: </strong>
+                            <span>{{ interview.interviewee.get_full_name }}</span>
+                            <br>
+                        {% endif %}
 
-                            {% if interview.interviewee.place_of_birth %}
-                                <strong>Τόπος γέννησης:</strong>
-                                <span>{{ interview.interviewee.place_of_birth }}</span>
-                                <br>
-                            {% endif %}
+                        {% if interview.interviewee.date_of_birth %}
+                            <strong>Ημερομηνία γέννησης: </strong>
+                            <span>{{ interview.interviewee.date_of_birth }}</span>
+                            <br>
+                        {% endif %}
 
-                            {% if interview.interviewee.date_of_birth %}
-                                <strong>Ημερομηνία γέννησης: </strong>
-                                <span>{{ interview.interviewee.date_of_birth }}</span>
-                                <br>
-                            {% endif %}
+                        {% if interview.interviewee.place_of_birth %}
+                            <strong>Τόπος γέννησης:</strong>
+                            <span>{{ interview.interviewee.place_of_birth }}</span>
+                            <br>
+                        {% endif %}
 
-                            {% if interview.interviewee.occupation %}
-                                <strong>Ενασχόληση:</strong>
-                                <span>{{ interview.interviewee.occupation }}</span>
-                            {% endif %}
-                        </div>
+                        {% if interview.interviewee.occupation %}
+                            <strong>Ενασχόληση:</strong>
+                            <span>{{ interview.interviewee.occupation }}</span>
+                        {% endif %}
                     </div>
                 </div>
                 <hr>
