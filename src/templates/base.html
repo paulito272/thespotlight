@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
     {% block head %}{% endblock %}
 </head>
-<body>
+<body class="pt-4">
     <script>
         (function (d, s, id) {
             var js, fjs = d.getElementsByTagName(s)[0];
@@ -36,8 +36,8 @@
 
     {% navigation %}
 
-    {% block jumbotron %}
-    {% endblock %}
+{#    {% block jumbotron %}#}
+{#    {% endblock %}#}
 
     <div id="ts-container" class="container">
         {% block content %}

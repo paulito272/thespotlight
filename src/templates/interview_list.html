@@ -46,57 +46,57 @@
 {% endblock %}
 
 {% block content %}
-    {% if interviews %}
-        <div class="row mb-2">
-            <div class="col-md-8">
-                <hr class="mb-2">
-                <h6><strong>Νεα συνέντευξη</strong></h6>
-            </div>
-            <div class="col-md-4">
-                <hr class="mb-2">
-                <h6><strong>Πιο δημοφιλής συνεντεύξεις</strong></h6>
-            </div>
-        </div>
-    {% endif %}
-
     <div class="row">
         {% if interviews %}
-            {% with interviews|first as interview %}
-                <div class="col-md-8 ts-interview">
-                    {% if interview.interviewee.profile_image %}
-                        <div class="mb-2">
-                            <a href="{{ interview.get_absolute_url }}">
-                                <div class="card ts-card">
-                                    <div class="card-img-overlay overlay"></div>
-                                    <img class="img-fluid ts-interview-image"
-                                         src="{{ interview.interviewee.profile_image.url }}"
-                                         alt="{{ interview.interviewee.slug }}">
-                                </div>
-                            </a>
-                        </div>
-                    {% endif %}
-                    <h5 class="ts-new-interview-title mt-3">
-                        <em>{{ interview.interviewee.get_full_name|accentify|upper }}:
-                            &ldquo;{{ interview.title|accentify|upper|truncatechars:120 }}&rdquo;
-                        </em>
-                    </h5>
-                    <hr>
-                    <strong class="ts-small-text">{{ interview.publish|date:"F d, Y" }}</strong>
-                    <div id="ts-interview-content">
-                        {{ interview.content|safe|truncatewords:200 }}
-                    </div>
-                    <a href="{{ interview.get_absolute_url }}">
-                        <button type="button" class="btn btn-secondary ts-btn-general">
-                            <strong class="ts-small-text">Διάβασε περισσότερα...</strong>
-                        </button>
-                    </a>
-                </div>
-            {% endwith %}
 
+            <!-- NEW INTERVIEW -->
+            <div class="col-md-8">
+                <div class="px-2 mb-3">
+                    <hr class="mb-2">
+                    <h6><strong>Νεα συνέντευξη</strong></h6>
+                </div>
+                {% with interviews|first as interview %}
+                    <div class="ts-interview px-2">
+                        {% if interview.interviewee.profile_image %}
+                            <div class="mb-2">
+                                <a href="{{ interview.get_absolute_url }}">
+                                    <div class="card ts-card">
+                                        <div class="card-img-overlay overlay"></div>
+                                        <img class="img-fluid ts-interview-image"
+                                             src="{{ interview.interviewee.profile_image.url }}"
+                                             alt="{{ interview.interviewee.slug }}">
+                                    </div>
+                                </a>
+                            </div>
+                        {% endif %}
+                        <h5 class="ts-new-interview-title mt-3">
+                            <em>{{ interview.interviewee.get_full_name|accentify|upper }}:
+                                &ldquo;{{ interview.title|accentify|upper|truncatechars:120 }}&rdquo;
+                            </em>
+                        </h5>
+                        <hr>
+                        <strong class="ts-small-text">{{ interview.publish|date:"F d, Y"|accentify|upper }}</strong>
+                        <div id="ts-interview-content" class="mt-4">
+                            {{ interview.content|safe|truncatewords:200 }}
+                        </div>
+                        <a href="{{ interview.get_absolute_url }}">
+                            <button type="button" class="btn btn-secondary ts-btn-general">
+                                <strong class="ts-small-text">Διάβασε περισσότερα...</strong>
+                            </button>
+                        </a>
+                    </div>
+                {% endwith %}
+            </div>
+
+            <!-- MOST READ INTERVIEWS -->
             <div class="col-md-4">
+                <div class="px-2 mb-3">
+                    <hr class="mb-2">
+                    <h6><strong>Πιο δημοφιλής συνεντεύξεις</strong></h6>
+                </div>
                 {% for interview in interviews %}
                     <div class="row">
-                        <div class="col-md-12 ts-interview">
+                        <div class="ts-interview px-4">
                             {% if interview.interviewee.profile_image %}
                                 <div class="mb-2">
                                     <a href="{{ interview.get_absolute_url }}">
@@ -124,6 +124,7 @@
         {% endif %}
     </div>
 
+    <!-- LAST WEEK’S INTERVIEWS -->
     <div class="row mb-2">
         <div class="col-8">
             <hr class="mb-2">
