@@ -110,7 +110,7 @@
 
                         {% if interview.interviewee.date_of_birth %}
                             <strong>Ημερομηνία γέννησης: </strong>
-                            <span>{{ interview.interviewee.date_of_birth }}</span>
+                            <span>{{ interview.interviewee.date_of_birth|date:"d E Y"}}</span>
                             <br>
                         {% endif %}
 
