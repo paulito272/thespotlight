@@ -66,10 +66,6 @@ body {
     color: #014c8c;
 }
 
-.ts-interview-directory-title {
-    line-height: 5rem;
-}
-
 .ts-card {
     border: none;
 }
@@ -272,5 +268,9 @@ footer a:hover {
     #ts-interview-header-container span,
     #ts-interview-header-container time {
         font-size: 0.625em;
+    }
+
+    .ts-mt-sm-5 {
+        margin-top: 3rem !important
     }
 }

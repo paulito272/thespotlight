@@ -76,7 +76,7 @@
                         </h5>
                         <hr class="mb-2">
                         <strong class="ts-small-text">{{ interview.publish|date:"F d, Y"|accentify|upper }}</strong>
-                        <div id="ts-interview-content"">
+                        <div id="ts-interview-content">
                             {{ interview.content|safe|truncatewords:200 }}
                         </div>
                         <a href="{{ interview.get_absolute_url }}">
@@ -91,7 +91,7 @@
             <!-- MOST READ INTERVIEWS -->
             <div class="col-md-4 px-md-0">
                 <div class="px-2 mb-3">
-                    <hr class="mb-2">
+                    <hr class="mb-2 ts-mt-sm-5">
                     <h6><strong>Πιο δημοφιλής συνεντεύξεις</strong></h6>
                 </div>
                 {% for interview in interviews %}
@@ -126,12 +126,12 @@
 
     <!-- LAST WEEK’S INTERVIEWS -->
     <div class="row mb-2">
-        <div class="col-8">
-            <hr class="mb-2">
+        <div class="col-md-8 col-sm-12">
+            <hr class="mb-2 mt-5">
             <h6><strong>Συνεντεύξεις περασμένης εβδομάδας</strong></h6>
         </div>
-        <div class="col-4">
-            <hr class="mb-2">
+        <div class="col-md-4 hidden-sm-down">
+            <hr class="mb-2 mt-5">
             <h6><strong>A-Z Κατάλογος Συνεντεύξεων</strong></h6>
             <div id="ts-interview-directory" class="pre-scrollable mt-3" style="overflow-x: hidden;">
                 {% for interview in interviews %}
@@ -145,8 +145,8 @@
                                          alt="{{ interview.interviewee.slug }}">
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <h6 class="ts-interview-title ts-interview-directory-title">
+                            <div class="col-md-6 align-self-center">
+                                <h6 class="ts-interview-title">
                                     <strong>{{ interview.interviewee.get_full_name }}</strong>
                                 </h6>
                             </div>
