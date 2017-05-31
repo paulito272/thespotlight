@@ -126,3 +126,42 @@ STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'static_cdn')
 
 MEDIA_URL = '/uploads/'
 MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'uploads')
+
+# Logging
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'filters': {
+        'require_debug_true': {
+            '()': 'django.utils.log.RequireDebugTrue',
+        },
+    },
+    'formatters': {
+        'verbose': {
+            'format': '%(asctime)s - %(levelname)s - %(module)s - %(message)s',
+        },
+    },
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'filters': ['require_debug_true'],
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose',
+        },
+        'logfile': {
+            'level': 'DEBUG',
+            'class': 'logging.handlers.TimedRotatingFileHandler',
+            'formatter': 'verbose',
+            'filename': os.path.join(BASE_DIR, 'logs/thespotlight.log'),
+            'when': 'D',
+            'backupCount': 5
+        },
+    },
+    'loggers': {
+        'interviews': {
+            'handlers': ['console', 'logfile'],
+            'level': 'INFO',
+            'propagate': True
+        },
+    },
+}

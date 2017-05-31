@@ -1,3 +1,5 @@
+import logging
+
 from django.shortcuts import reverse
 from django.urls import reverse_lazy
 from django.utils import timezone
@@ -8,6 +10,8 @@ from django.views.generic.edit import UpdateView, CreateView
 from categories.models import Subcategory
 from .forms import InterviewModelForm
 from .models import Interview
+
+logger = logging.getLogger(__name__)
 
 
 class InterviewCreateView(CreateView):
@@ -27,6 +31,7 @@ class InterviewListView(ListView):
     context = {
         'today': today,
         'page_request_var': page_request_var,
+        'most_read': model.objects.most_read()
     }
 
     def get_queryset(self):
@@ -38,6 +43,12 @@ class InterviewListView(ListView):
             queryset = self.model.objects.filter(category=category)
 
         return queryset
+
+    def get(self, request, *args, **kwargs):
+        days_past = (timezone.now().date() - self.context['today']).days
+        if (days_past >= 1):
+            self.context['most_read'] = self.model.objects.most_read()
+        return super(InterviewListView, self).get(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super(InterviewListView, self).get_context_data(**kwargs)

@@ -28,7 +28,7 @@ class Interview(models.Model):
     objects = InterviewManager()
 
     class Meta:
-        ordering = ['-timestamp', '-updated']
+        ordering = ['-publish', '-updated', '-timestamp']
 
     def __str__(self):
         return '{} - {}'.format(self.interviewee, self.title)
