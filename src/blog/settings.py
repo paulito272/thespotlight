@@ -3,6 +3,8 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+path = lambda *x: os.path.join(os.path.abspath(BASE_DIR), *x)
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
@@ -131,36 +133,30 @@ MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'uploads')
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
-    'filters': {
-        'require_debug_true': {
-            '()': 'django.utils.log.RequireDebugTrue',
-        },
-    },
     'formatters': {
         'verbose': {
-            'format': '%(asctime)s - %(levelname)s - %(module)s - %(message)s',
+            'format': '%(asctime)s - %(levelname)s - %(name)s - %(message)s',
         },
     },
     'handlers': {
         'console': {
-            'level': 'DEBUG',
-            'filters': ['require_debug_true'],
             'class': 'logging.StreamHandler',
             'formatter': 'verbose',
-        },
-        'logfile': {
             'level': 'DEBUG',
+        },
+        'file': {
             'class': 'logging.handlers.TimedRotatingFileHandler',
             'formatter': 'verbose',
-            'filename': os.path.join(BASE_DIR, 'logs/thespotlight.log'),
+            'level': 'INFO',
+            'filename': path('logs/thespotlight.log'),
             'when': 'D',
             'backupCount': 5
         },
     },
     'loggers': {
         'interviews': {
-            'handlers': ['console', 'logfile'],
-            'level': 'INFO',
+            'handlers': ['console', 'file'],
+            'level': 'DEBUG',
             'propagate': True
         },
     },

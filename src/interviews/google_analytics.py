@@ -1,19 +1,24 @@
 import datetime
+import logging
 import os
+from collections import OrderedDict
 
 import httplib2
 from apiclient.discovery import build
+from decouple import config
 from oauth2client.service_account import ServiceAccountCredentials
-from collections import OrderedDict
 
-# Define the auth scopes to request.
-scope = ['https://www.googleapis.com/auth/analytics.readonly']
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+SERVICE_ACCOUNT_EMAIL = config('SERVICE_ACCOUNT_EMAIL')
+SERVICE_ACCOUNT_PKCS12 = config('SERVICE_ACCOUNT_PKCS12')
 
 # Use the developer console and replace the values with your
 # service account email and relative location of your key file.
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-SERVICE_ACCOUNT_EMAIL = 'ele-thespotlight@thespotlight-169213.iam.gserviceaccount.com'
-SERVICE_ACCOUNT_PKCS12_FILE_PATH = os.path.join(BASE_DIR, 'keys', 'thespotlight-a503d4a089dd.p12')
+SERVICE_ACCOUNT_PKCS12_FILE_PATH = os.path.join(BASE_DIR, 'keys', SERVICE_ACCOUNT_PKCS12)
+
+# Define the auth scopes to request.
+scope = ['https://www.googleapis.com/auth/analytics.readonly']
+logger = logging.getLogger(__name__)
 
 
 def get_service(api_name, api_version, scope, key_file_location, service_account_email):
