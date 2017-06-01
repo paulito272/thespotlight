@@ -55,7 +55,7 @@
                     <hr class="mb-2">
                     <h6><strong>Νεα συνέντευξη</strong></h6>
                 </div>
-                {% with interviews|first as interview %}
+                {% with new_interview as interview %}
                     <div class="ts-interview px-2">
                         {% if interview.interviewee.profile_image %}
                             <div class="mb-2">

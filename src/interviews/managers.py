@@ -15,9 +15,12 @@ class InterviewManager(models.Manager):
     def latest(self, *args, **kwargs):
         return self.active().order_by('-publish')[:3]
 
+    def new(self, *args, **kwargs):
+        return self.active().first()
+
     def most_read(self, *args, **kwargs):
         pages = dict(get_most_read_pages())
-        
+
         if pages:
             objects = list(self.active().filter(slug__in=pages))
             objects.sort(key=lambda obj: pages[obj.slug])

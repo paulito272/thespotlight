@@ -31,6 +31,7 @@ class InterviewListView(ListView):
     context = {
         'today': today,
         'page_request_var': page_request_var,
+        'new_interview': model.objects.new(),
         'most_read': model.objects.most_read()
     }
 
@@ -45,9 +46,15 @@ class InterviewListView(ListView):
         return queryset
 
     def get(self, request, *args, **kwargs):
+
+        # Update every time
+        self.context['new_interview'] = self.model.objects.new()
+
+        # Update every day
         days_past = (timezone.now().date() - self.context['today']).days
         if (days_past >= 1):
             self.context['most_read'] = self.model.objects.most_read()
+
         return super(InterviewListView, self).get(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):

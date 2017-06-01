@@ -1,5 +1,4 @@
 import os
-from collections import OrderedDict
 
 import httplib2
 from apiclient.discovery import build
@@ -71,6 +70,7 @@ def get_first_profile_id(service):
     return None
 
 
+# Get week's top 3 pages (ignore: /, /home, /tag/, /twos/, /category/)
 def get_top3_week_pages(service, profile_id):
     return service.data().ga().get(
         ids='ga:' + profile_id,
@@ -85,7 +85,7 @@ def get_top3_week_pages(service, profile_id):
 
 
 def get_most_read_pages():
-    most_read_pages = OrderedDict()
+    most_read_pages = {}
 
     # Authenticate and construct service.
     service = get_service('analytics', 'v3', scope, SERVICE_ACCOUNT_PKCS12_FILE_PATH, SERVICE_ACCOUNT_EMAIL)
