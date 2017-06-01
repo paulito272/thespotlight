@@ -1,7 +1,11 @@
+import logging
+
 from django.db import models
 from django.utils import timezone
 
 from .google_analytics import get_most_read_pages
+
+logger = logging.getLogger(__name__)
 
 
 class InterviewManager(models.Manager):
@@ -14,5 +18,6 @@ class InterviewManager(models.Manager):
     def most_read(self, *args, **kwargs):
         slugs = get_most_read_pages()
         if slugs:
+            logger.info('Top pages: {}'.format(slugs))
             return self.active().filter(slug__in=slugs)
         return super(InterviewManager, self).none()

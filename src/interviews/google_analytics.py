@@ -1,6 +1,4 @@
-import logging
 import os
-from collections import OrderedDict
 
 import httplib2
 from apiclient.discovery import build
@@ -17,7 +15,6 @@ SERVICE_ACCOUNT_PKCS12_FILE_PATH = os.path.join(BASE_DIR, 'keys', SERVICE_ACCOUN
 
 # Define the auth scopes to request.
 scope = ['https://www.googleapis.com/auth/analytics.readonly']
-logger = logging.getLogger(__name__)
 
 
 def get_service(api_name, api_version, scope, key_file_location, service_account_email):
@@ -87,7 +84,7 @@ def get_top3_week_pages(service, profile_id):
 
 
 def get_most_read_pages():
-    most_read_pages = OrderedDict()
+    most_read_pages = []
 
     # Authenticate and construct service.
     service = get_service('analytics', 'v3', scope, SERVICE_ACCOUNT_PKCS12_FILE_PATH, SERVICE_ACCOUNT_EMAIL)
@@ -97,8 +94,8 @@ def get_most_read_pages():
     if results:
         top_pages = results.get('rows')
         for page in top_pages:
-            slug = page[1]
+            slug = page[1].replace('/', '')
             if slug:
-                most_read_pages[slug] = slug
+                most_read_pages.append(slug)
 
     return most_read_pages
