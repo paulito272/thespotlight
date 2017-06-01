@@ -29,11 +29,6 @@ body {
     background: rgba(0, 0, 0, 0.5);;
 }
 
-.ts-interview {
-    padding-left: 10px;
-    padding-right: 10px;
-}
-
 .ts-new-interview-title {
     font-family: 'Roboto Slab', serif;
 }
@@ -276,4 +271,9 @@ footer a:hover {
     #ts-interview-header-container time {
         font-size: 0.625em;
     }
+}
+
+/*Large devices (desktops, less than 1200px)*/
+@media (max-width: 1199px) {
+
 }
