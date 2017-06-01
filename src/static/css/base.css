@@ -127,6 +127,11 @@ body {
     word-wrap: break-word;
 }
 
+/*Interview's lead paragraph*/
+#ts-interview-content h5 {
+    padding: 0 60px;
+}
+
 #ts-carousel-overlay:before {
     content: '';
     display: block;
