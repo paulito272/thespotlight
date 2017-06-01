@@ -237,6 +237,13 @@ footer a:hover {
     color: #ffffff;
 }
 
+/*Small devices (landscape phones, less than 768px)*/
+@media (max-width: 767px) {
+    .ts-mt-sm-5 {
+        margin-top: 3rem !important
+    }
+}
+
 /*Medium devices (tablets, less than 992px)*/
 @media (max-width: 991px) {
     #ts-interview-content {
@@ -268,9 +275,5 @@ footer a:hover {
     #ts-interview-header-container span,
     #ts-interview-header-container time {
         font-size: 0.625em;
-    }
-
-    .ts-mt-sm-5 {
-        margin-top: 3rem !important
     }
 }
