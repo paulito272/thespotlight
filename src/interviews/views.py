@@ -32,6 +32,7 @@ class InterviewListView(ListView):
         'today': today,
         'page_request_var': page_request_var,
         'new_interview': model.objects.new(),
+        'active_interviews': model.objects.active(),
         'most_read': model.objects.most_read()
     }
 
@@ -49,6 +50,7 @@ class InterviewListView(ListView):
 
         # Update every time
         self.context['new_interview'] = self.model.objects.new()
+        self.context['active_interviews'] = self.model.objects.active()
 
         # Update every day
         days_past = (timezone.now().date() - self.context['today']).days

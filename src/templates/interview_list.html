@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load accentify %}
+{% load order_by %}
 
 {% block head_title %}All Interviews | {{ block.super }}{% endblock %}
 
@@ -125,36 +126,39 @@
     </div>
 
     <!-- LAST WEEK’S INTERVIEWS -->
+
     <div class="row mb-2">
         <div class="col-md-8 col-sm-12">
             <hr class="mb-2 mt-5">
             <h6><strong>Συνεντεύξεις περασμένης εβδομάδας</strong></h6>
         </div>
-        <div class="col-md-4 hidden-sm-down">
-            <hr class="mb-2 mt-5">
-            <h6><strong>A-Z Κατάλογος Συνεντεύξεων</strong></h6>
-            <div id="ts-interview-directory" class="pre-scrollable mt-3 px-3" style="overflow-x: hidden;">
-                {% for interview in interviews %}
-                    <a href="{{ interview.get_absolute_url }}">
-                        <div class="row mb-2">
-                            <div class="col-md-4 px-0">
-                                <div class="card ts-card">
-                                    <div class="card-img-overlay overlay p-0"></div>
-                                    <img class="img-fluid"
-                                         src="{{ interview.interviewee.profile_image.url }}"
-                                         alt="{{ interview.interviewee.slug }}">
+        {% if active_interviews %}
+            <div class="col-md-4 hidden-sm-down">
+                <hr class="mb-2 mt-5">
+                <h6><strong>A-Z Κατάλογος Συνεντεύξεων</strong></h6>
+                <div id="ts-interview-directory" class="pre-scrollable mt-3 px-3" style="overflow-x: hidden;">
+                    {% for interview in active_interviews|order_by:'-author' %}
+                        <a href="{{ interview.get_absolute_url }}">
+                            <div class="row mb-2">
+                                <div class="col-md-4 px-0">
+                                    <div class="card ts-card">
+                                        <div class="card-img-overlay overlay p-0"></div>
+                                        <img class="img-fluid"
+                                             src="{{ interview.interviewee.profile_image.url }}"
+                                             alt="{{ interview.interviewee.slug }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-8 align-self-center">
+                                    <h6 class="ts-interview-title ts-small-text">
+                                        <strong>{{ interview.interviewee.get_full_name }}</strong>
+                                    </h6>
                                 </div>
                             </div>
-                            <div class="col-md-8 align-self-center">
-                                <h6 class="ts-interview-title ts-small-text">
-                                    <strong>{{ interview.interviewee.get_full_name }}</strong>
-                                </h6>
-                            </div>
-                        </div>
-                    </a>
-                {% endfor %}
+                        </a>
+                    {% endfor %}
+                </div>
             </div>
-        </div>
+        {% endif %}
     </div>
 {% endblock %}
 
