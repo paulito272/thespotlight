@@ -16,8 +16,12 @@ class InterviewManager(models.Manager):
         return self.active().order_by('-publish')[:3]
 
     def most_read(self, *args, **kwargs):
-        slugs = get_most_read_pages()
-        if slugs:
-            logger.info('Top pages: {}'.format(slugs))
-            return self.active().filter(slug__in=slugs)
+        pages = dict(get_most_read_pages())
+        
+        if pages:
+            objects = list(self.active().filter(slug__in=pages))
+            objects.sort(key=lambda obj: pages[obj.slug])
+            logger.info('Most read interviews: {}'.format(objects))
+            return objects
+
         return super(InterviewManager, self).none()
