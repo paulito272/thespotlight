@@ -13,7 +13,7 @@ class InterviewManager(models.Manager):
         return super(InterviewManager, self).filter(draft=False).filter(publish__lte=timezone.now())
 
     def latest(self, *args, **kwargs):
-        return self.active().order_by('-publish')[:3]
+        return self.active().order_by('-publish')[:9]
 
     def new(self, *args, **kwargs):
         return self.active().first()
