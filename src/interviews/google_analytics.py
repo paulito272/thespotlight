@@ -1,4 +1,3 @@
-import datetime
 import logging
 import os
 from collections import OrderedDict
@@ -74,51 +73,32 @@ def get_first_profile_id(service):
     return None
 
 
-def get_pageviews(service, profile_id):
-    # Last week
-    end_date = datetime.date.today()
-    start_date = end_date - datetime.timedelta(days=7)
-
+def get_top3_week_pages(service, profile_id):
     return service.data().ga().get(
         ids='ga:' + profile_id,
-        dimensions='ga:pageTitle,ga:pagePath',
-        metrics='ga:pageviews,ga:uniquePageviews',
-        start_date=start_date.strftime('%Y-%m-%d'),
-        end_date=end_date.strftime('%Y-%m-%d'),
-        sort='-ga:pageviews').execute()
+        start_date='7daysAgo',
+        end_date='today',
+        metrics='ga:uniquePageviews',
+        dimensions='ga:pagePathLevel1,ga:pagePath',
+        sort='-ga:uniquePageviews',
+        filters='ga:pagePath!=/;ga:pagePath!=/home;ga:pagePathLevel1!=/tag/;'
+                'ga:pagePathLevel1!=/twos/;ga:pagePathLevel1!=/category/',
+        max_results='3').execute()
 
 
 def get_most_read_pages():
+    most_read_pages = OrderedDict()
+
     # Authenticate and construct service.
     service = get_service('analytics', 'v3', scope, SERVICE_ACCOUNT_PKCS12_FILE_PATH, SERVICE_ACCOUNT_EMAIL)
     profile = get_first_profile_id(service)
-
-    # Fetch last week's most read pages
-    results = get_pageviews(service, profile)
-
-    most_read_pages = OrderedDict()
-    NUM_OF_PAGES = 10
+    results = get_top3_week_pages(service, profile)
 
     if results:
         top_pages = results.get('rows')
-
         for page in top_pages:
-            if (len(most_read_pages) == NUM_OF_PAGES):
-                break
-            slug = page[1].strip('/')
+            slug = page[1]
             if slug:
-                if 'category' not in slug and 'tag' not in slug:
-                    most_read_pages[slug] = slug
+                most_read_pages[slug] = slug
 
     return most_read_pages
-
-
-def main():
-    slugs = get_most_read_pages()
-    if slugs:
-        for slug in slugs:
-            print(slug)
-
-
-if __name__ == '__main__':
-    main()
