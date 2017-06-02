@@ -25,7 +25,7 @@ class InterviewManager(models.Manager):
 
         if pages:
             objects = list(self.active().filter(slug__in=pages))
-            objects.sort(key=lambda obj: pages[obj.slug])
+            objects.sort(key=lambda obj: int(pages[obj.slug]), reverse=True)
             return objects
 
         return super(InterviewManager, self).none()
