@@ -1,5 +1,7 @@
 import logging
 
+from django.shortcuts import get_object_or_404
+from django.shortcuts import render
 from django.shortcuts import reverse
 from django.urls import reverse_lazy
 from django.utils import timezone
@@ -37,18 +39,15 @@ class InterviewListView(ListView):
         'active_interviews': model.objects.active()
     }
 
-    def get_queryset(self):
-        # By default get the latest interviews (top 9)
-        queryset = self.model.objects.active().order_by('-publish')[:9]
-
-        if self.request.GET.get('category'):
-            category_slug = self.request.GET.get('category')
-            category = Subcategory.objects.filter(slug=category_slug)
-            queryset = self.model.objects.filter(category=category)
-
-        return queryset
-
     def get(self, request, *args, **kwargs):
+        if request.GET.get('category'):
+            category_slug = request.GET.get('category')
+            category = get_object_or_404(Subcategory, slug=category_slug)
+
+            queryset = self.model.objects.active().filter(category=category)
+            context = {'category': category, 'interviews': queryset}
+
+            return render(request, 'interview_list_category.html', context)
 
         # Update every time
         self.context['new_interview'] = self.model.objects.new()
@@ -67,6 +66,10 @@ class InterviewListView(ListView):
         for key, value in self.context.items():
             context[key] = self.context[key]
         return context
+
+    def get_queryset(self):
+        # Get the last 9 interviews
+        return self.model.objects.active().order_by('-publish')[:9]
 
 
 class InterviewDetailView(DetailView):
@@ -92,97 +95,3 @@ class InterviewUpdateView(UpdateView):
     def get_success_url(self):
         slug = self.kwargs['slug'] if 'slug' in self.kwargs else ''
         return reverse('interviews:detail', kwargs={'slug': slug})
-
-# def post_create(request):
-#     if not request.user.is_staff or not request.user.is_superuser:
-#         raise Http404
-#
-#     form = PostForm(request.POST or None, request.FILES or None)
-#     if form.is_valid():
-#         instance = form.save(commit=False)
-#         instance.user = request.user
-#         instance.save()
-#         # message success
-#         messages.success(request, "Successfully Created")
-#         return HttpResponseRedirect(instance.get_absolute_url())
-#     context = {
-#         "form": form,
-#     }
-#     return render(request, "interview_form.html", context)
-
-
-# def post_detail(request, slug=None):
-#     instance = get_object_or_404(Post, slug=slug)
-#     if instance.publish > timezone.now().date() or instance.draft:
-#         if not request.user.is_staff or not request.user.is_superuser:
-#             raise Http404
-#     share_string = quote_plus(instance.content)
-#
-#     initial_data = {
-#         "content_type": instance.get_content_type,
-#         "object_id": instance.id
-#     }
-#     form = CommentForm(request.POST or None, initial=initial_data)
-#     if form.is_valid() and request.user.is_authenticated():
-#         c_type = form.cleaned_data.get("content_type")
-#         content_type = ContentType.objects.get(model=c_type)
-#         obj_id = form.cleaned_data.get('object_id')
-#         content_data = form.cleaned_data.get("content")
-#         parent_obj = None
-#         try:
-#             parent_id = int(request.POST.get("parent_id"))
-#         except:
-#             parent_id = None
-#
-#         if parent_id:
-#             parent_qs = Comment.objects.filter(id=parent_id)
-#             if parent_qs.exists() and parent_qs.count() == 1:
-#                 parent_obj = parent_qs.first()
-#
-#         new_comment, created = Comment.objects.get_or_create(
-#             user=request.user,
-#             content_type=content_type,
-#             object_id=obj_id,
-#             content=content_data,
-#             parent=parent_obj,
-#         )
-#         return HttpResponseRedirect(new_comment.content_object.get_absolute_url())
-#
-#     comments = instance.comments
-#     context = {
-#         "title": instance.title,
-#         "instance": instance,
-#         "share_string": share_string,
-#         "comments": comments,
-#         "comment_form": form,
-#     }
-#     return render(request, "interview_detail.html", context)
-
-
-
-# def post_update(request, slug=None):
-#     if not request.user.is_staff or not request.user.is_superuser:
-#         raise Http404
-#     instance = get_object_or_404(Post, slug=slug)
-#     form = PostForm(request.POST or None, request.FILES or None, instance=instance)
-#     if form.is_valid():
-#         instance = form.save(commit=False)
-#         instance.save()
-#         messages.success(request, "<a href='#'>Item</a> Saved", extra_tags='html_safe')
-#         return HttpResponseRedirect(instance.get_absolute_url())
-#
-#     context = {
-#         "title": instance.title,
-#         "instance": instance,
-#         "form": form,
-#     }
-#     return render(request, "interview_form.html", context)
-#
-#
-# def post_delete(request, slug=None):
-#     if not request.user.is_staff or not request.user.is_superuser:
-#         raise Http404
-#     instance = get_object_or_404(Post, slug=slug)
-#     instance.delete()
-#     messages.success(request, "Successfully deleted")
-#     return redirect("interviews:list")
