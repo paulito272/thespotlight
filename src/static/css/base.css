@@ -153,15 +153,16 @@ body {
     max-height: 415px !important;
 }
 
-#share a,
-#share a:hover {
+.ts-blank-link a,
+.ts-blank-link a:hover {
     text-decoration: none;
 }
 
-#share a {
+.ts-blank-link a {
     color: inherit;
 }
 
+.fa-facebook:hover,
 .fa-facebook-square:hover {
     color: #3b5998;
     transition: color .25s ease-out;
@@ -170,8 +171,17 @@ body {
     -o-transition: color .25s ease-out;
 }
 
+.fa-twitter:hover,
 .fa-twitter-square:hover {
     color: #00aced;
+    transition: color .25s ease-out;
+    -webkit-transition: color .25s ease-out;
+    -moz-transition: color .25s ease-out;
+    -o-transition: color .25s ease-out;
+}
+
+.fa-instagram:hover {
+    color: #c32aa3;
     transition: color .25s ease-out;
     -webkit-transition: color .25s ease-out;
     -moz-transition: color .25s ease-out;
@@ -184,6 +194,14 @@ body {
     -webkit-transition: color .25s ease-out;
     -moz-transition: color .25s ease-out;
     -o-transition: color .25s ease-out;
+}
+
+#ts-share {
+    padding-right: 1em;
+}
+
+#ts-fb-like-btn {
+    line-height: 0;
 }
 
 #footer {
