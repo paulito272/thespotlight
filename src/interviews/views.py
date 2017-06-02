@@ -32,12 +32,14 @@ class InterviewListView(ListView):
         'today': today,
         'page_request_var': page_request_var,
         'new_interview': model.objects.new(),
-        'active_interviews': model.objects.active(),
-        'most_read': model.objects.most_read()
+        'most_read': model.objects.most_read(),
+        'last_week_interview': model.objects.last_week(),
+        'active_interviews': model.objects.active()
     }
 
     def get_queryset(self):
-        queryset = self.model.objects.latest()
+        # By default get the latest interviews (top 9)
+        queryset = self.model.objects.active().order_by('-publish')[:9]
 
         if self.request.GET.get('category'):
             category_slug = self.request.GET.get('category')
@@ -50,6 +52,7 @@ class InterviewListView(ListView):
 
         # Update every time
         self.context['new_interview'] = self.model.objects.new()
+        self.context['last_week_interview'] = self.model.objects.last_week()
         self.context['active_interviews'] = self.model.objects.active()
 
         # Update every day

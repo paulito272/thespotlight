@@ -149,6 +149,10 @@ body {
     padding: 20px;
 }
 
+.pre-scrollable {
+    max-height: 415px !important;
+}
+
 #footer {
     position: absolute;
     bottom: 0;

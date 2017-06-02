@@ -4,6 +4,7 @@
 
 {% block head_title %}All Interviews | {{ block.super }}{% endblock %}
 
+<!-- JUMBOTRON -->
 {% block jumbotron %}
     {% if interviews %}
         <div id="ts-carousel" class="carousel slide mb-0" data-ride="carousel">
@@ -48,171 +49,190 @@
 
 {% block content %}
     <div class="row">
-        {% if interviews %}
 
-            <!-- NEW INTERVIEW -->
-            <div class="col-md-8 px-md-2">
-                <div class="mb-3">
-                    <hr class="mb-2">
-                    <h6><strong>Νεα συνέντευξη</strong></h6>
-                </div>
-                {% with new_interview as interview %}
-                    <div class="ts-interview">
-                        {% if interview.interviewee.profile_image %}
-                            <div class="mb-2">
-                                <a href="{{ interview.get_absolute_url }}">
-                                    <div class="card ts-card">
-                                        <div class="card-img-overlay overlay"></div>
-                                        <img class="img-fluid ts-interview-image"
-                                             src="{{ interview.interviewee.profile_image.url }}"
-                                             alt="{{ interview.interviewee.slug }}">
-                                    </div>
-                                </a>
-                            </div>
-                        {% endif %}
-                        <h5 class="ts-new-interview-title mt-3">
-                            <em>{{ interview.interviewee.get_full_name|accentify|upper }}:
-                                &ldquo;{{ interview.title|accentify|upper|truncatechars:120 }}&rdquo;
-                            </em>
-                        </h5>
-                        <hr class="mb-2">
-                        <strong class="ts-small-text">{{ interview.publish|date:"F d, Y"|accentify|upper }}</strong>
-                        <div id="ts-interview-content">
-                            {{ interview.content|safe|truncatewords:200 }}
-                        </div>
-                        <a href="{{ interview.get_absolute_url }}">
-                            <button type="button" class="btn btn-secondary ts-btn-general">
-                                <strong class="ts-small-text">Διάβασε περισσότερα...</strong>
-                            </button>
-                        </a>
-                    </div>
-                {% endwith %}
+        <!-- NEW INTERVIEW -->
+        <div class="col-md-8 px-md-2">
+            <div class="mb-3">
+                <hr class="mb-2">
+                <h6><strong>Νεα συνέντευξη</strong></h6>
             </div>
-
-            <!-- MOST READ INTERVIEWS -->
-            <div class="col-md-4 px-md-2">
-                <div class="col">
-                    <div class="row">
+            {% with new_interview as interview %}
+                <div class="ts-interview">
+                    {% if interview.interviewee.profile_image %}
                         <div class="mb-2">
-                            <hr class="mb-2 ts-mt-sm-5">
-                            <h6><strong>Πιο δημοφιλής συνεντεύξεις</strong></h6>
+                            <a href="{{ interview.get_absolute_url }}">
+                                <div class="card ts-card">
+                                    <div class="card-img-overlay overlay"></div>
+                                    <img class="img-fluid ts-interview-image"
+                                         src="{{ interview.interviewee.profile_image.url }}"
+                                         alt="{{ interview.interviewee.slug }}">
+                                </div>
+                            </a>
                         </div>
+                    {% endif %}
+                    <h5 class="ts-new-interview-title mt-3">
+                        <em>{{ interview.interviewee.get_full_name|accentify|upper }}:
+                            &ldquo;{{ interview.title|accentify|upper|truncatechars:120 }}&rdquo;
+                        </em>
+                    </h5>
+                    <hr class="mb-2">
+                    <strong class="ts-small-text">{{ interview.publish|date:"F d, Y"|accentify|upper }}</strong>
+                    <div id="ts-interview-content">
+                        {{ interview.content|safe|truncatewords:200 }}
                     </div>
-                    {% for interview in most_read %}
-                        <div class="row">
-                            <div class="ts-interview">
-                                {% if interview.interviewee.profile_image %}
-                                    <div class="mb-2">
-                                        <a href="{{ interview.get_absolute_url }}">
-                                            <div class="card ts-card">
-                                                <div class="card-img-overlay overlay"></div>
-                                                <img class="img-fluid ts-interview-image"
-                                                     src="{{ interview.interviewee.profile_image.url }}"
-                                                     alt="{{ interview.interviewee.slug }}">
-                                            </div>
-                                        </a>
-                                    </div>
-                                {% endif %}
-                                <h6 class="ts-interview-title">
-                                    <strong>{{ interview.interviewee.get_full_name }}</strong>
-                                </h6>
-                                <p class="ts-interview-subtitle">
-                                    <em>&ldquo;{{ interview.title|accentify|upper|truncatechars:120 }}&rdquo;</em>
-                                </p>
-                            </div>
-                        </div>
-                    {% endfor %}
+                    <a href="{{ interview.get_absolute_url }}">
+                        <button type="button" class="btn btn-secondary ts-btn-general">
+                            <strong class="ts-small-text">Διάβασε περισσότερα...</strong>
+                        </button>
+                    </a>
                 </div>
+            {% endwith %}
+        </div>
+
+        <!-- MOST READ INTERVIEWS -->
+        <div class="col-md-4 px-md-2">
+            <div class="mb-3">
+                <hr class="mb-2 ts-mt-sm-5">
+                <h6><strong>Πιο δημοφιλής συνεντεύξεις</strong></h6>
             </div>
-        {% else %}
-            <p>There are no interviews available.</p>
-        {% endif %}
+            {% for interview in most_read %}
+                <div class="ts-interview">
+                    {% if interview.interviewee.profile_image %}
+                        <div class="mb-2">
+                            <a href="{{ interview.get_absolute_url }}">
+                                <div class="card ts-card">
+                                    <div class="card-img-overlay overlay"></div>
+                                    <img class="img-fluid ts-interview-image"
+                                         src="{{ interview.interviewee.profile_image.url }}"
+                                         alt="{{ interview.interviewee.slug }}">
+                                </div>
+                            </a>
+                        </div>
+                    {% endif %}
+                    <h6 class="ts-interview-title">
+                        <strong>{{ interview.interviewee.get_full_name }}</strong>
+                    </h6>
+                    <p class="ts-interview-subtitle">
+                        <em>&ldquo;{{ interview.title|accentify|upper|truncatechars:120 }}&rdquo;</em>
+                    </p>
+                </div>
+            {% endfor %}
+        </div>
     </div>
 
-    <!-- LAST WEEK’S INTERVIEW -->
-    <div class="row mb-2">
-        <div class="col-md-8 col-sm-12">
-            <hr class="mb-2 mt-5">
-            <h6><strong>Συνέντευξη περασμένης εβδομάδας</strong></h6>
-        </div>
-        {% if active_interviews %}
-            <div class="col-md-4 hidden-sm-down">
+    <div class="row">
+
+        <!-- LAST WEEK’S INTERVIEW -->
+        <div class="col-md-8 col-sm-12 px-md-2">
+            <div class="mb-3">
                 <hr class="mb-2 mt-5">
-                <h6><strong>A-Z Κατάλογος Συνεντεύξεων</strong></h6>
-                <div id="ts-interview-directory" class="pre-scrollable mt-3 px-3" style="overflow-x: hidden;">
-                    {% for interview in active_interviews|order_by:'-author' %}
-                        <a href="{{ interview.get_absolute_url }}">
-                            <div class="row mb-2">
-                                <div class="col-md-4 px-0">
-                                    <div class="card ts-card">
-                                        <div class="card-img-overlay overlay p-0"></div>
-                                        <img class="img-fluid"
-                                             src="{{ interview.interviewee.profile_image.url }}"
-                                             alt="{{ interview.interviewee.slug }}">
-                                    </div>
+                <h6><strong>Συνέντευξη περασμένης εβδομάδας</strong></h6>
+            </div>
+            {% for interview in last_week_interview %}
+                <div class="ts-interview">
+                    {% if interview.interviewee.profile_image %}
+                        <div class="mb-2">
+                            <a href="{{ interview.get_absolute_url }}">
+                                <div class="card ts-card">
+                                    <div class="card-img-overlay overlay"></div>
+                                    <img class="img-fluid ts-interview-image"
+                                         src="{{ interview.interviewee.profile_image.url }}"
+                                         alt="{{ interview.interviewee.slug }}">
                                 </div>
-                                <div class="col-md-8 align-self-center">
-                                    <h6 class="ts-interview-title ts-small-text">
-                                        <strong>{{ interview.interviewee.get_full_name }}</strong>
-                                    </h6>
+                            </a>
+                        </div>
+                    {% endif %}
+                    <h5 class="ts-new-interview-title mt-3">
+                        <em>{{ interview.interviewee.get_full_name|accentify|upper }}:
+                            &ldquo;{{ interview.title|accentify|upper|truncatechars:120 }}&rdquo;
+                        </em>
+                    </h5>
+                    <hr class="mb-2">
+                    <strong class="ts-small-text">{{ interview.publish|date:"F d, Y"|accentify|upper }}</strong>
+                    <div id="ts-interview-content">
+                        {{ interview.content|safe|truncatewords:200 }}
+                    </div>
+                    <a href="{{ interview.get_absolute_url }}">
+                        <button type="button" class="btn btn-secondary ts-btn-general">
+                            <strong class="ts-small-text">Διάβασε περισσότερα...</strong>
+                        </button>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+
+
+        <!-- A-Z INTERVIEW DIRECTORY -->
+        <div class="col-md-4 hidden-sm-down">
+            <hr class="mb-2 mt-5">
+            <h6><strong>A-Z Κατάλογος Συνεντεύξεων</strong></h6>
+            <div id="ts-interview-directory" class="pre-scrollable mt-3 px-3" style="overflow-x: hidden;">
+                {% for interview in active_interviews|order_by:'-author' %}
+                    <a href="{{ interview.get_absolute_url }}">
+                        <div class="row mb-2">
+                            <div class="col-md-4 px-0">
+                                <div class="card ts-card">
+                                    <div class="card-img-overlay overlay p-0"></div>
+                                    <img class="img-fluid"
+                                         src="{{ interview.interviewee.profile_image.url }}"
+                                         alt="{{ interview.interviewee.slug }}">
                                 </div>
                             </div>
-                        </a>
-                    {% endfor %}
-                </div>
+                            <div class="col-md-8 align-self-center">
+                                <h6 class="ts-interview-title ts-small-text">
+                                    <strong>{{ interview.interviewee.get_full_name }}</strong>
+                                </h6>
+                            </div>
+                        </div>
+                    </a>
+                {% endfor %}
             </div>
-        {% endif %}
+        </div>
     </div>
 
     <!-- LATEST INTERVIEWS -->
-    {% if interviews %}
-        <div class="row mb-2">
-            <div class="col-12">
-                <div class="mb-3">
-                    <hr class="mb-2 mt-5">
-                    <h6><strong>Τελευταίες συνεντεύξεις</strong></h6>
-                </div>
-
-                <div class="col-12 px-0">
-                    {% for interview in interviews %}
-                        {% if forloop.first %}
-                            <div class="row">
-                        {% endif %}
-
-                        <div class="col-4 px-2 ts-latest-interviews-container">
-                            <a href="{{ interview.get_absolute_url }}">
-                                {% if interview.interviewee.profile_image %}
-                                    <div class="mb-2">
-                                        <div class="card ts-card">
-                                            <div class="card-img-overlay overlay"></div>
-                                            <img class="img-fluid ts-latest-interviews-image"
-                                                 src="{{ interview.interviewee.profile_image.url }}"
-                                                 alt="{{ interview.interviewee.slug }}">
-                                        </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="mb-3">
+                <hr class="mb-2 mt-5">
+                <h6><strong>Τελευταίες συνεντεύξεις</strong></h6>
+            </div>
+            <div class="col-12 px-2">
+                {% for interview in interviews %}
+                    {% if forloop.first %}
+                        <div class="row">
+                    {% endif %}
+                    <div class="col-4 px-2 ts-latest-interviews-container">
+                        <a href="{{ interview.get_absolute_url }}">
+                            {% if interview.interviewee.profile_image %}
+                                <div class="mb-2">
+                                    <div class="card ts-card">
+                                        <div class="card-img-overlay overlay"></div>
+                                        <img class="img-fluid ts-latest-interviews-image"
+                                             src="{{ interview.interviewee.profile_image.url }}"
+                                             alt="{{ interview.interviewee.slug }}">
                                     </div>
-                                {% endif %}
-                                <h6 class="ts-interview-title">
-                                    <strong>{{ interview.interviewee.get_full_name }}</strong>
-                                </h6>
-                                <p class="ts-interview-subtitle">
-                                    <em>&ldquo;{{ interview.title|accentify|upper|truncatechars:120 }}&rdquo;</em>
-                                </p>
-                            </a>
+                                </div>
+                            {% endif %}
+                            <h6 class="ts-interview-title">
+                                <strong>{{ interview.interviewee.get_full_name }}</strong>
+                            </h6>
+                            <p class="ts-interview-subtitle">
+                                <em>&ldquo;{{ interview.title|accentify|upper|truncatechars:120 }}&rdquo;</em>
+                            </p>
+                        </a>
+                    </div>
+                    {% if forloop.counter|divisibleby:3 %}
                         </div>
-
-                        {% if forloop.counter|divisibleby:3 %}
-                            </div>
-                            <div class="row">
-                        {% endif %}
-
-                        {% if forloop.last %}
-                            </div>
-                        {% endif %}
-                    {% endfor %}
-                </div>
+                        <div class="row">
+                    {% endif %}
+                    {% if forloop.last %}
+                        </div>
+                    {% endif %}
+                {% endfor %}
             </div>
         </div>
-    {% endif %}
+    </div>
 {% endblock %}
 
 <!-- PAGINATION -->
