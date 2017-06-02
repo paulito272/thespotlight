@@ -1,5 +1,6 @@
 import logging
 
+from django.db.models import Q
 from django.shortcuts import get_object_or_404
 from django.shortcuts import render
 from django.shortcuts import reverse
@@ -40,8 +41,24 @@ class InterviewListView(ListView):
     }
 
     def get(self, request, *args, **kwargs):
-        if request.GET.get('category'):
-            category_slug = request.GET.get('category')
+        query = request.GET.get('q')
+        category_slug = request.GET.get('category')
+
+        if query:
+            query = query.strip()
+            queryset = self.model.objects.active().filter(
+                Q(title__icontains=query) |
+                Q(slug__icontains=query) |
+                Q(author__first_name__icontains=query) |
+                Q(author__last_name__icontains=query) |
+                Q(content__icontains=query)
+            )
+            context = {'interviews': queryset}
+
+            return render(request, 'interview_list_search.html', context)
+
+        if category_slug:
+            category_slug = category_slug.strip()
             category = get_object_or_404(Subcategory, slug=category_slug)
 
             queryset = self.model.objects.active().filter(category=category)
@@ -78,6 +95,24 @@ class InterviewDetailView(DetailView):
     template_name = 'interview_detail.html'
 
     today = timezone.now().date()
+
+    def get(self, request, *args, **kwargs):
+        query = request.GET.get('q')
+
+        if query:
+            query = query.strip()
+            queryset = self.model.objects.active().filter(
+                Q(title__icontains=query) |
+                Q(slug__icontains=query) |
+                Q(author__first_name__icontains=query) |
+                Q(author__last_name__icontains=query) |
+                Q(content__icontains=query)
+            )
+            context = {'interviews': queryset}
+
+            return render(request, 'interview_list_search.html', context)
+
+        return super(InterviewDetailView, self).get(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super(InterviewDetailView, self).get_context_data(**kwargs)

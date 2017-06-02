@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load accentify %}
+
+{% block head_title %}Αναζήτηση | Συνεντεύξεις | {{ block.super }}{% endblock %}
+
+{% block content %}
+    {% if interviews %}
+        <div class="row">
+            <div class="col-12">
+                <div class="mb-3">
+                    <hr class="mb-2">
+                    <h6><strong>Αποτελέσματα αναζήτησης</strong></h6>
+                    <kbd class="ts-small-text">{{ request.GET.q }}</kbd>
+                </div>
+                <div class="col-12 px-2">
+                    {% for interview in interviews %}
+                        {% if forloop.first %}
+                            <div class="row">
+                        {% endif %}
+                    <div class="col-4 px-2 ts-latest-interviews-container">
+                        <a href="{{ interview.get_absolute_url }}">
+                            {% if interview.interviewee.profile_image %}
+                                <div class="mb-2">
+                                    <div class="card ts-card">
+                                        <div class="card-img-overlay overlay"></div>
+                                        <img class="img-fluid ts-latest-interviews-image"
+                                             src="{{ interview.interviewee.profile_image.url }}"
+                                             alt="{{ interview.interviewee.slug }}">
+                                    </div>
+                                </div>
+                            {% endif %}
+                            <h6 class="ts-interview-title">
+                                <strong>{{ interview.interviewee.get_full_name }}</strong>
+                            </h6>
+                            <p class="ts-interview-subtitle">
+                                <em>&ldquo;{{ interview.title|accentify|upper|truncatechars:120 }}&rdquo;</em>
+                            </p>
+                        </a>
+                    </div>
+                    {% if forloop.counter|divisibleby:3 %}
+                        </div>
+                        <div class="row">
+                    {% endif %}
+                    {% if forloop.last %}
+                        </div>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
