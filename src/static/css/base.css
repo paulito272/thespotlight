@@ -153,6 +153,39 @@ body {
     max-height: 415px !important;
 }
 
+#share a,
+#share a:hover {
+    text-decoration: none;
+}
+
+#share a {
+    color: inherit;
+}
+
+.fa-facebook-square:hover {
+    color: #3b5998;
+    transition: color .25s ease-out;
+    -webkit-transition: color .25s ease-out;
+    -moz-transition: color .25s ease-out;
+    -o-transition: color .25s ease-out;
+}
+
+.fa-twitter-square:hover {
+    color: #00aced;
+    transition: color .25s ease-out;
+    -webkit-transition: color .25s ease-out;
+    -moz-transition: color .25s ease-out;
+    -o-transition: color .25s ease-out;
+}
+
+.fa-google-plus-square:hover {
+    color: #dd4b39;
+    transition: color .25s ease-out;
+    -webkit-transition: color .25s ease-out;
+    -moz-transition: color .25s ease-out;
+    -o-transition: color .25s ease-out;
+}
+
 #footer {
     position: absolute;
     bottom: 0;
@@ -206,6 +239,9 @@ footer a:hover {
     border: none;
     border-radius: 100%;
     transition: all 0.25s ease;
+    -webkit-transition: all 0.25s ease;
+    -moz-transition: all 0.25s ease;
+    -o-transition: all 0.25s ease;
 }
 
 @media (min-width: 40em) {
@@ -230,10 +266,6 @@ footer a:hover {
     -o-animation-delay: 0.5s;
 }
 
-#ts-m-interview-header {
-    display: none;
-}
-
 #ts-m-interview-cover-image-container {
     display: none;
 }
@@ -246,15 +278,19 @@ footer a:hover {
     -moz-border-radius: 0;
     border-radius: 0;
     cursor: pointer;
+    transition: background-color .25s ease-out;
     -webkit-transition: background-color .25s ease-out;
     -moz-transition: background-color .25s ease-out;
     -o-transition: background-color .25s ease-out;
-    transition: background-color .25s ease-out;
 }
 
 .ts-btn-general:hover {
     background-color: #000000;
     color: #ffffff;
+}
+
+.ts-slh {
+    line-height: 1em;
 }
 
 /*Small devices (landscape phones, less than 768px)*/
@@ -273,15 +309,6 @@ footer a:hover {
     #ts-interview-main-title {
         font-size: 1.125em;
         padding-bottom: 1.063em;
-    }
-
-    #ts-interview-header {
-        display: none;
-    }
-
-    #ts-m-interview-header {
-        display: block;
-        line-height: 1em;
     }
 
     #ts-interview-cover-image {

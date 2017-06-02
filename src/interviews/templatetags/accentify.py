@@ -6,6 +6,6 @@ register = Library()
 
 
 @register.filter
-def accentify(s):
-    return ''.join(c for c in unicodedata.normalize('NFD', s)
+def accentify(value):
+    return ''.join(c for c in unicodedata.normalize('NFD', value)
                    if unicodedata.category(c) != 'Mn')

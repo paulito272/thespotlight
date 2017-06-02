@@ -15,29 +15,16 @@
             <hr>
 
             <div id="ts-interview-header-container" class="row mb-3">
-                <div id="ts-interview-header" class="col-6">
-                    <span class="fa fa-calendar-o"></span>
-                    <time>{{ interview.publish|date:"F d, Y"|accentify|upper }}</time>
-                    <span class="text-muted">
-                        | By
-                        {% if interview.author.get_full_name %}
-                            {{ interview.author.get_full_name }}
-                        {% else %}
-                            {{ interview.author.username }}
-                        {% endif %}
-                    </span>
-                </div>
-
-                <div id="ts-m-interview-header" class="col-6">
-                    <div class="row">
-                        <div class="col pl-sm-0">
-                            <span class="fa fa-calendar-o"></span>
-                            <time>{{ interview.publish|date:"F d, Y"|accentify|upper }}</time>
+                <div id="ts-interview-header" class="col-6 align-self-center ts-slh">
+                    <div class="col px-0 px-md-3">
+                        <div class="row">
+                            <div class="col pl-sm-0">
+                                <span class="fa fa-calendar-o"></span>
+                                <time>{{ interview.publish|date:"F d, Y"|accentify|upper }}</time>
+                            </div>
                         </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col pl-sm-0">
+                        <div class="row">
+                            <div class="col pl-sm-0">
                             <span class="text-muted">
                                 By
                                 {% if interview.author.get_full_name %}
@@ -46,16 +33,34 @@
                                     {{ interview.author.username }}
                                 {% endif %}
                             </span>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="col-6 text-right align-self-center">
-                    <span class="fa fa-clock-o"></span>
-                    <span>
-                        {{ interview.read_time }}
-                        {% if  interview.read_time > 1 %} λεπτά{% else %} λεπτό {% endif %}
-                    </span>
+                <div id="share" class="col-6 text-right">
+                    <div class="row">
+                        <div class="col pl-sm-0 ts-slh">
+                            <span class="fa fa-clock-o"></span>
+                                <span>
+                                    {{ interview.read_time }}
+                                    {% if  interview.read_time > 1 %} λεπτά{% else %} λεπτό {% endif %}
+                                </span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col pl-sm-0">
+                            <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}">
+                                <i class="fa fa-facebook-square fa-lg" aria-hidden="true"></i>
+                            </a>
+                            <a href="https://twitter.com/home?status={{ interview.interviewee.get_full_name|accentify|upper }}%3A%20%E2%80%9C{{ interview.title|accentify|upper }}%E2%80%9D%20{{ request.build_absolute_uri }}">
+                                <i class="fa fa-twitter-square fa-lg" aria-hidden="true"></i>
+                            </a>
+                            <a href='https://plus.google.com/share?url={{ request.build_absolute_uri }}'>
+                                <i class="fa fa-google-plus-square fa-lg" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
