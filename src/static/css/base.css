@@ -293,6 +293,17 @@ footer a:hover {
     line-height: 1em;
 }
 
+.ts-btn-search {
+    cursor: pointer;
+    color: #5cb3fd;
+    border-color: #5cb3fd;
+}
+
+.ts-btn-search:hover {
+    background-color: #5cb3fd;
+    border-color: #5cb3fd;
+}
+
 /*Small devices (landscape phones, less than 768px)*/
 @media (max-width: 767px) {
     .ts-mt-sm-5 {
