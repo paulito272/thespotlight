@@ -50,13 +50,16 @@
                     </div>
                     <div class="row">
                         <div class="col pl-sm-0">
-                            <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}">
+                            <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}"
+                               target="_blank">
                                 <i class="fa fa-facebook-square fa-lg" aria-hidden="true"></i>
                             </a>
-                            <a href="https://twitter.com/home?status={{ interview.interviewee.get_full_name|accentify|upper }}%3A%20%E2%80%9C{{ interview.title|accentify|upper }}%E2%80%9D%20{{ request.build_absolute_uri }}">
+                            <a href="https://twitter.com/home?status={{ interview.interviewee.get_full_name|accentify|upper }}%3A%20%E2%80%9C{{ interview.title|accentify|upper }}%E2%80%9D%0D{{ request.build_absolute_uri }}"
+                               target="_blank">
                                 <i class="fa fa-twitter-square fa-lg" aria-hidden="true"></i>
                             </a>
-                            <a href='https://plus.google.com/share?url={{ request.build_absolute_uri }}'>
+                            <a href="https://plus.google.com/share?url={{ request.build_absolute_uri }}"
+                               target="_blank">
                                 <i class="fa fa-google-plus-square fa-lg" aria-hidden="true"></i>
                             </a>
                         </div>
