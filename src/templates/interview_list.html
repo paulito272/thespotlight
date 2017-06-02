@@ -208,33 +208,33 @@
                         {% if forloop.first %}
                             <div class="row">
                         {% endif %}
-                        <div class="col-4 px-2 ts-latest-interviews-container">
-                            <a href="{{ interview.get_absolute_url }}">
-                                {% if interview.interviewee.profile_image %}
-                                    <div class="mb-2">
-                                        <div class="card ts-card">
-                                            <div class="card-img-overlay overlay"></div>
-                                            <img class="img-fluid ts-latest-interviews-image"
-                                                 src="{{ interview.interviewee.profile_image.url }}"
-                                                 alt="{{ interview.interviewee.slug }}">
-                                        </div>
+                    <div class="col-4 px-2 ts-latest-interviews-container">
+                        <a href="{{ interview.get_absolute_url }}">
+                            {% if interview.interviewee.profile_image %}
+                                <div class="mb-2">
+                                    <div class="card ts-card">
+                                        <div class="card-img-overlay overlay"></div>
+                                        <img class="img-fluid ts-latest-interviews-image"
+                                             src="{{ interview.interviewee.profile_image.url }}"
+                                             alt="{{ interview.interviewee.slug }}">
                                     </div>
-                                {% endif %}
-                                <h6 class="ts-interview-title">
-                                    <strong>{{ interview.interviewee.get_full_name }}</strong>
-                                </h6>
-                                <p class="ts-interview-subtitle">
-                                    <em>&ldquo;{{ interview.title|accentify|upper|truncatechars:120 }}&rdquo;</em>
-                                </p>
-                            </a>
+                                </div>
+                            {% endif %}
+                            <h6 class="ts-interview-title">
+                                <strong>{{ interview.interviewee.get_full_name }}</strong>
+                            </h6>
+                            <p class="ts-interview-subtitle">
+                                <em>&ldquo;{{ interview.title|accentify|upper|truncatechars:120 }}&rdquo;</em>
+                            </p>
+                        </a>
+                    </div>
+                    {% if forloop.counter|divisibleby:3 %}
                         </div>
-                        {% if forloop.counter|divisibleby:3 %}
-                            </div>
-                            <div class="row">
-                        {% endif %}
-                        {% if forloop.last %}
-                            </div>
-                        {% endif %}
+                        <div class="row">
+                    {% endif %}
+                    {% if forloop.last %}
+                        </div>
+                    {% endif %}
                     {% endfor %}
                 </div>
             </div>

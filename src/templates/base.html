@@ -40,6 +40,21 @@
     {% block jumbotron %}
     {% endblock %}
 
+    <div class="container-fluid">
+        <div class="row mt-4">
+            <div class="col-4 offset-4 text-center">
+                <div class="fb-login-button"
+                     width="255px"
+                     data-max-rows="1"
+                     data-size="large"
+                     data-button-type="continue_with"
+                     data-auto-logout-link="true"
+                     data-use-continue-as="true">
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div id="ts-container" class="container">
         {% block content %}
         {% endblock %}
