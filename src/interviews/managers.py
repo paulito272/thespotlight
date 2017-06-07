@@ -24,19 +24,8 @@ class InterviewManager(models.Manager):
                                                                         publish__lt=monday_of_this_week)[:1]
 
     def most_read(self, *args, **kwargs):
-        queryset = super(InterviewManager, self).none()
+        slugs = get_most_read_pages()
+        if slugs:
+            return self.active().filter(slug__in=slugs)
 
-        pages = dict(get_most_read_pages())
-        if pages:
-            interviews = list(self.active().filter(slug__in=list(pages.keys())))
-            if (interviews):
-                interviews.sort(key=lambda obj: int(pages[obj.slug]), reverse=True)
-                ids = [int(obj.id) for obj in interviews]
-                clauses = ' '.join(['WHEN id={} THEN {}'.format(pk, i) for i, pk in enumerate(ids)])
-                ordering = 'CASE {} END'.format(clauses)
-                queryset = super(InterviewManager, self).filter(pk__in=ids).extra(
-                    select={'ordering': ordering}, order_by=('ordering',))
-                logger.info(queryset)
-                return queryset
-
-        return queryset
+        return super(InterviewManager, self).none()

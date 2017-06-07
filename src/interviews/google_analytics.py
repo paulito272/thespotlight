@@ -85,7 +85,7 @@ def get_top3_week_pages(service, profile_id):
 
 
 def get_most_read_pages():
-    most_read_pages = {}
+    most_read_pages = []
 
     # Authenticate and construct service.
     service = get_service('analytics', 'v3', scope, SERVICE_ACCOUNT_PKCS12_FILE_PATH, SERVICE_ACCOUNT_EMAIL)
@@ -96,8 +96,7 @@ def get_most_read_pages():
         top_pages = results.get('rows')
         for page in top_pages:
             slug = page[1].replace('/', '')
-            views = page[2]
             if slug:
-                most_read_pages[slug] = views
+                most_read_pages.append(slug)
 
     return most_read_pages
