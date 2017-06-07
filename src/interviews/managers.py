@@ -14,7 +14,7 @@ class InterviewManager(models.Manager):
         return super(InterviewManager, self).filter(draft=False).filter(publish__lte=timezone.now())
 
     def newest(self, *args, **kwargs):
-        return self.active()[:1]
+        return self.active().first()
 
     def last_week(self, *args, **kwargs):
         some_day_last_week = timezone.now().date() - timedelta(days=7)
