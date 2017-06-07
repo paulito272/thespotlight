@@ -34,7 +34,7 @@ class InterviewListView(ListView):
     context = {
         'today': today,
         'page_request_var': page_request_var,
-        'new_interview': model.objects.new(),
+        'new_interview': model.objects.newest(),
         'most_read': model.objects.most_read(),
         'last_week_interview': model.objects.last_week(),
         'active_interviews': model.objects.active()
