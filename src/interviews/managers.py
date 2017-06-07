@@ -26,6 +26,6 @@ class InterviewManager(models.Manager):
     def most_read(self, *args, **kwargs):
         slugs = get_most_read_pages()
         if slugs:
-            return self.active().filter(slug__in=slugs)
+            return self.active().filter(slug__in=slugs).order_by('slug')
 
         return super(InterviewManager, self).none()
