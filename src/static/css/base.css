@@ -54,7 +54,7 @@ body {
 
 .ts-latest-interviews-image {
     object-fit: cover;
-    height: 170px;
+    max-height: 250px;
 }
 
 .ts-latest-interviews-container a {
@@ -357,4 +357,16 @@ footer a:hover {
 /*Large devices (desktops, less than 1200px)*/
 @media (max-width: 1199px) {
 
+}
+
+/*Extra large devices (large desktops, 1200px and up)*/
+@media (min-width: 1200px) {
+    #ts-container .px-md-2 {
+        padding-left: 9px !important;
+        padding-right: 9px !important;
+    }
+
+    .container {
+        width: 1330px;
+    }
 }
