@@ -47,24 +47,99 @@
             </a>
         </div>
 
-        <div id="ts-fb-like-btn" class="fb-like align-self-center"
-             data-href="https://www.facebook.com/thespotlightgr-1105744862874930/"
-             data-layout="button_count"
-             data-action="like"
-             data-size="small"
-             data-show-faces="false"
-             data-share="false">
-        </div>
-
         <form method="GET" action="" class="form-inline my-2 my-lg-0">
             <div class="input-group col-sm-12">
                 <input type="text" class="form-control" name="q" value="{{ request.GET.q }}" placeholder="Αναζήτηση...">
                 <span class="input-group-btn">
-                    <button class="btn btn-outline-info ts-btn-search" type="submit">
+                    <button class="btn btn-outline-info ts-btn-info ts-cursor-pointer" type="submit">
                         <i class="fa fa-search" aria-hidden="true"></i>
                     </button>
                 </span>
             </div>
         </form>
+
+        <!-- Facebook Login Button trigger modal -->
+        <button type="button" id="ts-fb-login-btn"
+                class="btn btn-outline-info ts-btn-info ts-cursor-pointer align-self-center"
+                data-toggle="modal" data-target="#ts-loginModal">
+            <i class="fa fa-sign-in" aria-hidden="true"></i>
+            Log In/Out
+        </button>
+
+        <!-- Login Modal -->
+        <div class="modal fade" id="ts-loginModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="ts-loginModalLabel">Log In</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col">
+                                    <form method="POST" action="" id="login_form" class="form-horizontal">
+                                        {% csrf_token %}
+                                        <fieldset>
+                                            <div class="form-group">
+                                                <div class="col-md-12">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon">
+                                                            <i class="fa fa-user" aria-hidden="true"></i>
+                                                        </span>
+                                                        <input name="first_name" placeholder="Username"
+                                                               class="form-control" type="text">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-md-12">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon">
+                                                            <i class="fa fa-lock" aria-hidden="true"></i>
+                                                        </span>
+                                                        <input name="email" placeholder="Password" class="form-control"
+                                                               type="text">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-md-12">
+                                                    <button type="submit"
+                                                            class="btn btn-md btn-success btn-block ts-cursor-pointer">
+                                                        Log In
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                    </form>
+                                </div>
+                            </div>
+                            <hr class="mb-1">
+                            <div class="row mb-3">
+                                <div class="col text-center">
+                                    <small class="text-muted text-center">Or connect with</small>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col text-center">
+                                    <div class="fb-login-button"
+                                         data-width="300px"
+                                         data-max-rows="1"
+                                         data-size="medium"
+                                         data-button-type="login_with"
+                                         data-auto-logout-link="true"
+                                         data-use-continue-as="false">
+                                        Facebook
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </nav>

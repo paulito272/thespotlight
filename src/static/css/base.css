@@ -295,7 +295,6 @@ footer a:hover {
     -webkit-border-radius: 0;
     -moz-border-radius: 0;
     border-radius: 0;
-    cursor: pointer;
     transition: background-color .25s ease-out;
     -webkit-transition: background-color .25s ease-out;
     -moz-transition: background-color .25s ease-out;
@@ -311,15 +310,18 @@ footer a:hover {
     line-height: 1em;
 }
 
-.ts-btn-search {
-    cursor: pointer;
+.ts-btn-info {
     color: #5cb3fd;
     border-color: #5cb3fd;
 }
 
-.ts-btn-search:hover {
+.ts-btn-info:hover {
     background-color: #5cb3fd;
     border-color: #5cb3fd;
+}
+
+.ts-cursor-pointer {
+    cursor: pointer;
 }
 
 /*Small devices (landscape phones, less than 768px)*/

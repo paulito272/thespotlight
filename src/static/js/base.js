@@ -4,6 +4,7 @@ function addFooterPadding() {
 }
 
 $(document).ready(function () {
+    $('#ts-loginModal').appendTo('body');
     $('#ts-interview-content').find('img').addClass('img-fluid');
     addFooterPadding();
 });
