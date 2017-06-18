@@ -7,7 +7,7 @@
         <span class="navbar-toggler-icon"></span>
     </button>
 
-    <a class="navbar-brand" href="{% url 'interviews:list' %}">
+    <a class="navbar-brand" href="{% url 'interviews:home' %}">
         <img src="{% static 'img/logo.png' %}" width="30" height="30"
              class="d-inline-block align-top" alt="logo">
         The Spotlight
@@ -17,10 +17,13 @@
         <ul class="navbar-nav mr-auto">
             {% for category in categories %}
                 {% if category.sub_categories.all.count >= 1 %}
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="{{ category.slug }}"
-                           id="dropdown01" data-toggle="dropdown" aria-haspopup="true"
-                           aria-expanded="false">{{ category.name }}</a>
+                    <li class="nav-item dropdown dropdown-li">
+                        <a class="dropdown-link" href="{{ category.slug }}">
+                            {{ category.name }}
+                        </a>
+                        <a class="nav-link dropdown-toggle dropdown-caret" id="dropdown01"
+                           data-toggle="dropdown" aria-haspopup="true"
+                           aria-expanded="false"></a>
                         <div class="dropdown-menu" aria-labelledby="dropdown01">
                             {% for sub_category in category.sub_categories.all %}
                                 <a class="dropdown-item"

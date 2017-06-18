@@ -27,6 +27,12 @@ class InterviewListView(ListView):
     model = Interview
     context_object_name = 'interviews'
     template_name = 'interview_list.html'
+
+
+class InterviewHomeView(ListView):
+    model = Interview
+    context_object_name = 'interviews'
+    template_name = 'interview_list.html'
     paginate_by = 10
 
     today = timezone.now().date()
@@ -74,10 +80,10 @@ class InterviewListView(ListView):
         if days_past >= 1:
             self.context['most_read'] = self.model.objects.most_read()
 
-        return super(InterviewListView, self).get(request, *args, **kwargs)
+        return super(InterviewHomeView, self).get(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
-        context = super(InterviewListView, self).get_context_data(**kwargs)
+        context = super(InterviewHomeView, self).get_context_data(**kwargs)
         for key, value in self.context.items():
             context[key] = self.context[key]
         return context

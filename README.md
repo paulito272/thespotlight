@@ -24,6 +24,7 @@ Make the migrations.
 $ cd src/
 $ python manage.py makemigrations && python manage.py migrate
 ```
+
 Create a superuser.
 
 ```sh

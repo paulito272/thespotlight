@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load accentify %}
 {% load order_by %}
+{% load remove_img_tags %}
 
 {% block head_title %}{{ block.super }}{% endblock %}
 
@@ -80,7 +81,7 @@
                             {{ interview.publish|date:"F d, Y"|accentify|upper }}
                         </strong>
                         <div id="ts-interview-content">
-                            {{ interview.content|safe|truncatewords:200 }}
+                            {{ interview.content|remove_img_tags|safe|truncatewords:200 }}
                         </div>
                         <a href="{{ interview.get_absolute_url }}">
                             <button type="button"
@@ -208,7 +209,15 @@
             <div class="col-12">
                 <div class="mb-3">
                     <hr class="mb-2 mt-5">
-                    <h6><strong>Τελευταίες συνεντεύξεις</strong></h6>
+                    <h6>
+                        <strong>
+                            {% if request.path == '/interviews/' %}
+                                Συνεντεύξεις
+                            {% else %}
+                                Τελευταίες συνεντεύξεις
+                            {% endif %}
+                        </strong>
+                    </h6>
                 </div>
                 <div class="col-12 px-2">
                     {% for interview in interviews %}
@@ -251,9 +260,10 @@
 
 <!-- PAGINATION -->
 {% block pagination %}
-    {% if interviews %}
-        <div class="row mt-5">
-            <div class="col-md-12 text-center">
+    {% if is_paginated %}
+        {% if interviews %}
+            <div class="row mt-5">
+                <div class="col-md-12 text-center">
                 <span class="step-links">
                     {% if page_obj.has_previous %}
                         <a class="float-left"
@@ -275,7 +285,8 @@
                         </a>
                     {% endif %}
                 </span>
+                </div>
             </div>
-        </div>
+        {% endif %}
     {% endif %}
 {% endblock %}

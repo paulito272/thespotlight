@@ -75,7 +75,7 @@ def get_first_profile_id(service):
 def get_top3_week_pages(service, profile_id):
     return service.data().ga().get(
         ids='ga:' + profile_id,
-        start_date='7daysAgo',
+        start_date='30daysAgo',
         end_date='today',
         metrics='ga:uniquePageviews',
         dimensions='ga:pagePathLevel1,ga:pagePath',

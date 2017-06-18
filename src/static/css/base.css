@@ -324,6 +324,31 @@ footer a:hover {
     cursor: pointer;
 }
 
+.dropdown-li {
+    display: inline-block !important;
+}
+
+.dropdown-li{
+    margin-left: 20px !important;
+}
+
+.dropdown-link {
+    display: inline-block !important;
+    text-decoration: none;
+    color: inherit;
+}
+
+.dropdown-link:hover {
+    text-decoration: none;
+    color: inherit;
+}
+
+.dropdown-caret {
+    display: inline-block !important;
+    padding-left: 0 !important;
+    cursor: pointer;
+}
+
 /*Small devices (landscape phones, less than 768px)*/
 @media (max-width: 767px) {
     .ts-mt-sm-5 {
