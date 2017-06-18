@@ -1,7 +1,7 @@
 from django.contrib import admin
 
-from .forms import InterviewModelForm
-from .models import Interview
+from interviews.forms import InterviewModelForm
+from interviews.models import Interview
 
 
 class InterviewModelAdmin(admin.ModelAdmin):

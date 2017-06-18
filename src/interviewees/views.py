@@ -1,6 +1,6 @@
 from django.views.generic import ListView, DetailView
 
-from .models import Interviewee
+from interviewees.models import Interviewee
 
 
 class IntervieweeListView(ListView):
@@ -17,5 +17,4 @@ class IntervieweeDetailView(DetailView):
 
     def get_queryset(self):
         qs = super(IntervieweeDetailView, self).get_queryset()
-        print(qs)
         return qs

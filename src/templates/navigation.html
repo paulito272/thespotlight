@@ -8,7 +8,8 @@
     </button>
 
     <a class="navbar-brand" href="{% url 'interviews:list' %}">
-        <img src="{% static 'img/logo.png' %}" width="30" height="30" class="d-inline-block align-top" alt="logo">
+        <img src="{% static 'img/logo.png' %}" width="30" height="30"
+             class="d-inline-block align-top" alt="logo">
         The Spotlight
     </a>
 
@@ -29,14 +30,16 @@
                     </li>
                 {% elif not category.sub_categories.all %}
                     <li class="nav-item {% if category.id == selected %}active{% endif %}">
-                        <a class="nav-link" href="/?category={{ category.slug }}">{{ category.name }}</a>
+                        <a class="nav-link"
+                           href="/?category={{ category.slug }}">{{ category.name }}</a>
                     </li>
                 {% endif %}
             {% endfor %}
         </ul>
 
         <div id="ts-share" class="align-self-center ts-blank-link">
-            <a href="https://www.facebook.com/thespotlightgr-1105744862874930/" target="_blank" class="pr-2">
+            <a href="https://www.facebook.com/thespotlightgr-1105744862874930/" target="_blank"
+               class="pr-2">
                 <i class="fa fa-facebook" aria-hidden="true"></i>
             </a>
             <a href="https://twitter.com/thespotlightgr/" target="_blank" class="pr-2">
@@ -49,9 +52,11 @@
 
         <form method="GET" action="" class="form-inline my-2 my-lg-0">
             <div class="input-group col-sm-12">
-                <input type="text" class="form-control" name="q" value="{{ request.GET.q }}" placeholder="Αναζήτηση...">
+                <input type="text" class="form-control" name="q" value="{{ request.GET.q }}"
+                       placeholder="Αναζήτηση...">
                 <span class="input-group-btn">
-                    <button class="btn btn-outline-info ts-btn-info ts-cursor-pointer" type="submit">
+                    <button class="btn btn-outline-info ts-btn-info ts-cursor-pointer"
+                            type="submit">
                         <i class="fa fa-search" aria-hidden="true"></i>
                     </button>
                 </span>
@@ -72,7 +77,8 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="ts-loginModalLabel">Log In</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <button type="button" class="close" data-dismiss="modal"
+                                aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
@@ -80,16 +86,19 @@
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col">
-                                    <form method="POST" action="" id="login_form" class="form-horizontal">
+                                    <form method="POST" action="" id="login_form"
+                                          class="form-horizontal">
                                         {% csrf_token %}
                                         <fieldset>
                                             <div class="form-group">
                                                 <div class="col-md-12">
                                                     <div class="input-group">
                                                         <span class="input-group-addon">
-                                                            <i class="fa fa-user" aria-hidden="true"></i>
+                                                            <i class="fa fa-user"
+                                                               aria-hidden="true"></i>
                                                         </span>
-                                                        <input name="first_name" placeholder="Username"
+                                                        <input name="first_name"
+                                                               placeholder="Username"
                                                                class="form-control" type="text">
                                                     </div>
                                                 </div>
@@ -98,10 +107,12 @@
                                                 <div class="col-md-12">
                                                     <div class="input-group">
                                                         <span class="input-group-addon">
-                                                            <i class="fa fa-lock" aria-hidden="true"></i>
+                                                            <i class="fa fa-lock"
+                                                               aria-hidden="true"></i>
                                                         </span>
-                                                        <input name="email" placeholder="Password" class="form-control"
-                                                               type="text">
+                                                        <input name="email"
+                                                               placeholder="Password"
+                                                               class="form-control" type="text">
                                                     </div>
                                                 </div>
                                             </div>

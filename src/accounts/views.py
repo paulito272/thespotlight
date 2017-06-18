@@ -5,7 +5,7 @@ from django.contrib.auth import (
 )
 from django.shortcuts import render, redirect
 
-from .forms import UserLoginForm, UserRegisterForm
+from accounts.forms import UserLoginForm, UserRegisterForm
 
 
 def login_view(request):

@@ -1,6 +1,7 @@
 from django.conf.urls import url
 
-from .views import (InterviewListView, InterviewCreateView, InterviewUpdateView, InterviewDetailView)
+from .views import (InterviewListView, InterviewCreateView, InterviewUpdateView,
+                    InterviewDetailView)
 
 urlpatterns = [
     url(r'^$', InterviewListView.as_view(), name='list'),

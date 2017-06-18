@@ -8,8 +8,8 @@ from unidecode import unidecode
 
 from categories.models import Subcategory
 from interviewees.models import Interviewee
-from .managers import InterviewManager
-from .utils import get_read_time
+from interviews.managers import InterviewManager
+from interviews.utils import get_read_time
 
 
 class Interview(models.Model):
@@ -18,11 +18,14 @@ class Interview(models.Model):
     category = models.ForeignKey(Subcategory)
     title = models.CharField(max_length=120)
     content = models.TextField()
-    publish = models.DateField(auto_now=False, auto_now_add=False, verbose_name='Publication Date')
+    publish = models.DateField(auto_now=False, auto_now_add=False,
+                               verbose_name='Publication Date')
     draft = models.BooleanField(default=False)
     read_time = models.IntegerField(default=0, editable=False)
-    updated = models.DateTimeField(auto_now=True, auto_now_add=False, verbose_name='Last Updated')
-    timestamp = models.DateTimeField(auto_now=False, auto_now_add=True, verbose_name='Creation Date')
+    updated = models.DateTimeField(auto_now=True, auto_now_add=False,
+                                   verbose_name='Last Updated')
+    timestamp = models.DateTimeField(auto_now=False, auto_now_add=True,
+                                     verbose_name='Creation Date')
     slug = models.SlugField(max_length=255, editable=True, blank=True, null=False, unique=True)
 
     objects = InterviewManager()

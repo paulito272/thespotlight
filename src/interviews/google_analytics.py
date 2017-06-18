@@ -1,8 +1,8 @@
 import os
 
 import httplib2
-from apiclient.discovery import build
 from decouple import config
+from googleapiclient.discovery import build
 from oauth2client.service_account import ServiceAccountCredentials
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -31,7 +31,8 @@ def get_service(api_name, api_version, scope, key_file_location, service_account
       A service that is connected to the specified API.
     """
 
-    credentials = ServiceAccountCredentials.from_p12_keyfile(service_account_email, key_file_location, scopes=scope)
+    credentials = ServiceAccountCredentials.from_p12_keyfile(service_account_email,
+                                                             key_file_location, scopes=scope)
 
     http = credentials.authorize(httplib2.Http())
 
@@ -88,7 +89,8 @@ def get_most_read_pages():
     most_read_pages = []
 
     # Authenticate and construct service.
-    service = get_service('analytics', 'v3', scope, SERVICE_ACCOUNT_PKCS12_FILE_PATH, SERVICE_ACCOUNT_EMAIL)
+    service = get_service('analytics', 'v3', scope, SERVICE_ACCOUNT_PKCS12_FILE_PATH,
+                          SERVICE_ACCOUNT_EMAIL)
     profile = get_first_profile_id(service)
     results = get_top3_week_pages(service, profile)
 

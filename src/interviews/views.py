@@ -11,8 +11,8 @@ from django.views.generic.detail import DetailView
 from django.views.generic.edit import UpdateView, CreateView
 
 from categories.models import Subcategory
-from .forms import InterviewModelForm
-from .models import Interview
+from interviews.forms import InterviewModelForm
+from interviews.models import Interview
 
 logger = logging.getLogger(__name__)
 
@@ -71,7 +71,7 @@ class InterviewListView(ListView):
 
         # Update every day
         days_past = (timezone.now().date() - self.context['today']).days
-        if (days_past >= 1):
+        if days_past >= 1:
             self.context['most_read'] = self.model.objects.most_read()
 
         return super(InterviewListView, self).get(request, *args, **kwargs)

@@ -76,12 +76,15 @@
                             </em>
                         </h5>
                         <hr class="mb-2">
-                        <strong class="ts-small-text">{{ interview.publish|date:"F d, Y"|accentify|upper }}</strong>
+                        <strong class="ts-small-text">
+                            {{ interview.publish|date:"F d, Y"|accentify|upper }}
+                        </strong>
                         <div id="ts-interview-content">
                             {{ interview.content|safe|truncatewords:200 }}
                         </div>
                         <a href="{{ interview.get_absolute_url }}">
-                            <button type="button" class="btn btn-secondary ts-btn-general ts-cursor-pointer">
+                            <button type="button"
+                                    class="btn btn-secondary ts-btn-general ts-cursor-pointer">
                                 <strong class="ts-small-text">Διάβασε περισσότερα...</strong>
                             </button>
                         </a>
@@ -151,12 +154,15 @@
                             </em>
                         </h5>
                         <hr class="mb-2">
-                        <strong class="ts-small-text">{{ interview.publish|date:"F d, Y"|accentify|upper }}</strong>
+                        <strong class="ts-small-text">
+                            {{ interview.publish|date:"F d, Y"|accentify|upper }}
+                        </strong>
                         <div id="ts-interview-content">
                             {{ interview.content|safe|truncatewords:200 }}
                         </div>
                         <a href="{{ interview.get_absolute_url }}">
-                            <button type="button" class="btn btn-secondary ts-btn-general ts-cursor-pointer">
+                            <button type="button"
+                                    class="btn btn-secondary ts-btn-general ts-cursor-pointer">
                                 <strong class="ts-small-text">Διάβασε περισσότερα...</strong>
                             </button>
                         </a>
@@ -170,7 +176,8 @@
             <div class="col-md-4 hidden-sm-down">
                 <hr class="mb-2 mt-5">
                 <h6><strong>A-Z Κατάλογος Συνεντεύξεων</strong></h6>
-                <div id="ts-interview-directory" class="pre-scrollable mt-3 px-3" style="overflow-x: hidden;">
+                <div id="ts-interview-directory" class="pre-scrollable mt-3 px-3"
+                     style="overflow-x: hidden;">
                     {% for interview in active_interviews|order_by:'-author' %}
                         <a href="{{ interview.get_absolute_url }}">
                             <div class="row mb-2">
@@ -249,7 +256,8 @@
             <div class="col-md-12 text-center">
                 <span class="step-links">
                     {% if page_obj.has_previous %}
-                        <a class="float-left" href="?{{ page_request_var }}={{ page_obj.previous_page_number }}
+                        <a class="float-left"
+                           href="?{{ page_request_var }}={{ page_obj.previous_page_number }}
                         {% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">
                             <i class="fa fa-angle-double-left" aria-hidden="true"></i>
                         </a>
@@ -260,7 +268,8 @@
                     </span>
 
                     {% if page_obj.has_next %}
-                        <a class="float-right" href="?{{ page_request_var }}={{ page_obj.next_page_number }}
+                        <a class="float-right"
+                           href="?{{ page_request_var }}={{ page_obj.next_page_number }}
                         {% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">
                             <i class="fa fa-angle-double-right" aria-hidden="true"></i>
                         </a>

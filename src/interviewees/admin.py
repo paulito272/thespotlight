@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Interviewee
+from interviewees.models import Interviewee
 
 
 class IntervieweeModelAdmin(admin.ModelAdmin):
