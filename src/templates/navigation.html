@@ -40,7 +40,7 @@
             {% endfor %}
         </ul>
 
-        <div id="ts-share" class="align-self-center ts-blank-link">
+        <div id="ts-share" class="align-self-center ts-blank-link my-2 hidden-sm-down">
             <a href="https://www.facebook.com/thespotlightgr-1105744862874930/" target="_blank"
                class="pr-2">
                 <i class="fa fa-facebook" aria-hidden="true"></i>
@@ -51,6 +51,12 @@
             <a href="https://www.instagram.com/thespotlight.gr/" target="_blank" class="pr-2">
                 <i class="fa fa-instagram" aria-hidden="true"></i>
             </a>
+        </div>
+
+        <!-- Facebook Login Button -->
+        <div class="fb-login-button align-self-center my-2" data-max-rows="1" data-size="medium"
+             data-button-type="continue_with" data-show-faces="false"
+             data-auto-logout-link="true" data-use-continue-as="true">
         </div>
 
         <form method="GET" action="" class="form-inline my-2 my-lg-0">
@@ -65,95 +71,5 @@
                 </span>
             </div>
         </form>
-
-        <!-- Facebook Login Button trigger modal -->
-        <button type="button" id="ts-fb-login-btn"
-                class="btn btn-outline-info ts-btn-info ts-cursor-pointer align-self-center"
-                data-toggle="modal" data-target="#ts-loginModal">
-            <i class="fa fa-sign-in" aria-hidden="true"></i>
-            Log In/Out
-        </button>
-
-        <!-- Login Modal -->
-        <div class="modal fade" id="ts-loginModal" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="ts-loginModalLabel">Log In</h5>
-                        <button type="button" class="close" data-dismiss="modal"
-                                aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col">
-                                    <form method="POST" action="" id="login_form"
-                                          class="form-horizontal">
-                                        {% csrf_token %}
-                                        <fieldset>
-                                            <div class="form-group">
-                                                <div class="col-md-12">
-                                                    <div class="input-group">
-                                                        <span class="input-group-addon">
-                                                            <i class="fa fa-user"
-                                                               aria-hidden="true"></i>
-                                                        </span>
-                                                        <input name="first_name"
-                                                               placeholder="Username"
-                                                               class="form-control" type="text">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="col-md-12">
-                                                    <div class="input-group">
-                                                        <span class="input-group-addon">
-                                                            <i class="fa fa-lock"
-                                                               aria-hidden="true"></i>
-                                                        </span>
-                                                        <input name="email"
-                                                               placeholder="Password"
-                                                               class="form-control" type="text">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="col-md-12">
-                                                    <button type="submit"
-                                                            class="btn btn-md btn-success btn-block ts-cursor-pointer">
-                                                        Log In
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </fieldset>
-                                    </form>
-                                </div>
-                            </div>
-                            <hr class="mb-1">
-                            <div class="row mb-3">
-                                <div class="col text-center">
-                                    <small class="text-muted text-center">Or connect with</small>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col text-center">
-                                    <div class="fb-login-button"
-                                         data-width="300px"
-                                         data-max-rows="1"
-                                         data-size="medium"
-                                         data-button-type="login_with"
-                                         data-auto-logout-link="true"
-                                         data-use-continue-as="false">
-                                        Facebook
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 </nav>

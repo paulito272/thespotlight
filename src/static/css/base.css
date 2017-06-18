@@ -328,7 +328,7 @@ footer a:hover {
     display: inline-block !important;
 }
 
-.dropdown-li{
+.dropdown-li {
     margin-left: 20px !important;
 }
 
@@ -378,6 +378,12 @@ footer a:hover {
     #ts-interview-header-container span,
     #ts-interview-header-container time {
         font-size: 0.625em;
+    }
+
+    #ts-share,
+    .fb-login-button {
+        padding-left: 15px;
+        padding-right: 15px;
     }
 }
 

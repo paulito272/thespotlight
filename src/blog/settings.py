@@ -14,7 +14,7 @@ SECRET_KEY = 'w&-ds9ktm=u2j_98#temz@ts8i201#@j_woahl3lmi+#y9(j^_'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -35,8 +35,7 @@ INSTALLED_APPS = [
     # Custom apps
     'interviews',
     'interviewees',
-    'categories',
-    'accounts'
+    'categories'
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
