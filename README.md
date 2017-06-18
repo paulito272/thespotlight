@@ -5,6 +5,12 @@ Developed with with the Django Framework while leveraging other technologies suc
 
 ### Installation
 
+Install the prerequisites.
+
+```sh
+$ sudo apt-get install build-essential libssl-dev libffi-dev libjpeg-dev python-dev python3-dev
+```
+
 Install the dependencies.
 
 ```sh
