@@ -50,13 +50,13 @@
 {% block content %}
     <div class="row">
         <!-- NEW INTERVIEW -->
-        {% if new_interview %}
+        {% if active_interviews %}
             <div class="col-md-8 px-md-2">
                 <div class="mb-3">
                     <hr class="mb-2">
                     <h6><strong>Νεα συνέντευξη</strong></h6>
                 </div>
-                {% with new_interview as interview %}
+                {% with active_interviews|first as interview %}
                     <div class="ts-interview">
                         {% if interview.interviewee.profile_image %}
                             <div class="mb-2">

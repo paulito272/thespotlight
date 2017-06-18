@@ -34,7 +34,6 @@ class InterviewListView(ListView):
     context = {
         'today': today,
         'page_request_var': page_request_var,
-        'new_interview': model.objects.newest(),
         'most_read': model.objects.most_read(),
         'last_week_interview': model.objects.last_week(),
         'active_interviews': model.objects.active()
@@ -67,7 +66,6 @@ class InterviewListView(ListView):
             return render(request, 'interview_list_category.html', context)
 
         # Update every time
-        self.context['new_interview'] = self.model.objects.newest()
         self.context['last_week_interview'] = self.model.objects.last_week()
         self.context['active_interviews'] = self.model.objects.active()
 

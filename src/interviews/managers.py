@@ -13,9 +13,6 @@ class InterviewManager(models.Manager):
     def active(self, *args, **kwargs):
         return super(InterviewManager, self).filter(draft=False).filter(publish__lte=timezone.now())
 
-    def newest(self, *args, **kwargs):
-        return self.active().first()
-
     def last_week(self, *args, **kwargs):
         some_day_last_week = timezone.now().date() - timedelta(days=7)
         monday_of_last_week = some_day_last_week - timedelta(days=(some_day_last_week.isocalendar()[2] - 1))
