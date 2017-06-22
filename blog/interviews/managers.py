@@ -11,7 +11,7 @@ logger = logging.getLogger('blog')
 
 class InterviewManager(models.Manager):
     def active(self, *args, **kwargs):
-        return super(InterviewManager, self).filter(draft=False).filter(
+        return super().filter(draft=False).filter(
             publish__lte=timezone.now())
 
     def last_week(self, *args, **kwargs):
@@ -19,7 +19,7 @@ class InterviewManager(models.Manager):
         monday_of_last_week = some_day_last_week - timedelta(
             days=(some_day_last_week.isocalendar()[2] - 1))
         monday_of_this_week = monday_of_last_week + timedelta(days=7)
-        return super(InterviewManager, self).filter(draft=False).filter(
+        return super().filter(draft=False).filter(
             publish__gte=monday_of_last_week,
             publish__lt=monday_of_this_week)[:1]
 
@@ -29,4 +29,4 @@ class InterviewManager(models.Manager):
         if slugs:
             return self.active().filter(slug__in=slugs).order_by('slug')
 
-        return super(InterviewManager, self).none()
+        return super().none()

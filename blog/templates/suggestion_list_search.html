@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 {% load accentify %}
 
-{% block head_title %}Αναζήτηση | Συνεντεύξεις | {{ block.super }}{% endblock %}
+{% block head_title %}Αναζήτηση | Προτάσεις | {{ block.super }}{% endblock %}
 
 {% block content %}
-    {% if interviews %}
+    {% if suggestions %}
         <div class="row">
             <div class="col-12">
                 <div class="mb-3">
@@ -13,27 +13,27 @@
                     <kbd class="ts-small-text">{{ request.GET.q }}</kbd>
                 </div>
                 <div class="col-12 px-2">
-                    {% for interview in interviews %}
+                    {% for suggestion in suggestions %}
                         {% if forloop.first %}
                             <div class="row">
                         {% endif %}
                     <div class="col-4 px-2 ts-latest-interviews-container">
-                        <a href="{{ interview.get_absolute_url }}">
-                            {% if interview.interviewee.profile_image %}
+                        <a href="{{ suggestion.get_absolute_url }}">
+                            {% if suggestion.image %}
                                 <div class="mb-2">
                                     <div class="card ts-card">
                                         <div class="card-img-overlay overlay"></div>
                                         <img class="img-fluid ts-latest-interviews-image"
-                                             src="{{ interview.interviewee.profile_image.url }}"
-                                             alt="{{ interview.interviewee.slug }}">
+                                             src="{{ suggestions.image.url }}"
+                                             alt="{{ suggestions.slug }}">
                                     </div>
                                 </div>
                             {% endif %}
                             <h6 class="ts-interview-title">
-                                <strong>{{ interview.interviewee.get_full_name }}</strong>
+                                <strong>{{ suggestion.interviewee.get_full_name }}</strong>
                             </h6>
                             <p class="ts-interview-subtitle">
-                                <em>&ldquo;{{ interview.title|accentify|upper|truncatechars:120 }}&rdquo;</em>
+                                <em>&ldquo;{{ suggestion.title|accentify|upper|truncatechars:120 }}&rdquo;</em>
                             </p>
                         </a>
                     </div>

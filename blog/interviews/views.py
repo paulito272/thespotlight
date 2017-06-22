@@ -8,7 +8,7 @@ from django.views.generic import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView
 
-from blog.categories.models import Subcategory
+from blog.categories.models import Category
 from blog.interviews.forms import InterviewModelForm
 from blog.interviews.models import Interview
 
@@ -62,7 +62,7 @@ class InterviewHomeView(ListView):
 
         if category_slug:
             category_slug = category_slug.strip()
-            category = get_object_or_404(Subcategory, slug=category_slug)
+            category = get_object_or_404(Category, slug=category_slug)
 
             queryset = self.model.objects.active().filter(category=category)
             context = {'category': category, 'interviews': queryset}
@@ -78,10 +78,10 @@ class InterviewHomeView(ListView):
         if days_past >= 1:
             self.context['most_read'] = self.model.objects.most_read()
 
-        return super(InterviewHomeView, self).get(request, *args, **kwargs)
+        return super().get(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
-        context = super(InterviewHomeView, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         for key, value in self.context.items():
             context[key] = self.context[key]
         return context
@@ -89,6 +89,29 @@ class InterviewHomeView(ListView):
     def get_queryset(self):
         # Get the last 9 interviews
         return self.model.objects.active().order_by('-publish')[:9]
+
+
+class InterviewCategoryListView(ListView):
+    model = Interview
+    context_object_name = 'interviews'
+    template_name = 'interview_list.html'
+    paginate_by = 10
+
+    today = timezone.now().date()
+    page_request_var = 'page'
+    context = {
+        'today': today,
+        'page_request_var': page_request_var,
+    }
+
+    def get_queryset(self):
+        return self.model.objects.active(category=self.kwargs['category'])
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        for key, value in self.context.items():
+            context[key] = self.context[key]
+        return context
 
 
 class InterviewDetailView(DetailView):
@@ -114,10 +137,10 @@ class InterviewDetailView(DetailView):
 
             return render(request, 'interview_list_search.html', context)
 
-        return super(InterviewDetailView, self).get(request, *args, **kwargs)
+        return super().get(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
-        context = super(InterviewDetailView, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         interview = self.get_object()
         context['title'] = '{}: {}'.format(interview.interviewee, interview.title)
         context['today'] = self.today

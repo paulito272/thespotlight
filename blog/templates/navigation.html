@@ -7,7 +7,7 @@
         <span class="navbar-toggler-icon"></span>
     </button>
 
-    <a class="navbar-brand" href="{% url 'interviews:home' %}">
+    <a class="navbar-brand" href="{% url 'home' %}">
         <img src="{% static 'img/logo.png' %}" width="30" height="30"
              class="d-inline-block align-top" alt="logo">
         The Spotlight
@@ -15,31 +15,39 @@
 
     <div class="collapse navbar-collapse" id="ts-navbar">
         <ul class="navbar-nav mr-auto">
-            {% for category in categories %}
-                {% if category.sub_categories.all.count >= 1 %}
-                    <li class="nav-item dropdown dropdown-li">
-                        <a class="dropdown-link" href="{{ category.slug }}">
-                            {{ category.name }}
-                        </a>
-                        <a class="nav-link dropdown-toggle dropdown-caret" id="dropdown01"
-                           data-toggle="dropdown" aria-haspopup="true"
-                           aria-expanded="false"></a>
-                        <div class="dropdown-menu" aria-labelledby="dropdown01">
-                            {% for sub_category in category.sub_categories.all %}
-                                <a class="dropdown-item"
-                                   href="/?category={{ sub_category.slug }}">
-                                    {{ sub_category.name }}
-                                </a>
-                            {% endfor %}
-                        </div>
-                    </li>
-                {% elif not category.sub_categories.all %}
-                    <li class="nav-item {% if category.id == selected %}active{% endif %}">
-                        <a class="nav-link"
-                           href="/?category={{ category.slug }}">{{ category.name }}</a>
-                    </li>
-                {% endif %}
-            {% endfor %}
+            <li class="nav-item dropdown dropdown-li">
+                <a class="dropdown-link" href="{% url 'interviews:list' %}">Συνεντεύξεις</a>
+                <a class="nav-link dropdown-toggle dropdown-caret" id="dropdown01"
+                   data-toggle="dropdown" aria-haspopup="true"
+                   aria-expanded="false"></a>
+                <div class="dropdown-menu" aria-labelledby="dropdown01">
+                    {% if interviews %}
+                        {% for category in interviews.all %}
+                            <a class="dropdown-item"
+                               href="{% url 'interviews:category' category.slug %}">
+                                {{ category.name }}
+                            </a>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </li>
+
+            <li class="nav-item dropdown dropdown-li">
+                <a class="dropdown-link" href="{% url 'suggestions:list' %}">Προτάσεις</a>
+                <a class="nav-link dropdown-toggle dropdown-caret" id="dropdown01"
+                   data-toggle="dropdown" aria-haspopup="true"
+                   aria-expanded="false"></a>
+                <div class="dropdown-menu" aria-labelledby="dropdown01">
+                    {% if suggestions %}
+                        {% for category in suggestions.all %}
+                            <a class="dropdown-item"
+                               href="{% url 'suggestions:category' category.slug %}">
+                                {{ category.name }}
+                            </a>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </li>
         </ul>
 
         <div id="ts-share" class="align-self-center ts-blank-link my-2 hidden-sm-down">

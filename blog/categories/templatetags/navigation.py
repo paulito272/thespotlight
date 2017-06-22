@@ -6,8 +6,8 @@ register = template.Library()
 
 
 @register.inclusion_tag('navigation.html')
-def navigation(selected_id=None):
+def navigation():
     return {
-        'categories': Category.objects.all(),
-        'selected': selected_id,
+        'interviews': Category.objects.filter(category='interviews'),
+        'suggestions': Category.objects.filter(category='suggestions')
     }

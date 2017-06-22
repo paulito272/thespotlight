@@ -5,31 +5,27 @@ from unidecode import unidecode
 
 
 class Category(models.Model):
-    position = models.PositiveSmallIntegerField(default=1, blank=False, unique=True)
-    name = models.CharField(max_length=120, unique=True)
-    sub_categories = models.ManyToManyField('Subcategory', blank=True)
-    slug = models.SlugField(max_length=255, editable=True, blank=True, null=False, unique=True)
+    CATEGORY_CHOICES = (
+        ('interviews', 'Συντεντεύξεις'),
+        ('suggestions', 'Προτάσεις')
+    )
 
-    class Meta:
-        ordering = ['position']
-        verbose_name = 'Category'
-        verbose_name_plural = 'Categories'
-
-    def __str__(self):
-        return self.name
-
-
-class Subcategory(models.Model):
-    name = models.CharField(max_length=120, unique=True)
+    category = models.CharField(
+        max_length=50,
+        choices=CATEGORY_CHOICES,
+        default='interviews',
+        verbose_name='Category'
+    )
+    name = models.CharField(max_length=50, unique=True)
     slug = models.SlugField(max_length=255, editable=True, blank=True, null=False, unique=True)
 
     class Meta:
         ordering = ['name']
-        verbose_name = 'Subcategory'
-        verbose_name_plural = 'Subcategories'
+        verbose_name = 'Category'
+        verbose_name_plural = 'Categories'
 
     def __str__(self):
-        return self.name
+        return '{}: {}'.format(self.get_category_display(), self.name)
 
 
 def create_slug(instance, new_slug=None):
@@ -50,4 +46,3 @@ def pre_save_receiver(sender, instance, *args, **kwargs):
 
 
 pre_save.connect(pre_save_receiver, sender=Category)
-pre_save.connect(pre_save_receiver, sender=Subcategory)

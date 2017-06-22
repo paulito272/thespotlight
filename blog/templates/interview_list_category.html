@@ -47,5 +47,15 @@
                 </div>
             </div>
         </div>
+    {% else %}
+        <div class="row">
+            <div class="col-12">
+                <div class="mb-3">
+                    <hr class="mb-2">
+                    <h6><strong>{{ category.name }}</strong></h6>
+                    <p>Δεν υπάρχουν διαθέσιμα άρθρα σε αυτή τη κατηγορία.</p>
+                </div>
+            </div>
+        </div>
     {% endif %}
 {% endblock %}

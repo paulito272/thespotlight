@@ -6,10 +6,10 @@ from blog.interviews.models import Interview
 
 class InterviewModelAdmin(admin.ModelAdmin):
     form = InterviewModelForm
-    change_form_template = 'interviews/admin/change_form.html'
-    list_display = ['interviewee', 'title', 'publish', 'updated']
-    list_filter = ['publish', 'updated', 'timestamp']
-    search_fields = ['title', 'content', 'interviewee']
+    change_form_template = 'admin/change_form.html'
+    list_display = ('interviewee', 'title', 'publish', 'updated')
+    list_filter = ('publish', 'updated', 'timestamp')
+    search_fields = ('title', 'content', 'interviewee')
 
 
 admin.site.register(Interview, InterviewModelAdmin)

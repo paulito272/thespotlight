@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     # Custom apps
     'blog.categories',
     'blog.interviewees',
+    'blog.suggestions',
     'blog.interviews',
 ]
 # crispy_forms configuration

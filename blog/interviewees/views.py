@@ -6,7 +6,7 @@ from blog.interviewees.models import Interviewee
 class IntervieweeListView(ListView):
     model = Interviewee
     context_object_name = 'interviewees'
-    queryset = Interviewee.objects.all()
+    queryset = model.objects.all()
     template_name = 'interviewee_list.html'
 
 
@@ -16,5 +16,5 @@ class IntervieweeDetailView(DetailView):
     template_name = 'interviewee_detail.html'
 
     def get_queryset(self):
-        qs = super(IntervieweeDetailView, self).get_queryset()
+        qs = super().get_queryset()
         return qs
