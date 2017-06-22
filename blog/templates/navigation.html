@@ -50,7 +50,7 @@
             </li>
         </ul>
 
-        <div id="ts-share" class="align-self-center ts-blank-link my-2 hidden-sm-down">
+        <div id="ts-share" class="align-self-center ts-blank-link hidden-sm-down">
             <a href="https://www.facebook.com/thespotlightgr-1105744862874930/" target="_blank"
                class="pr-2">
                 <i class="fa fa-facebook" aria-hidden="true"></i>
@@ -64,12 +64,13 @@
         </div>
 
         <!-- Facebook Login Button -->
-        <div class="fb-login-button align-self-center my-2" data-max-rows="1" data-size="medium"
+        <div class="fb-login-button align-self-center my-2 my-md-0" data-max-rows="1"
+             data-size="medium"
              data-button-type="continue_with" data-show-faces="false"
              data-auto-logout-link="true" data-use-continue-as="true">
         </div>
 
-        <form method="GET" action="" class="form-inline my-2 my-lg-0">
+        <form method="GET" action="" class="form-inline my-2 my-md-0 my-lg-0">
             <div class="input-group col-sm-12">
                 <input type="text" class="form-control" name="q" value="{{ request.GET.q }}"
                        placeholder="Αναζήτηση...">
