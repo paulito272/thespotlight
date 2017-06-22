@@ -1,0 +1,12 @@
+Django==1.11.2
+django-crispy-forms==1.6.1
+django-wysiwyg==0.8.0
+django-ckeditor==5.2.2
+whitenoise==3.3.0
+python-decouple==3.0
+google-api-python-client==1.6.2
+cryptography==1.9
+pyOpenSSL==17.0.0
+html5lib==1.0b8
+Pillow==4.1.1
+Unidecode==0.4.20

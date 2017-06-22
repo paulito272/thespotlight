@@ -15,13 +15,12 @@ Install the requirements.
 
 ```sh
 $ cd thespotlight/
-$ pip install -r requirements.txt
+$ pip install -r requirements/dev.txt
 ```
 
 Make the migrations.
 
 ```sh
-$ cd src/
 $ python manage.py makemigrations && python manage.py migrate
 ```
 
@@ -47,5 +46,3 @@ License
 ----
 
 MIT
-
-**Free Software, Hell Yeah!**
