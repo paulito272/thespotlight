@@ -97,15 +97,14 @@ class InterviewCategoryListView(ListView):
     template_name = 'interview_list.html'
     paginate_by = 10
 
-    today = timezone.now().date()
     page_request_var = 'page'
     context = {
-        'today': today,
         'page_request_var': page_request_var,
     }
 
     def get_queryset(self):
-        return self.model.objects.active(category=self.kwargs['category'])
+        category = Category.objects.filter(slug=self.kwargs['category'])
+        return self.model.objects.active().filter(category=category)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

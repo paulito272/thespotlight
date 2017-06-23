@@ -3,6 +3,7 @@ from django.shortcuts import get_object_or_404, render
 from django.utils import timezone
 from django.views.generic import DetailView, ListView
 
+from blog.categories.models import Category
 from blog.suggestions.models import Suggestion
 
 
@@ -61,15 +62,14 @@ class SuggestionCategoryListView(ListView):
     template_name = 'suggestion_list.html'
     paginate_by = 10
 
-    today = timezone.now().date()
     page_request_var = 'page'
     context = {
-        'today': today,
         'page_request_var': page_request_var,
     }
 
     def get_queryset(self):
-        return self.model.objects.active(category=self.kwargs['category'])
+        category = Category.objects.filter(slug=self.kwargs['category'])
+        return self.model.objects.active().filter(category=category)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

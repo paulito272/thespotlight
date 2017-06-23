@@ -4,7 +4,7 @@ from blog.interviews.views import (InterviewCategoryListView, InterviewCreateVie
                                    InterviewDetailView, InterviewListView, InterviewUpdateView)
 
 urlpatterns = [
-    url(r'^(?P<category>[\w]+)/$', InterviewCategoryListView.as_view(), name='category'),
+    url(r'^category/(?P<category>[\w]+)/$', InterviewCategoryListView.as_view(), name='category'),
     url(r'^create/$', InterviewCreateView.as_view(), name='create'),
     url(r'^(?P<slug>[\w-]+)/edit/$', InterviewUpdateView.as_view(), name='edit'),
     url(r'^(?P<slug>[\w-]+)/$', InterviewDetailView.as_view(), name='detail'),
