@@ -3,14 +3,14 @@ from django.conf.urls import include, url
 from django.conf.urls.static import static
 from django.contrib import admin
 
-from blog.interviews.views import InterviewHomeView
+from blog.views import HomeView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^interviews/', include('blog.interviews.urls', namespace='interviews')),
     url(r'^suggestions/', include('blog.suggestions.urls', namespace='suggestions')),
     url(r'^interviewees/', include('blog.interviewees.urls', namespace='interviewees')),
-    url(r'^$', InterviewHomeView.as_view(), name='home'),
+    url(r'^$', HomeView.as_view(), name='home'),
 ]
 
 if settings.DEBUG:

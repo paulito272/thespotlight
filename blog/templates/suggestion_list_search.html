@@ -24,17 +24,16 @@
                                     <div class="card ts-card">
                                         <div class="card-img-overlay overlay"></div>
                                         <img class="img-fluid ts-latest-interviews-image"
-                                             src="{{ suggestions.image.url }}"
-                                             alt="{{ suggestions.slug }}">
+                                             src="{{ suggestion.image.url }}"
+                                             alt="{{ suggestion.slug }}">
                                     </div>
                                 </div>
                             {% endif %}
                             <h6 class="ts-interview-title">
-                                <strong>{{ suggestion.interviewee.get_full_name }}</strong>
+                                <strong>
+                                    {{ suggestion.title|accentify|upper|truncatechars:120 }}
+                                </strong>
                             </h6>
-                            <p class="ts-interview-subtitle">
-                                <em>&ldquo;{{ suggestion.title|accentify|upper|truncatechars:120 }}&rdquo;</em>
-                            </p>
                         </a>
                     </div>
                     {% if forloop.counter|divisibleby:3 %}

@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load accentify %}
 
-{% block head_title %}{{ block.super }}{% endblock %}
+{% block head_title %}Προτάσεις | {{ block.super }}{% endblock %}
 
 {% block content %}
     <!-- SUGGESTIONS -->
@@ -30,7 +30,9 @@
                                 </div>
                             {% endif %}
                             <h6 class="ts-interview-title">
-                                <strong>{{ suggestion.title|accentify|upper|truncatechars:120 }}</strong>
+                                <strong>
+                                    {{ suggestion.title|accentify|upper|truncatechars:120 }}
+                                </strong>
                             </h6>
                         </a>
                     </div>

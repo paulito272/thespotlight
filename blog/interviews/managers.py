@@ -11,8 +11,7 @@ logger = logging.getLogger('blog')
 
 class InterviewManager(models.Manager):
     def active(self, *args, **kwargs):
-        return super().filter(draft=False).filter(
-            publish__lte=timezone.now())
+        return super().filter(draft=False).filter(publish__lte=timezone.now())
 
     def last_week(self, *args, **kwargs):
         some_day_last_week = timezone.now().date() - timedelta(days=7)

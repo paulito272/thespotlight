@@ -68,7 +68,8 @@ class SuggestionCategoryListView(ListView):
     }
 
     def get_queryset(self):
-        category = Category.objects.filter(slug=self.kwargs['category'])
+        category_slug = self.kwargs['category'] if 'category' in self.kwargs else ''
+        category = Category.objects.filter(slug=category_slug)
         return self.model.objects.active().filter(category=category)
 
     def get_context_data(self, **kwargs):

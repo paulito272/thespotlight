@@ -19,14 +19,38 @@ body {
 
 .overlay {
     background: rgba(0, 0, 0, 0.0);
-    -webkit-transition: background .25s ease-out;
-    -moz-transition: background .25s ease-out;
-    -o-transition: background .25s ease-out;
-    transition: background .25s ease-out;
+    -webkit-transition: background .5s ease-out;
+    -moz-transition: background .5s ease-out;
+    -o-transition: background .5s ease-out;
+    transition: background .5s ease-out;
 }
 
 .overlay:hover {
     background: rgba(0, 0, 0, 0.5);;
+}
+
+img.grayscale {
+    /* Firefox 3.5+, IE10 */
+    filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale");
+
+    /* IE6-9 */
+    filter: gray;
+
+    /* Chrome 19+ & Safari 6+ */
+    filter: grayscale(100%);
+
+    -webkit-filter: grayscale(100%);
+
+    /* Fade to color for Chrome and Safari */
+    -webkit-transition: all .5s ease;
+
+    /* Fix for transition flickering */
+    -webkit-backface-visibility: hidden;
+}
+
+img.grayscale:hover {
+    filter: none;
+    -webkit-filter: grayscale(0%);
 }
 
 .ts-new-interview-title {
@@ -295,10 +319,10 @@ footer a:hover {
     -webkit-border-radius: 0;
     -moz-border-radius: 0;
     border-radius: 0;
-    transition: background-color .25s ease-out;
-    -webkit-transition: background-color .25s ease-out;
-    -moz-transition: background-color .25s ease-out;
-    -o-transition: background-color .25s ease-out;
+    transition: all .25s ease-out;
+    -webkit-transition: all .25s ease-out;
+    -moz-transition: all .25s ease-out;
+    -o-transition: all .25s ease-out;
 }
 
 .ts-btn-general:hover {
