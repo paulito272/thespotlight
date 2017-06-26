@@ -226,14 +226,6 @@ img.grayscale:hover {
     -o-transition: color .25s ease-out;
 }
 
-#ts-share {
-    padding-right: 1em;
-}
-
-#ts-fb-like-btn {
-    line-height: 0;
-}
-
 #footer {
     position: absolute;
     bottom: 0;
@@ -354,23 +346,9 @@ footer a:hover {
     cursor: pointer;
 }
 
-.dropdown-li {
-    display: inline-block !important;
-}
-
-.dropdown-li {
-    margin-left: 20px !important;
-}
-
 .dropdown-link {
     display: inline-block !important;
-    text-decoration: none;
-    color: inherit;
-}
-
-.dropdown-link:hover {
-    text-decoration: none;
-    color: inherit;
+    padding-right: 0 !important;
 }
 
 .dropdown-caret {
@@ -381,17 +359,25 @@ footer a:hover {
 
 /*Small devices (landscape phones, less than 768px)*/
 @media (max-width: 767px) {
+    .container {
+        width: 100%;
+    }
+
     .ts-mt-sm-5 {
         margin-top: 3rem !important
     }
 
     .ts-latest-interviews-image {
-        height: 70px !important;
+        height: 150px !important;
     }
 }
 
 /*Medium devices (tablets, less than 992px)*/
 @media (max-width: 991px) {
+    .container {
+        width: 100%;
+    }
+
     #ts-interview-main-title {
         font-size: 1.125em;
         padding-bottom: 1.063em;
@@ -410,8 +396,7 @@ footer a:hover {
         font-size: 0.625em;
     }
 
-    #ts-share,
-    .fb-login-button {
+    #ts-share {
         padding-left: 15px;
         padding-right: 15px;
     }
@@ -419,17 +404,29 @@ footer a:hover {
 
 /*Large devices (desktops, less than 1200px)*/
 @media (max-width: 1199px) {
+    .container {
+        width: 100%;
+    }
 
+    .nav-item,
+    .dropdown-item,
+    #ts-search-form input.form-control {
+        font-size: 0.875em !important;
+    }
+
+    .ts-latest-interviews-image {
+        height: 250px !important;
+    }
 }
 
 /*Extra large devices (large desktops, 1200px and up)*/
 @media (min-width: 1200px) {
+    .container {
+        width: 1330px;
+    }
+
     #ts-container .px-md-2 {
         padding-left: 9px !important;
         padding-right: 9px !important;
-    }
-
-    .container {
-        width: 1330px;
     }
 }

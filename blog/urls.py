@@ -3,12 +3,13 @@ from django.conf.urls import include, url
 from django.conf.urls.static import static
 from django.contrib import admin
 
-from blog.views import HomeView
+from blog.views import ContactFormView, HomeView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^interviews/', include('blog.interviews.urls', namespace='interviews')),
     url(r'^suggestions/', include('blog.suggestions.urls', namespace='suggestions')),
+    url(r'^contact/$', ContactFormView.as_view(), name='contact'),
     url(r'^$', HomeView.as_view(), name='home'),
 ]
 

@@ -14,9 +14,11 @@
     </a>
 
     <div class="collapse navbar-collapse" id="ts-navbar">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item dropdown dropdown-li">
-                <a class="dropdown-link" href="{% url 'interviews:list' %}">Συνεντεύξεις</a>
+        <ul class="navbar-nav mr-auto align-self-center">
+
+            <li class="nav-item dropdown pl-0 pl-sm-3">
+                <a class="nav-link dropdown-link"
+                   href="{% url 'interviews:list' %}">Συνεντεύξεις</a>
                 <a class="nav-link dropdown-toggle dropdown-caret" id="dropdown01"
                    data-toggle="dropdown" aria-haspopup="true"
                    aria-expanded="false"></a>
@@ -32,8 +34,9 @@
                 </div>
             </li>
 
-            <li class="nav-item dropdown dropdown-li">
-                <a class="dropdown-link" href="{% url 'suggestions:list' %}">Προτάσεις</a>
+            <li class="nav-item dropdown pl-0 pl-sm-3">
+                <a class="nav-link dropdown-link"
+                   href="{% url 'suggestions:list' %}">Προτάσεις</a>
                 <a class="nav-link dropdown-toggle dropdown-caret" id="dropdown01"
                    data-toggle="dropdown" aria-haspopup="true"
                    aria-expanded="false"></a>
@@ -48,9 +51,15 @@
                     {% endif %}
                 </div>
             </li>
+
+            <li class="nav-item pl-0 pl-sm-3">
+                <a class="nav-link" href="{% url 'contact' %}">
+                    Επικοινωνήστε μαζί μας
+                </a>
+            </li>
         </ul>
 
-        <div id="ts-share" class="align-self-center ts-blank-link hidden-sm-down">
+        <div id="ts-share" class="align-self-center ts-blank-link hidden-md-down">
             <a href="https://www.facebook.com/thespotlightgr-1105744862874930/" target="_blank"
                class="pr-2">
                 <i class="fa fa-facebook" aria-hidden="true"></i>
@@ -63,20 +72,12 @@
             </a>
         </div>
 
-        <!-- Facebook Login Button -->
-        <div class="fb-login-button align-self-center my-2 my-md-0" data-max-rows="1"
-             data-size="medium"
-             data-button-type="continue_with" data-show-faces="false"
-             data-auto-logout-link="true" data-use-continue-as="true">
-        </div>
-
-        <form method="GET" action="" class="form-inline my-2 my-md-0 my-lg-0">
+        <form id="ts-search-form" method="GET" action="" class="form-inline my-2 my-md-0 my-lg-0">
             <div class="input-group col-sm-12">
                 <input type="text" class="form-control" name="q" value="{{ request.GET.q }}"
                        placeholder="Αναζήτηση...">
                 <span class="input-group-btn">
-                    <button class="btn btn-outline-info ts-btn-info ts-cursor-pointer"
-                            type="submit">
+                    <button class="btn btn-outline-info ts-btn-info ts-cursor-pointer" type="submit">
                         <i class="fa fa-search" aria-hidden="true"></i>
                     </button>
                 </span>

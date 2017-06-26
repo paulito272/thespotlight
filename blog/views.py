@@ -1,6 +1,9 @@
+from django.conf import settings
+from django.core.mail import mail_admins, send_mail
 from django.utils import timezone
-from django.views.generic import ListView
+from django.views.generic import FormView, ListView
 
+from blog.forms import ContactForm
 from blog.interviews.models import Interview
 from blog.suggestions.models import Suggestion
 
@@ -58,3 +61,34 @@ class HomeView(ListView):
         for key, value in self.context.items():
             context[key] = self.context[key]
         return context
+
+
+class ContactFormView(FormView):
+    form_class = ContactForm
+    template_name = 'contact.html'
+    success_url = '/contact/'
+
+    def form_valid(self, form):
+        message = '{name} ({email}): '.format(name=form.cleaned_data.get('name'),
+                                              email=form.cleaned_data.get('email'))
+        message += '\n\n{0}'.format(form.cleaned_data.get('message'))
+
+        mail_admins(
+            subject=form.cleaned_data.get('subject').strip(),
+            message=message,
+            fail_silently=True
+        )
+
+        send_mail(
+            subject='Σας ευχαριστούμε για το μήνυμά σας.',
+            message='Ευχαριστούμε!\n'
+                    'Το μήνυμά σας έχει σταλεί με επιτυχία.\n'
+                    'Θα επικοινωνούσουμε μαζί σας το συντομότερο δυνατό.\n\n'
+                    'Με εκτίμηση,\n'
+                    'Η ομάδα του thespotlight.gr',
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            recipient_list=[form.cleaned_data.get('email')],
+            fail_silently=True
+        )
+
+        return super().form_valid(form)

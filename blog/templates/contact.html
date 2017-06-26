@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block head_title %}Επικοινωνήστε μαζί μας | {{ block.super }}{% endblock %}
+
+{% block content %}
+    <div class="row mt-3">
+        <div class="col-sm-8">
+            <h2>Φόρμα Επικοινωνίας</h2>
+            <p class="text-muted">
+                Μπορείτε να επικοινωνήσετε μαζί μας συμπληρώνοντας την παρακάτω φόρμα επικοινωνίας.<br>
+                Κάποιος εκπρόσωπός μας θα επικοινωνήσει σύντομα μαζί σας.<br>
+                Εναλλακτικά, μπορεί να χρησιμοποιήσετε τα στοιχεία επικοινωνίας στα δεξιά.
+            </p>
+            <br>
+            <form method="POST" action="" enctype="multipart/form-data">{% csrf_token %}
+                {{ form|crispy }}
+                <input type="submit"
+                       class="btn btn-block btn-outline-info ts-btn-info ts-cursor-pointer"
+                       value="Αποστολή"/>
+            </form>
+        </div>
+
+        <div class="col-sm-4 mt-5 mt-sm-0">
+            <h2>Στοιχεία Επικοινωνίας</h2>
+            <p class="text-muted">
+                Σε περίπτωση που επιθυμείτε να έρθετε σε άμεση επαφή μαζί μας, τα στοιχεία
+                επικοινωνίας μας βρίσκονται παρακάτω:
+            </p>
+            <br>
+            <div class="form-group">
+                <label class="form-control-label">E-mail</label>
+                <div class="text-muted">
+                    <i class="fa fa-envelope-o" aria-hidden="true"></i>
+                    info@thespotlight.gr
+                </div>
+            </div>
+            <div class="form-group" style="margin-top: 2em;">
+                <label class="form-control-label">Τηλέφωνο</label>
+                <div class="text-muted">
+                    <i class="fa fa-mobile" aria-hidden="true"></i>
+                    6983645872
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
