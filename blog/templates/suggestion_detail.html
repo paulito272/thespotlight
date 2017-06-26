@@ -37,25 +37,14 @@
                     </div>
                 </div>
 
-                <div class="col-6 text-right ts-blank-link">
-                    <div class="row">
-                        <div class="col pl-sm-0 ts-slh">
-                            <span class="fa fa-clock-o"></span>
-                                <span>
-                                    {{ suggestion.read_time }}
-                                    {% if  suggestion.read_time > 1 %} λεπτά
-                                    {% else %} λεπτό
-                                    {% endif %}
-                                </span>
-                        </div>
-                    </div>
+                <div class="col-6 text-right ts-blank-link align-self-center">
                     <div class="row">
                         <div class="col pl-sm-0">
                             <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}"
                                target="_blank">
                                 <i class="fa fa-facebook-square fa-lg" aria-hidden="true"></i>
                             </a>
-                            <a href="https://twitter.com/home?status={{ interview.title|accentify|upper }}%E2%80%9D%0D{{ request.build_absolute_uri }}"
+                            <a href="https://twitter.com/home?status={{ interview.interviewee.get_full_name|accentify|upper }}%3A%20%E2%80%9C{{ interview.title|accentify|upper }}%E2%80%9D%0D{{ request.build_absolute_uri }}"
                                target="_blank">
                                 <i class="fa fa-twitter-square fa-lg" aria-hidden="true"></i>
                             </a>
@@ -110,6 +99,22 @@
                         <strong>[Staff only]</strong>&nbsp;<span>Future Interview</span>
                     </div>
                 {% endif %}
+
+                <div>
+                    <span class="text-muted ts-small-text">
+                        <i class="fa fa-folder-o" aria-hidden="true"></i>
+                        <a href="{% url 'suggestions:category' suggestion.category.slug %}"
+                           class="ts-no-style-link">
+                            {{ suggestion.category.name }}.{{ suggestion.category.get_category_display }}
+                        </a>
+                        <span class="px-2">|</span>
+                        <i class="fa fa-clock-o" aria-hidden="true"></i>
+                        {{ suggestion.read_time }}
+                        {% if  suggestion.read_time > 1 %} λεπτά
+                        {% else %} λεπτό
+                        {% endif %}
+                    </span>
+                </div>
 
                 <div id="ts-interview-content">
                     {{ suggestion.content|safe }}

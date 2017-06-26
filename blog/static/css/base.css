@@ -177,6 +177,12 @@ img.grayscale:hover {
     max-height: 415px !important;
 }
 
+.ts-no-style-link,
+.ts-no-style-link:hover {
+    text-decoration: none;
+    color: inherit;
+}
+
 .ts-blank-link a,
 .ts-blank-link a:hover {
     text-decoration: none;

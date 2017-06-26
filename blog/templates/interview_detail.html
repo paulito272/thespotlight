@@ -38,18 +38,7 @@
                     </div>
                 </div>
 
-                <div class="col-6 text-right ts-blank-link">
-                    <div class="row">
-                        <div class="col pl-sm-0 ts-slh">
-                            <span class="fa fa-clock-o"></span>
-                                <span>
-                                    {{ interview.read_time }}
-                                    {% if  interview.read_time > 1 %} λεπτά
-                                    {% else %} λεπτό
-                                    {% endif %}
-                                </span>
-                        </div>
-                    </div>
+                <div class="col-6 text-right ts-blank-link align-self-center">
                     <div class="row">
                         <div class="col pl-sm-0">
                             <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}"
@@ -111,6 +100,22 @@
                         <strong>[Staff only]</strong>&nbsp;<span>Future Interview</span>
                     </div>
                 {% endif %}
+
+                <div>
+                    <span class="text-muted ts-small-text">
+                        <i class="fa fa-folder-o" aria-hidden="true"></i>
+                        <a href="{% url 'interviews:category' interview.category.slug %}"
+                           class="ts-no-style-link">
+                            {{ interview.category.name }}.{{ interview.category.get_category_display }}
+                        </a>
+                        <span class="px-2">|</span>
+                        <i class="fa fa-clock-o" aria-hidden="true"></i>
+                        {{ interview.read_time }}
+                        {% if  interview.read_time > 1 %} λεπτά
+                        {% else %} λεπτό
+                        {% endif %}
+                    </span>
+                </div>
 
                 <hr>
                 <div class="row">

@@ -9,7 +9,6 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^interviews/', include('blog.interviews.urls', namespace='interviews')),
     url(r'^suggestions/', include('blog.suggestions.urls', namespace='suggestions')),
-    url(r'^interviewees/', include('blog.interviewees.urls', namespace='interviewees')),
     url(r'^$', HomeView.as_view(), name='home'),
 ]
 
