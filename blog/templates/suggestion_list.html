@@ -19,12 +19,11 @@
                     <div class="col-4 px-2 ts-latest-interviews-container">
                         <a href="{{ suggestion.get_absolute_url }}">
                             {% if suggestion.image %}
-                                <div class="mb-2">
-                                    <div class="card ts-card">
-                                        <div class="card-img-overlay overlay"></div>
-                                        <img class="img-fluid ts-latest-interviews-image"
+                                <div class="thumbnail mb-2">
+                                    <div class="img-wrapper">
+                                        <img class="img-fluid ts-latest-interviews-image grayscale"
                                              src="{{ suggestion.image.url }}"
-                                             alt="{{ suggestion.slug }}">
+                                             alt="{{ suggestion.slug }}">>
                                     </div>
                                 </div>
                             {% endif %}

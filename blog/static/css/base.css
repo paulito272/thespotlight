@@ -357,6 +357,25 @@ footer a:hover {
     cursor: pointer;
 }
 
+.thumbnail img {
+    max-width: 100%; /* do not stretch the bootstrap column */
+}
+
+.img-wrapper {
+    width: 100%;
+    padding-bottom: 75%; /* your aspect ratio here! */
+    position: relative;
+}
+
+.img-wrapper img {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    min-height: 100%; /* optional: if you want the smallest images to fill the .thumbnail */
+}
+
 /*Small devices (landscape phones, less than 768px)*/
 @media (max-width: 767px) {
     .container {
@@ -365,10 +384,6 @@ footer a:hover {
 
     .ts-mt-sm-5 {
         margin-top: 3rem !important
-    }
-
-    .ts-latest-interviews-image {
-        height: 150px !important;
     }
 }
 
@@ -412,10 +427,6 @@ footer a:hover {
     .dropdown-item,
     #ts-search-form input.form-control {
         font-size: 0.875em !important;
-    }
-
-    .ts-latest-interviews-image {
-        height: 250px !important;
     }
 }
 

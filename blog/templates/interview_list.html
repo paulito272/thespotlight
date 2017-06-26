@@ -20,12 +20,11 @@
                     <div class="col-4 px-2 ts-latest-interviews-container">
                         <a href="{{ interview.get_absolute_url }}">
                             {% if interview.interviewee.profile_image %}
-                                <div class="mb-2">
-                                    <div class="card ts-card">
-                                        <div class="card-img-overlay overlay"></div>
-                                        <img class="img-fluid ts-latest-interviews-image"
+                                <div class="thumbnail mb-2">
+                                    <div class="img-wrapper">
+                                        <img class="img-fluid ts-latest-interviews-image grayscale"
                                              src="{{ interview.interviewee.profile_image.url }}"
-                                             alt="{{ interview.interviewee.slug }}">
+                                             alt="{{ interview.interviewee.slug }}">>
                                     </div>
                                 </div>
                             {% endif %}
