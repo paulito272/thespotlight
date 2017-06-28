@@ -9,7 +9,13 @@
             <div class="col-12">
                 <div class="mb-4 pb-3">
                     <h6><strong>Αποτελέσματα αναζήτησης:</strong></h6>
-                    <kbd class="ts-small-text">{{ request.GET.q }}</kbd>
+                    <kbd class="ts-small-text">
+                        {% if tag %}
+                            {{ tag }}
+                        {% else %}
+                            {{ request.GET.q }}
+                        {% endif %}
+                    </kbd>
                 </div>
                 <div class="col-12 px-0">
                     <!-- INTERVIEWS -->

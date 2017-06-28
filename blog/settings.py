@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'ckeditor',
 
     # Custom apps
+    'blog.base',
     'blog.categories',
     'blog.interviewees',
     'blog.suggestions',

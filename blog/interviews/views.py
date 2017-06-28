@@ -17,29 +17,34 @@ class InterviewDetailView(SearchMixin, DetailView):
     context_object_name = 'interview'
     template_name = 'interview_detail.html'
     today = timezone.now().date()
+    context = {
+        'today': today,
+        'interviews': model.objects.active()
+    }
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         interview = self.get_object()
+        for key, value in self.context.items():
+            context[key] = self.context[key]
         context['title'] = '{}: {}'.format(interview.interviewee, interview.title)
-        context['today'] = self.today
         return context
 
 
-class InterviewCategoryListView(SearchMixin, ListView):
+class InterviewDateListView(SearchMixin, ListView):
     model = Interview
     context_object_name = 'interviews'
     template_name = 'interview_list.html'
     paginate_by = 10
     page_request_var = 'page'
     context = {
-        'page_request_var': page_request_var,
+        'page_request_var': page_request_var
     }
 
     def get_queryset(self):
-        category_slug = self.kwargs['category'] if 'category' in self.kwargs else ''
-        category = Category.objects.filter(slug=category_slug)
-        return self.model.objects.active().filter(category=category)
+        year = self.kwargs['year'] if 'year' in self.kwargs else ''
+        month = self.kwargs['month'] if 'month' in self.kwargs else ''
+        return self.model.objects.active().filter(publish__year=year).filter(publish__month=month)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -61,6 +66,28 @@ class InterviewTagListView(SearchMixin, ListView):
     def get_queryset(self):
         tag_slug = self.kwargs['tag'] if 'tag' in self.kwargs else ''
         return self.model.objects.active().filter(tags__slug=tag_slug)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        for key, value in self.context.items():
+            context[key] = self.context[key]
+        return context
+
+
+class InterviewCategoryListView(SearchMixin, ListView):
+    model = Interview
+    context_object_name = 'interviews'
+    template_name = 'interview_list.html'
+    paginate_by = 10
+    page_request_var = 'page'
+    context = {
+        'page_request_var': page_request_var
+    }
+
+    def get_queryset(self):
+        category_slug = self.kwargs['category'] if 'category' in self.kwargs else ''
+        category = Category.objects.filter(slug=category_slug)
+        return self.model.objects.active().filter(category=category)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

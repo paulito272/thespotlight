@@ -23,6 +23,7 @@ class SuggestionModelForm(forms.ModelForm):
             'category',
             'title',
             'content',
+            'tags',
             'draft',
             'image',
             'publish',

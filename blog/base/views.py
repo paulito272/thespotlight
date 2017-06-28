@@ -45,6 +45,28 @@ class HomeView(SearchMixin, ListView):
         return context
 
 
+class TagView(SearchMixin, ListView):
+    model = Interview
+    queryset = model.objects.active()
+    context_object_name = 'interviews'
+    template_name = 'search.html'
+    paginate_by = 10
+    page_request_var = 'page'
+    today = timezone.now().date()
+    context = {
+        'today': today,
+        'page_request_var': page_request_var,
+        'suggestions': Suggestion.objects.active()
+    }
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        for key, value in self.context.items():
+            context[key] = self.context[key]
+        self.context['tag'] = self.kwargs['tag']
+        return context
+
+
 class ContactFormView(SearchMixin, FormView):
     form_class = ContactForm
     template_name = 'contact.html'

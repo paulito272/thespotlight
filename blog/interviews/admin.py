@@ -1,18 +1,7 @@
 from django.contrib import admin
 
 from blog.interviews.forms import InterviewModelForm
-from blog.interviews.models import Interview, Tag
-
-
-class TagModelAdmin(admin.ModelAdmin):
-    list_display = ('word',)
-    search_fields = ('word', 'slug')
-
-    class Meta:
-        model = Tag
-
-
-admin.site.register(Tag, TagModelAdmin)
+from blog.interviews.models import Interview
 
 
 class InterviewModelAdmin(admin.ModelAdmin):

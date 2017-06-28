@@ -12,24 +12,14 @@ from blog.interviews.managers import InterviewManager
 from blog.interviews.utils import get_read_time
 
 
-class Tag(models.Model):
-    word = models.CharField(max_length=60)
-    slug = models.CharField(max_length=60)
-    timestamp = models.DateTimeField(auto_now=False, auto_now_add=True)
-
-    def __str__(self):
-        return self.word
-
-
 class Interview(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL, default=1)
     interviewee = models.ForeignKey(Interviewee)
     category = models.ForeignKey(Category)
     title = models.CharField(max_length=120)
     content = models.TextField()
-    publish = models.DateField(auto_now=False, auto_now_add=False,
-                               verbose_name='Publication Date')
-    tags = models.ManyToManyField(Tag, related_name='interviews')
+    tags = models.ManyToManyField('base.Tag', related_name='interviews')
+    publish = models.DateField(auto_now=False, auto_now_add=False, verbose_name='Publication Date')
     draft = models.BooleanField(default=False)
     read_time = models.IntegerField(default=0, editable=False)
     updated = models.DateTimeField(auto_now=True, auto_now_add=False,

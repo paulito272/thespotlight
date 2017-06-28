@@ -183,11 +183,30 @@
                 <div class="col">
                     <div class="mb-3">
                         <hr class="mb-2">
+                        <h6><strong>Παλαιότερες Συνεντεύξεις</strong></h6>
+                    </div>
+                    <div class="col">
+                        <select class="custom-select" style="width: 100%"
+                                onchange="location = '/interviews/' + this.value;">
+                            <option value="" selected>Επιλέξτε μήνα</option>
+                            {% for i in interviews %}
+                                <option value="{{ i.publish|date:"Y/m/" }}">
+                                    {{ i.publish|date:"F Y" }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col">
+                    <div class="mb-3">
+                        <hr class="mb-2">
                         <h6><strong>Ετικέτες</strong></h6>
                     </div>
-                    <div class="text-left">
+                    <div class="col">
                         {% for tag in interview.tags.all %}
-                            <a href="{% url 'interviews:tag' tag.slug %}"
+                            <a href="{% url 'tag' tag.slug %}"
                                class="btn btn-secondary ts-btn-general">
                                 <strong class="ts-small-text">{{ tag.word }}</strong>
                             </a>
