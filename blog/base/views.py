@@ -14,9 +14,8 @@ class HomeView(SearchMixin, ListView):
     queryset = model.objects.active()
     context_object_name = 'interviews'
     template_name = 'home.html'
-    page_request_var = 'page'
     paginate_by = 10
-
+    page_request_var = 'page'
     today = timezone.now().date()
     context = {
         'today': today,

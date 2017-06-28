@@ -24,6 +24,7 @@ class InterviewModelForm(forms.ModelForm):
             'category',
             'title',
             'content',
+            'tags',
             'draft',
             'publish',
             'slug'

@@ -160,20 +160,40 @@
         </div>
 
         <div id="ts-interview-adds" class="col-md-4 hidden-sm-down">
-            <div class="adds text-center">
-                <p>Adds will be placed here</p>
-                <p>Adds will be placed here</p>
-                <p>Adds will be placed here</p>
-                <p>Adds will be placed here</p>
-                <p>Adds will be placed here</p>
-                <p>Adds will be placed here</p>
-                <p>Adds will be placed here</p>
-                <p>Adds will be placed here</p>
-                <p>Adds will be placed here</p>
-                <p>Adds will be placed here</p>
-                <p>Adds will be placed here</p>
-                <p>Adds will be placed here</p>
-                <p>Adds will be placed here</p>
+            <div class="row">
+                <div class="col">
+                    <div class="adds text-center">
+                        <p>Adds will be placed here</p>
+                        <p>Adds will be placed here</p>
+                        <p>Adds will be placed here</p>
+                        <p>Adds will be placed here</p>
+                        <p>Adds will be placed here</p>
+                        <p>Adds will be placed here</p>
+                        <p>Adds will be placed here</p>
+                        <p>Adds will be placed here</p>
+                        <p>Adds will be placed here</p>
+                        <p>Adds will be placed here</p>
+                        <p>Adds will be placed here</p>
+                        <p>Adds will be placed here</p>
+                        <p>Adds will be placed here</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col">
+                    <div class="mb-3">
+                        <hr class="mb-2">
+                        <h6><strong>Ετικέτες</strong></h6>
+                    </div>
+                    <div class="text-left">
+                        {% for tag in interview.tags.all %}
+                            <a href="{% url 'interviews:tag' tag.slug %}"
+                               class="btn btn-secondary ts-btn-general">
+                                <strong class="ts-small-text">{{ tag.word }}</strong>
+                            </a>
+                        {% endfor %}
+                    </div>
+                </div>
             </div>
         </div>
     </div>

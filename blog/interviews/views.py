@@ -46,3 +46,24 @@ class InterviewCategoryListView(SearchMixin, ListView):
         for key, value in self.context.items():
             context[key] = self.context[key]
         return context
+
+
+class InterviewTagListView(SearchMixin, ListView):
+    model = Interview
+    context_object_name = 'interviews'
+    template_name = 'interview_list.html'
+    paginate_by = 10
+    page_request_var = 'page'
+    context = {
+        'page_request_var': page_request_var,
+    }
+
+    def get_queryset(self):
+        tag_slug = self.kwargs['tag'] if 'tag' in self.kwargs else ''
+        return self.model.objects.active().filter(tags__slug=tag_slug)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        for key, value in self.context.items():
+            context[key] = self.context[key]
+        return context
