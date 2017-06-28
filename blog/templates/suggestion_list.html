@@ -16,32 +16,32 @@
                         {% if forloop.first %}
                             <div class="row">
                         {% endif %}
-                    <div class="col-4 px-2 ts-latest-interviews-container">
-                        <a href="{{ suggestion.get_absolute_url }}">
-                            {% if suggestion.image %}
-                                <div class="thumbnail mb-2">
-                                    <div class="img-wrapper">
-                                        <img class="img-fluid ts-latest-interviews-image grayscale"
-                                             src="{{ suggestion.image.url }}"
-                                             alt="{{ suggestion.slug }}">>
+                        <div class="col-4 px-2 ts-latest-interviews-container">
+                            <a href="{{ suggestion.get_absolute_url }}">
+                                {% if suggestion.image %}
+                                    <div class="thumbnail mb-2">
+                                        <div class="img-wrapper">
+                                            <img class="img-fluid ts-latest-interviews-image grayscale"
+                                                 src="{{ suggestion.image.url }}"
+                                                 alt="{{ suggestion.slug }}">>
+                                        </div>
                                     </div>
-                                </div>
-                            {% endif %}
-                            <h6 class="ts-interview-title">
-                                <strong>
-                                    {{ suggestion.title|truncatechars:120 }}
-                                </strong>
-                            </h6>
-                        </a>
-                    </div>
-                    {% if forloop.counter|divisibleby:3 %}
+                                {% endif %}
+                                <h6 class="ts-interview-title">
+                                    <strong>
+                                        {{ suggestion.title|truncatechars:120 }}
+                                    </strong>
+                                </h6>
+                            </a>
                         </div>
-                        <div class="row">
-                    {% endif %}
-                    {% if forloop.last %}
-                        </div>
-                    {% endif %}
-                    {% endfor %}
+                        {% if forloop.counter|divisibleby:3 %}
+                            </div>
+                            <div class="row">
+                        {% endif %}
+                        {% if forloop.last %}
+                            </div>
+                        {% endif %}
+                        {% endfor %}
                 </div>
             </div>
         </div>

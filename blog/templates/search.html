@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+{% load accentify %}
+
+{% block head_title %}Αναζήτηση | {{ block.super }}{% endblock %}
+
+{% block content %}
+    {% if interviews or suggestions %}
+        <div class="row">
+            <div class="col-12">
+                <div class="mb-4 pb-3">
+                    <h6><strong>Αποτελέσματα αναζήτησης:</strong></h6>
+                    <kbd class="ts-small-text">{{ request.GET.q }}</kbd>
+                </div>
+                <div class="col-12 px-0">
+                    <!-- INTERVIEWS -->
+                    {% if interviews %}
+                        <div class="mb-3">
+                            <hr class="mb-2">
+                            <h6><strong>Συνεντεύξεις</strong></h6>
+                        </div>
+                        {% for interview in interviews %}
+                            {% if forloop.first %}
+                                <div class="row">
+                            {% endif %}
+                            <div class="col-4 px-3 ts-latest-interviews-container">
+                                <a href="{{ interview.get_absolute_url }}">
+                                    {% if interview.interviewee.profile_image %}
+                                        <div class="thumbnail mb-2">
+                                            <div class="img-wrapper">
+                                                <img class="img-fluid ts-latest-interviews-image grayscale"
+                                                     src="{{ interview.interviewee.profile_image.url }}"
+                                                     alt="{{ interview.interviewee.slug }}">>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                    <h6 class="ts-interview-title">
+                                        <strong>{{ interview.interviewee.get_full_name }}</strong>
+                                    </h6>
+                                    <p class="ts-interview-subtitle">
+                                        <em>&ldquo;{{ interview.title|accentify|upper|truncatechars:120 }}&rdquo;</em>
+                                    </p>
+                                </a>
+                            </div>
+                            {% if forloop.counter|divisibleby:3 %}
+                                </div>
+                                <div class="row">
+                            {% endif %}
+                            {% if forloop.last %}
+                                </div>
+                            {% endif %}
+                            {% endfor %}
+                    {% endif %}
+
+                    <!-- SUGGESTIONS -->
+                    {% if suggestions %}
+                        <div class="mb-3">
+                            <hr class="mb-2">
+                            <h6><strong>Προτάσεις</strong></h6>
+                        </div>
+                        {% for suggestion in suggestions %}
+                            {% if forloop.first %}
+                                <div class="row">
+                            {% endif %}
+                            <div class="col-4 px-2 ts-latest-interviews-container">
+                                <a href="{{ suggestion.get_absolute_url }}">
+                                    {% if suggestion.image %}
+                                        <div class="thumbnail mb-2">
+                                            <div class="img-wrapper">
+                                                <img class="img-fluid ts-latest-interviews-image grayscale"
+                                                     src="{{ suggestion.image.url }}"
+                                                     alt="{{ suggestion.slug }}">>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                    <h6 class="ts-interview-title">
+                                        <strong>
+                                            {{ suggestion.title|truncatechars:120 }}
+                                        </strong>
+                                    </h6>
+                                </a>
+                            </div>
+                            {% if forloop.counter|divisibleby:3 %}
+                                </div>
+                                <div class="row">
+                            {% endif %}
+                            {% if forloop.last %}
+                                </div>
+                            {% endif %}
+                            {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <div class="row">
+            <div class="col-12">
+                <div class="mb-3">
+                    <hr class="mb-2">
+                    <h6>
+                        <strong>
+                            Δεν βρέθηκαν αποτελέσματα με τα κριτήρια αναζήτησης που δώσατε,
+                            παρακαλώ ξαναδοκιμάστε!
+                        </strong>
+                    </h6>
+                    <kbd class="ts-small-text">{{ request.GET.q }}</kbd>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
