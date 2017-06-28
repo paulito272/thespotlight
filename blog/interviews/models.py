@@ -18,7 +18,7 @@ class Interview(models.Model):
     category = models.ForeignKey(Category)
     title = models.CharField(max_length=120)
     content = models.TextField()
-    tags = models.ManyToManyField('base.Tag', related_name='interviews')
+    tags = models.ManyToManyField('base.Tag', related_name='interviews', blank=True)
     publish = models.DateField(auto_now=False, auto_now_add=False, verbose_name='Publication Date')
     draft = models.BooleanField(default=False)
     read_time = models.IntegerField(default=0, editable=False)
