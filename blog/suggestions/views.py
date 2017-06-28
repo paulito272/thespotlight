@@ -1,8 +1,8 @@
 from django.utils import timezone
 from django.views.generic import DetailView, ListView
 
+from blog.base.mixins import SearchMixin
 from blog.categories.models import Category
-from blog.mixins import SearchMixin
 from blog.suggestions.models import Suggestion
 
 

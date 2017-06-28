@@ -3,7 +3,7 @@ from django.conf.urls import include, url
 from django.conf.urls.static import static
 from django.contrib import admin
 
-from blog.views import ContactFormView, HomeView
+from blog.base.views import ContactFormView, HomeView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),

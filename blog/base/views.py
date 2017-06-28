@@ -3,7 +3,7 @@ from django.core.mail import mail_admins, send_mail
 from django.utils import timezone
 from django.views.generic import FormView, ListView
 
-from blog.forms import ContactForm
+from blog.base.forms import ContactForm
 from blog.interviews.models import Interview
 from blog.mixins import SearchMixin
 from blog.suggestions.models import Suggestion
