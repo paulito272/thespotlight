@@ -10,7 +10,7 @@ urlpatterns = [
     url(r'^interviews/', include('blog.interviews.urls', namespace='interviews')),
     url(r'^suggestions/', include('blog.suggestions.urls', namespace='suggestions')),
     url(r'^contact/$', ContactFormView.as_view(), name='contact'),
-    url(r'^tag/(?P<tag>[\w]+)/$', TagView.as_view(), name='tag'),
+    url(r'^tag/(?P<tag>[\w-]+)/$', TagView.as_view(), name='tag'),
     url(r'^$', HomeView.as_view(), name='home'),
 ]
 

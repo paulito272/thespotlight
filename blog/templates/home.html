@@ -99,7 +99,7 @@
                 <div class="col-md-4 px-md-2">
                     <div class="mb-3">
                         <hr class="mb-2 ts-mt-sm-5">
-                        <h6><strong>Πιο δημοφιλής</strong></h6>
+                        <h6><strong>Πιο δημοφιλής συνεντεύξεις</strong></h6>
                     </div>
                     {% for interview in most_read_interviews %}
                         <div class="ts-interview">
@@ -128,7 +128,7 @@
         </div>
     {% endif %}
 
-    <!-- LAST WEEK’S INTERVIEW | A-Z INTERVIEW DIRECTORY-->
+    <!-- LAST WEEK’S INTERVIEW | A-Z INTERVIEW DIRECTORY -->
     {% if interviews %}
         <div class="row mt-5">
             <!-- LAST WEEK’S INTERVIEW -->
@@ -176,13 +176,13 @@
             {% endif %}
 
             <!-- A-Z INTERVIEW DIRECTORY -->
-            {% if active_interviews %}
+            {% if interviews %}
                 <div class="col-md-4 hidden-sm-down">
                     <hr>
                     <h6><strong>A-Z Κατάλογος Συνεντεύξεων</strong></h6>
                     <div id="ts-interview-directory" class="pre-scrollable mt-3 px-3"
                          style="overflow-x: hidden;">
-                        {% for interview in active_interviews|order_by:'interviewee__first_name' %}
+                        {% for interview in interviews|order_by:'interviewee__first_name' %}
                             <a href="{{ interview.get_absolute_url }}">
                                 <div class="row mb-2">
                                     <div class="col-md-4 px-0">
@@ -260,9 +260,10 @@
         </div>
     {% endif %}
 
-    <!-- NEW SUGGESTION -->
+    <!-- NEW SUGGESTION | MOST READ SUGGESTIONS -->
     {% if suggestions %}
         <div class="row {% if interviews %}mt-4{% endif %}">
+            <!-- NEW SUGGESTION -->
             <div class="col-md-8 px-md-2">
                 <div class="mb-3">
                     <hr class="mb-2">
@@ -300,6 +301,79 @@
                         </a>
                     </div>
                 {% endwith %}
+            </div>
+
+            <!-- MOST READ SUGGESTIONS -->
+            {% if most_read_suggestions %}
+                <div class="col-md-4 px-md-2">
+                    <div class="mb-3">
+                        <hr class="mb-2 ts-mt-sm-5">
+                        <h6><strong>Πιο δημοφιλής προτάσεις</strong></h6>
+                    </div>
+                    {% for suggestion in most_read_suggestions %}
+                        <div class="ts-interview">
+                            {% if suggestion.image %}
+                                <div class="mb-2">
+                                    <a href="{{ suggestion.get_absolute_url }}">
+                                        <div class="card ts-card">
+                                            <div class="card-img-overlay"></div>
+                                            <img class="img-fluid ts-interview-image grayscale"
+                                                 src="{{ suggestion.image.url }}"
+                                                 alt="{{ suggestion.slug }}">
+                                        </div>
+                                    </a>
+                                </div>
+                            {% endif %}
+                            <h6 class="ts-interview-title">
+                                <strong>{{ suggestion.title|truncatechars:120 }}</strong>
+                            </h6>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+    {% endif %}
+
+    <!-- LAST WEEK’S SUGGESTION -->
+    {% if last_week_suggestion %}
+        <div class="row mt-5">
+            <div class="col-md-8 col-sm-12 px-md-2">
+                <div class="mb-3">
+                    <hr class="mb-2">
+                    <h6><strong>Πρόταση περασμένης εβδομάδας</strong></h6>
+                </div>
+                {% for suggestion in last_week_suggestion %}
+                    <div class="ts-interview">
+                        {% if suggestion.image %}
+                            <div class="mb-2">
+                                <a href="{{ suggestion.get_absolute_url }}">
+                                    <div class="card ts-card">
+                                        <div class="card-img-overlay overlay"></div>
+                                        <img class="img-fluid ts-interview-image"
+                                             src="{{ suggestion.image.url }}"
+                                             alt="{{ suggestion.slug }}">
+                                    </div>
+                                </a>
+                            </div>
+                        {% endif %}
+                        <h5 class="ts-new-interview-title mt-3">
+                            <em>{{ suggestion.title|accentify|upper|truncatechars:120 }}</em>
+                        </h5>
+                        <hr class="mb-2">
+                        <strong class="ts-small-text">
+                            {{ suggestion.publish|date:"F d, Y"|accentify|upper }}
+                        </strong>
+                        <div id="ts-interview-content">
+                            {{ suggestion.content|remove_tags|safe|truncatewords:150 }}
+                        </div>
+                        <a href="{{ suggestion.get_absolute_url }}">
+                            <button type="button"
+                                    class="btn btn-secondary ts-btn-general ts-cursor-pointer">
+                                <strong class="ts-small-text">Διάβασε περισσότερα...</strong>
+                            </button>
+                        </a>
+                    </div>
+                {% endfor %}
             </div>
         </div>
     {% endif %}

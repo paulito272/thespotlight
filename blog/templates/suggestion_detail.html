@@ -155,8 +155,8 @@
                         <h6><strong>Παλαιότερες Προτάσεις</strong></h6>
                     </div>
                     <div class="col">
-                        <select class="custom-select" style="width: 100%"
-                                onchange="location = '/suggestions/' + this.value;">
+                        <select id="ts-suggestion-date-selection" class="custom-select"
+                                style="width: 100%">
                             <option value="" selected>Επιλέξτε μήνα</option>
                             {% for s in suggestions %}
                                 <option value="{{ s.publish|date:"Y/m/" }}">
@@ -174,7 +174,7 @@
                         <h6><strong>Ετικέτες</strong></h6>
                     </div>
                     <div class="col">
-                        {% for tag in suggestion.tags.all %}
+                        {% for tag in tags.all %}
                             <a href="{% url 'tag' tag.slug %}"
                                class="btn btn-secondary ts-btn-general">
                                 <strong class="ts-small-text">{{ tag.word }}</strong>

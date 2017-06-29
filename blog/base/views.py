@@ -1,18 +1,15 @@
 from django.conf import settings
 from django.core.mail import mail_admins, send_mail
 from django.utils import timezone
-from django.views.generic import FormView, ListView
+from django.views.generic import FormView, TemplateView
 
 from blog.base.forms import ContactForm
-from blog.base.mixins import SearchMixin
+from blog.base.mixins import ContextMixin, SearchMixin
 from blog.interviews.models import Interview
 from blog.suggestions.models import Suggestion
 
 
-class HomeView(SearchMixin, ListView):
-    model = Interview
-    queryset = model.objects.active()
-    context_object_name = 'interviews'
+class HomeView(ContextMixin, SearchMixin, TemplateView):
     template_name = 'home.html'
     paginate_by = 10
     page_request_var = 'page'
@@ -20,51 +17,44 @@ class HomeView(SearchMixin, ListView):
     context = {
         'today': today,
         'page_request_var': page_request_var,
-        'most_read_interviews': model.objects.most_read(),
-        'last_week_interview': model.objects.last_week(),
-        'active_interviews': model.objects.active(),
-        'suggestions': Suggestion.objects.active()
+        'most_read_interviews': Interview.objects.most_read(),
+        'most_read_suggestions': Suggestion.objects.most_read()
     }
 
     def get(self, request, *args, **kwargs):
         # Update every time
-        self.context['last_week_interview'] = self.model.objects.last_week()
-        self.context['active_interviews'] = self.model.objects.active()
+        self.context['interviews'] = Interview.objects.active()
+        self.context['last_week_interview'] = Interview.objects.last_week()
+
+        self.context['suggestions'] = Suggestion.objects.active()
+        self.context['last_week_suggestion'] = Suggestion.objects.last_week()
 
         # Update every day
         days_past = (timezone.now().date() - self.context['today']).days
         if days_past >= 1:
-            self.context['most_read_interviews'] = self.model.objects.most_read()
+            self.context['most_read_interviews'] = Interview.objects.most_read()
+            self.context['most_read_suggestions'] = Suggestion.objects.most_read()
 
         return super().get(request, *args, **kwargs)
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        for key, value in self.context.items():
-            context[key] = self.context[key]
-        return context
 
-
-class TagView(SearchMixin, ListView):
-    model = Interview
-    queryset = model.objects.active()
-    context_object_name = 'interviews'
+class TagView(ContextMixin, SearchMixin, TemplateView):
     template_name = 'search.html'
     paginate_by = 10
     page_request_var = 'page'
     today = timezone.now().date()
     context = {
         'today': today,
-        'page_request_var': page_request_var,
-        'suggestions': Suggestion.objects.active()
+        'page_request_var': page_request_var
     }
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        for key, value in self.context.items():
-            context[key] = self.context[key]
-        self.context['tag'] = self.kwargs['tag']
-        return context
+    def get(self, request, *args, **kwargs):
+        tag_slug = self.kwargs['tag'] if 'tag' in self.kwargs else ''
+
+        self.context['interviews'] = Interview.objects.active().filter(tags__slug=tag_slug)
+        self.context['suggestions'] = Suggestion.objects.active().filter(tags__slug=tag_slug)
+
+        return super().get(request, *args, **kwargs)
 
 
 class ContactFormView(SearchMixin, FormView):

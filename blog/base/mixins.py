@@ -28,3 +28,11 @@ class SearchMixin:
             return render(request, 'search.html', context)
 
         return super().get(request, *args, **kwargs)
+
+
+class ContextMixin:
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        for key, value in self.context.items():
+            context[key] = self.context[key]
+        return context

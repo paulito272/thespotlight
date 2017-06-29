@@ -186,12 +186,12 @@
                         <h6><strong>Παλαιότερες Συνεντεύξεις</strong></h6>
                     </div>
                     <div class="col">
-                        <select class="custom-select" style="width: 100%"
-                                onchange="location = '/interviews/' + this.value;">
+                        <select id="ts-interview-date-selection" class="custom-select"
+                                style="width: 100%">
                             <option value="" selected>Επιλέξτε μήνα</option>
-                            {% for i in interviews %}
-                                <option value="{{ i.publish|date:"Y/m/" }}">
-                                    {{ i.publish|date:"F Y" }}
+                            {% for d in dates %}
+                                <option value="{{ d|date:"Y/m/" }}">
+                                    {{ d|date:"F Y" }}
                                 </option>
                             {% endfor %}
                         </select>
@@ -205,7 +205,7 @@
                         <h6><strong>Ετικέτες</strong></h6>
                     </div>
                     <div class="col">
-                        {% for tag in interview.tags.all %}
+                        {% for tag in tags.all %}
                             <a href="{% url 'tag' tag.slug %}"
                                class="btn btn-secondary ts-btn-general">
                                 <strong class="ts-small-text">{{ tag.word }}</strong>

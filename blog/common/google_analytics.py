@@ -1,3 +1,4 @@
+import logging
 import os
 
 import httplib2
@@ -5,13 +6,16 @@ from decouple import config
 from googleapiclient.discovery import build
 from oauth2client.service_account import ServiceAccountCredentials
 
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+from blog.settings import BASE_DIR
+
+logger = logging.getLogger('blog')
 SERVICE_ACCOUNT_EMAIL = config('SERVICE_ACCOUNT_EMAIL')
 SERVICE_ACCOUNT_PKCS12 = config('SERVICE_ACCOUNT_PKCS12')
 
 # Use the developer console and replace the values with your
 # service account email and relative location of your key file.
-SERVICE_ACCOUNT_PKCS12_FILE_PATH = os.path.join(BASE_DIR, 'keys', SERVICE_ACCOUNT_PKCS12)
+SERVICE_ACCOUNT_PKCS12_FILE_PATH = os.path.join(BASE_DIR, 'blog/common/keys',
+                                                SERVICE_ACCOUNT_PKCS12)
 
 # Define the auth scopes to request.
 scope = ['https://www.googleapis.com/auth/analytics.readonly']

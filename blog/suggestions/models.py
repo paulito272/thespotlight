@@ -8,8 +8,8 @@ from django_wysiwyg import clean_html
 from unidecode import unidecode
 
 from blog.categories.models import Category
+from blog.common.managers import CommonManager
 from blog.interviews.utils import get_read_time
-from blog.suggestions.managers import SuggestionManager
 
 
 def upload_location(instance, filename):
@@ -35,7 +35,7 @@ class Suggestion(models.Model):
     photographer = models.CharField(_('photographer name'), max_length=90, blank=True, null=True)
     slug = models.SlugField(max_length=255, editable=True, blank=True, null=False, unique=True)
 
-    objects = SuggestionManager()
+    objects = CommonManager()
 
     class Meta:
         ordering = ['-publish', '-updated', '-timestamp']
@@ -52,8 +52,7 @@ def create_slug(instance, new_slug=None):
     if new_slug is not None:
         slug = new_slug
     qs = Suggestion.objects.filter(slug=slug).order_by('-id')
-    exists = qs.exists()
-    if exists:
+    if qs.exists():
         new_slug = '{}-{}'.format(slug, qs.first().id)
         return create_slug(instance, new_slug=new_slug)
     return slug
