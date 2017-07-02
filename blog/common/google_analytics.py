@@ -76,7 +76,7 @@ def get_first_profile_id(service):
 
 
 # Get week's top 3 pages (ignore: /, /home, /tag/, /twos/, /category/)
-def get_top3_week_pages(service, profile_id):
+def get_top_week_pages(service, profile_id):
     return service.data().ga().get(
         ids='ga:' + profile_id,
         start_date='30daysAgo',
@@ -86,7 +86,7 @@ def get_top3_week_pages(service, profile_id):
         sort='-ga:uniquePageviews',
         filters='ga:pagePath!=/;ga:pagePath!=/home;ga:pagePathLevel1!=/tag/;'
                 'ga:pagePathLevel1!=/twos/;ga:pagePathLevel1!=/category/',
-        max_results='3').execute()
+        max_results='10').execute()
 
 
 def get_most_read_pages():
@@ -96,7 +96,7 @@ def get_most_read_pages():
     service = get_service('analytics', 'v3', scope, SERVICE_ACCOUNT_PKCS12_FILE_PATH,
                           SERVICE_ACCOUNT_EMAIL)
     profile = get_first_profile_id(service)
-    results = get_top3_week_pages(service, profile)
+    results = get_top_week_pages(service, profile)
 
     if results:
         top_pages = results.get('rows')
