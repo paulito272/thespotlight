@@ -239,3 +239,7 @@ static_cdn/*
 */*/migrations/*
 !*/*/migrations/__init__.py
 # End of https://www.gitignore.io/api/macos,linux,django,python,pycharm,windows
+
+# Symbol Gen: generated tags
+.tags
+.tags_swap
